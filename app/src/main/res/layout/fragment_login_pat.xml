@@ -1,6 +1,194 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/gray_e0">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/stateView"
+        android:layout_width="120dp"
+        android:layout_height="15dp"
+        android:layout_marginTop="45dp"
+        android:background="@color/green"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/patNameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="45dp"
+        android:text="@string/pat_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/stateView" />
+
+    <EditText
+        android:id="@+id/patNameEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/bg_round_white_32"
+        android:paddingHorizontal="24dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        app:layout_constraintEnd_toStartOf="@id/mailTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/patNameTextView"
+        tools:text="뭉치" />
+
+
+    <TextView
+        android:id="@+id/mailTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/bg_round_white_12"
+        android:gravity="center"
+        app:layout_constraintDimensionRatio="1.1:1"
+        android:paddingHorizontal="18dp"
+        android:text="♂"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@id/patNameEditText"
+        app:layout_constraintEnd_toStartOf="@id/femailTextView"
+        app:layout_constraintStart_toEndOf="@id/patNameEditText"
+        app:layout_constraintTop_toTopOf="@id/patNameEditText" />
+
+    <TextView
+        android:id="@+id/femailTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:background="@drawable/bg_round_white_12"
+        android:gravity="center"
+        app:layout_constraintDimensionRatio="1.1:1"
+        android:paddingHorizontal="18dp"
+        android:layout_marginEnd="50dp"
+        android:text="♀"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@id/patNameEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/patNameEditText" />
+
+
+    <TextView
+        android:id="@+id/typeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
+        android:text="@string/type"
+        app:layout_constraintStart_toStartOf="@id/patNameTextView"
+        app:layout_constraintTop_toBottomOf="@id/patNameEditText" />
+
+    <EditText
+        android:id="@+id/typeEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="50dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/bg_round_white_32"
+        android:paddingHorizontal="24dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/typeTextView"
+        tools:text="푸" />
+
+
+    <TextView
+        android:id="@+id/birthdayTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
+        android:text="@string/birthday"
+        app:layout_constraintStart_toStartOf="@id/patNameTextView"
+        app:layout_constraintTop_toBottomOf="@id/typeEditText" />
+
+    <EditText
+        android:id="@+id/birthdayEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/bg_round_white_32"
+        android:paddingHorizontal="24dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        app:layout_constraintEnd_toEndOf="@id/typeEditText"
+        app:layout_constraintStart_toStartOf="@id/typeEditText"
+        app:layout_constraintTop_toBottomOf="@id/birthdayTextView"
+        tools:text="2020-02-12" />
+
+    <TextView
+        android:id="@+id/weightTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
+        android:text="@string/weight"
+        app:layout_constraintStart_toStartOf="@id/patNameTextView"
+        app:layout_constraintTop_toBottomOf="@id/birthdayEditText" />
+
+    <EditText
+        android:id="@+id/weightEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/bg_round_white_32"
+        android:paddingHorizontal="24dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        app:layout_constraintEnd_toEndOf="@id/typeEditText"
+        app:layout_constraintStart_toStartOf="@id/typeEditText"
+        app:layout_constraintTop_toBottomOf="@id/weightTextView"
+        tools:text="3.2kg" />
+
+
+    <TextView
+        android:id="@+id/addButton"
+        android:layout_width="0dp"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/green"
+        android:gravity="center"
+        android:text="@string/add"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/nextButton"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <TextView
+        android:id="@+id/nextButton"
+        android:layout_width="0dp"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/green"
+        android:gravity="center"
+        android:text="@string/next"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/addButton" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@color/gray_e0"
+        app:layout_constraintBottom_toBottomOf="@id/addButton"
+        app:layout_constraintEnd_toStartOf="@id/nextButton"
+        app:layout_constraintStart_toEndOf="@id/addButton"
+        app:layout_constraintTop_toTopOf="@id/addButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

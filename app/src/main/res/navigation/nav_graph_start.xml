@@ -7,18 +7,51 @@
 
     <fragment
         android:id="@+id/startFragment"
-        android:name="com.example.lint.ui.start.StartFragment"
+        android:name="com.example.link.ui.start.StartFragment"
         android:label="StartFragment"
         tools:layout="@layout/fragment_start">
         <action
-            android:id="@+id/action_startFragment_to_loginFragment"
-            app:destination="@id/loginFragment"
+            android:id="@+id/action_startFragment_to_loginSelectFragment"
+            app:destination="@id/loginSelectFragment"
             app:enterAnim="@android:anim/fade_in" />
     </fragment>
 
     <fragment
-        android:id="@+id/loginFragment"
-        android:name="com.example.lint.ui.start.login.LoginSelectFragment"
+        android:id="@+id/loginSelectFragment"
+        android:name="com.example.link.ui.start.login.LoginSelectFragment"
         android:label="LoginFragment"
-        tools:layout="@layout/fragment_login_select"/>
+        tools:layout="@layout/fragment_login_select">
+        <action
+            android:id="@+id/action_loginSelectFragment_to_loginIdFragment"
+            app:destination="@id/loginIdFragment" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/loginIdFragment"
+        android:name="com.example.link.ui.start.login.LoginIdFragment"
+        android:label="LoginIdFragment"
+        tools:layout="@layout/fragment_login_id">
+        <action
+            android:id="@+id/action_loginIdFragment_to_loginPatFragment"
+            app:destination="@id/loginPatFragment" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/loginPatFragment"
+        android:name="com.example.link.ui.start.login.LoginPatFragment"
+        android:label="LoginPatFragment"
+        tools:layout="@layout/fragment_login_pat">
+        <action
+            android:id="@+id/action_loginPatFragment_to_loginProfileFragment"
+            app:destination="@id/loginProfileFragment" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/loginProfileFragment"
+        android:name="com.example.link.ui.start.login.LoginProfileFragment"
+        android:label="LoginProfileFragment"
+        tools:layout="@layout/fragment_login_profile" />
 </navigation>
