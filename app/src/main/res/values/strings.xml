@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">LINT</string>
+    <string name="title_activity_start">StartActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="lint">LINT</string>
+    <string name="subtitle">나의 반려견을 잇다</string>
+    <string name="login_by_google">구글로 로그인</string>
+    <string name="login_by_facebook">페이스북으로 로그인</string>
+    <string name="login_by_twitter">트위터로 로그인</string>
+    <string name="login_by_apple">애플로 로그인</string>
+</resources>
