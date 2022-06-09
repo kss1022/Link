@@ -5,12 +5,8 @@
     <string name="next">다음</string>
     <string name="add">추가하기</string>
 
-
+    <!--Start-->
     <string name="subtitle">나의 반려견을 잇다</string>
-    <string name="login_by_google">구글로 로그인</string>
-    <string name="login_by_facebook">페이스북으로 로그인</string>
-    <string name="login_by_twitter">트위터로 로그인</string>
-    <string name="login_by_apple">애플로 로그인</string>
     <string name="start_with_this_profile">이 프로필로 시작하기</string>
     <string name="id">아이디</string>
     <string name="password">비밀번호</string>
@@ -19,5 +15,30 @@
     <string name="type">종류</string>
     <string name="birthday">생일</string>
     <string name="weight">몸무게</string>
+    <string name="character_mail">♂</string>
+    <string name="character_femail">♀</string>
+    <string name="password_is_not_same">비밀번호가 일치하지 않습니다</string>
+
+    <string name="pat_age">%d년 %d개월</string>
+    <string name="day_is_error">날자가 잘못 입력하였습니다😭\n다시 확인해주세요</string>
+    <string name="default_user_name">집사123</string>
+    <string name="negative">취소</string>
+    <string name="positive">확인</string>
+    <string name="please_input_user_name">닉네임 입력해주세요😄</string>
+    <string name="user_name">집사 이름</string>
+    <string name="skipp">건너뛰기</string>
+
+
+    <string name="set_profile_message">집사님!</string>
+    <string name="set_profile_sub_message">프로필을 변경해 볼래요?</string>
+
+    <!--Education-->
+    <string name="with_link">링크와</string>
+    <string name="education_first_message">와 함께 간단한</string>
+    <string name="education_first_sub_message">태깅으로 일상을 기록해 보아요</string>
+    <string name="education_second_message">하고싶은 말을 메모에\n남겨놓아요</string>
+    <string name="education_third_message">반려동물과 함께 갈 수\n있는 공간 찾아보아요</string>
+    <string name="start">시작하기</string>
+
 
 </resources>

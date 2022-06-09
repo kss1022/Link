@@ -1,57 +1,82 @@
 package com.example.link.ui.start.login
 
-import android.os.Bundle
-import android.view.LayoutInflater
+import android.util.Log
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import android.widget.Toast
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
+import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.link.R
 import com.example.link.databinding.FragmentLoginIdBinding
+import com.example.link.ui.base.BaseFragment
 import com.example.link.ui.start.StartSharedViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 
 @AndroidEntryPoint
-class LoginIdFragment : Fragment() {
+class LoginIdFragment : BaseFragment<FragmentLoginIdBinding,LoginIdViewModel>() {
+
+    override val viewModel: LoginIdViewModel by viewModels()
 
     @Inject
     lateinit var sharedViewModel: StartSharedViewModel
 
-    private var _binding: FragmentLoginIdBinding? = null
-    private val binding get() = _binding!!
+    override fun getViewBinding(): FragmentLoginIdBinding =
+        FragmentLoginIdBinding.inflate(layoutInflater)
 
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentLoginIdBinding.inflate(layoutInflater)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        initViews()
-        bindViews()
+    override fun initViews() {
+        setData()
     }
 
 
-    private fun initViews() {
-    }
 
-    private fun bindViews() = with(binding) {
-        nextButton.setOnClickListener {
-            findNavController().navigate(R.id.action_loginIdFragment_to_loginPatFragment)
+    override fun bindViews() {
+        binding.nextButton.setOnClickListener {
+            viewModel.clickNext()
+        }
+
+
+        binding.idEditText.addTextChangedListener{
+            viewModel.setId( binding.idEditText.text.toString())
+        }
+
+        binding.passwordEditText.addTextChangedListener {
+            viewModel.setPassword( binding.passwordEditText.text.toString())
+        }
+
+        binding.passwordCheckEditText.addTextChangedListener {
+            viewModel.setCheckPassword( binding.passwordCheckEditText.text.toString())
         }
     }
 
 
+    override fun observeData() {
+        viewModel.passwordSameEvent.observe(viewLifecycleOwner){ isSame->
+            isSame?.let {
+                binding.passwordErrorTextView.isVisible = it.not()
+            }
+        }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
+        viewModel.nextClickEvent.observe(viewLifecycleOwner){ click->
+            findNavController().navigate(R.id.action_loginIdFragment_to_loginPatFragment)
+//            click?.let {
+//                if(it){
+//                    findNavController().navigate(R.id.action_loginIdFragment_to_loginPatFragment)
+//                }else{
+//                    Toast.makeText(requireContext() , getString(R.string.password_is_not_same), Toast.LENGTH_SHORT).show()
+//                }
+//            }
+        }
+    }
+
+
+    private fun setData(){
+        viewModel.id.value?.let{ binding.idEditText.setText(it) }
+        viewModel.password.value?.let{ binding.passwordEditText.setText(it) }
+        viewModel.passwordCheck.value?.let { binding.passwordCheckEditText.setText(it) }
     }
 
 }

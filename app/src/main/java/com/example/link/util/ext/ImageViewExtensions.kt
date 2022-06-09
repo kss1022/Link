@@ -38,3 +38,15 @@ internal fun ImageView.clear() = Glide.with(context).clear(this)
             }
             .into(this)
     }
+
+    @SuppressLint("CheckResult")
+    fun ImageView.load(url: Int, corner: Float = 0f, scaleType: Transformation<Bitmap> = CenterInside()) {
+        Glide.with(this)
+         .load(url)
+         .transition(DrawableTransitionOptions.withCrossFade(factory))
+         .diskCacheStrategy(DiskCacheStrategy.ALL)
+         .apply {
+            if (corner > 0) transforms(scaleType, RoundedCorners(corner.fromDpToPx()))
+         }
+         .into(this)
+    }

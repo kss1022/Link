@@ -7,9 +7,9 @@
     <ImageView
         android:id="@+id/mainImageView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:src="@drawable/ic_launcher_foreground"
+        android:layout_height="220dp"
+        android:layout_marginTop="40dp"
+        android:src="@drawable/start_main_image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -31,7 +31,7 @@
         android:id="@+id/titleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="20dp"
         android:text="@string/lint"
         android:textColor="@color/white"
         android:textSize="30sp"
@@ -44,7 +44,7 @@
         android:id="@+id/subTitleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="8dp"
         android:text="@string/subtitle"
         android:textColor="@color/white"
         android:textSize="20sp"
@@ -54,82 +54,49 @@
         app:layout_constraintTop_toBottomOf="@id/titleTextView" />
 
 
-    <TextView
+    <ImageView
         android:id="@+id/googleLoginButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="32dp"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/bg_round_white_32"
-        android:paddingStart="50dp"
-        android:paddingTop="18dp"
-        android:paddingEnd="0dp"
-        android:paddingBottom="18dp"
-        android:text="@string/login_by_google"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        android:textStyle="bold"
+        android:layout_marginHorizontal="50dp"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/google_login"
         app:layout_constraintBottom_toTopOf="@id/facebookLoginButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/subTitleTextView" />
 
-
-    <TextView
+    <ImageView
         android:id="@+id/facebookLoginButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="32dp"
-        android:background="@drawable/bg_round_white_32"
-        android:paddingStart="50dp"
-        android:paddingTop="18dp"
-        android:paddingEnd="0dp"
-        android:paddingBottom="18dp"
-        android:text="@string/login_by_facebook"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        android:textStyle="bold"
+        android:layout_marginHorizontal="50dp"
+        android:src="@drawable/facebook_login"
         app:layout_constraintBottom_toTopOf="@id/twitterLoginButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/googleLoginButton" />
 
 
-    <TextView
+    <ImageView
         android:id="@+id/twitterLoginButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="32dp"
-        android:background="@drawable/bg_round_white_32"
-        android:paddingStart="50dp"
-        android:paddingTop="18dp"
-        android:paddingEnd="0dp"
-        android:paddingBottom="18dp"
-        android:text="@string/login_by_twitter"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        android:textStyle="bold"
+        android:layout_marginHorizontal="50dp"
+        android:src="@drawable/twitter_login"
         app:layout_constraintBottom_toTopOf="@id/appleLoginButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/facebookLoginButton" />
 
 
-    <TextView
+    <ImageView
         android:id="@+id/appleLoginButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="32dp"
-        android:layout_marginBottom="32dp"
-        android:background="@drawable/bg_round_white_32"
-        android:paddingStart="50dp"
-        android:paddingTop="12dp"
-        android:paddingEnd="0dp"
-        android:paddingBottom="18dp"
-        android:text="@string/login_by_apple"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        android:textStyle="bold"
+        android:layout_marginHorizontal="50dp"
+        android:layout_marginBottom="24dp"
+        android:src="@drawable/apple_login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -24,7 +24,7 @@
 
     <color name="gray_e0">#e0e0e0</color>
 
-    <color name="colorPrimary">@color/whit_a50</color>
-    <color name="colorPrimaryDark">@color/black_a50</color>
+    <color name="colorPrimary">@color/white</color>
+    <color name="colorPrimaryDark">@color/whit_a50</color>
     <color name="colorAccent">#FF4081</color>
 </resources>

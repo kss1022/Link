@@ -1,58 +1,194 @@
 package com.example.link.ui.start.login
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.Toast
+import androidx.core.content.ContextCompat
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.link.R
 import com.example.link.databinding.FragmentLoginPatBinding
+import com.example.link.ui.base.BaseFragment
 import com.example.link.ui.start.StartSharedViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class LoginPatFragment : Fragment(){
+class LoginPatFragment : BaseFragment<FragmentLoginPatBinding, LoginPatViewModel>() {
 
     @Inject
-    lateinit var sharedViewModel : StartSharedViewModel
+    lateinit var sharedViewModel: StartSharedViewModel
+
+    override val viewModel: LoginPatViewModel by viewModels()
+
+    override fun getViewBinding(): FragmentLoginPatBinding =
+        FragmentLoginPatBinding.inflate(layoutInflater)
 
 
-
-    private var _binding  : FragmentLoginPatBinding? = null
-    private val binding get() = _binding!!
-
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentLoginPatBinding.inflate(layoutInflater)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        initViews()
-        bindViews()
+    override fun initViews() {
+        setData()
     }
 
 
-    private fun initViews() {
+    override fun bindViews() {
+        binding.nextButton.setOnClickListener {
+            viewModel.clickNext()
+        }
 
-    }
+        binding.mailButton.setOnClickListener {
+            viewModel.setMail(true)
+        }
 
-    private fun bindViews() = with(binding){
-        nextButton.setOnClickListener {
-            findNavController().navigate(R.id.action_loginPatFragment_to_loginProfileFragment)
+        binding.femailButton.setOnClickListener {
+            viewModel.setMail(false)
+        }
+
+        binding.patNameEditText.addTextChangedListener {
+            viewModel.setName(binding.patNameEditText.text.toString())
+        }
+
+        binding.typeEditText.addTextChangedListener {
+            viewModel.setType(binding.typeEditText.text.toString())
+        }
+
+        binding.birthdayEditText.addTextChangedListener {
+            viewModel.setBirthday(binding.birthdayEditText.text.toString())
+        }
+
+        //Set Text YYYY-MM-DD
+        DateInputMask(binding.birthdayEditText).listen()
+
+        binding.weightTextView.addTextChangedListener {
+            viewModel.setWeight(binding.weightTextView.text.toString())
         }
     }
 
 
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
+    override fun observeData() {
+        viewModel.nextClickEvent.observe(viewLifecycleOwner){ goNext->
+            goNext?.let {
+                if(it) findNavController().navigate(R.id.action_loginPatFragment_to_loginProfileFragment)
+            }
+        }
+
+        viewModel.isMail.observe(viewLifecycleOwner) { isMail ->
+            isMail?.let {
+                if (it) {
+                    setMail()
+                } else {
+                    setFemail()
+                }
+            }
+        }
+
+        viewModel.patAge.observe(viewLifecycleOwner) { patAge ->
+            patAge?.let {
+                if(it.first < 0) {
+                    //error
+                    binding.patAgeTextView.text = ""
+                    Toast.makeText(requireContext(), getString(R.string.day_is_error), Toast.LENGTH_SHORT).show()
+                }else{
+                    binding.patAgeTextView.text = getString(R.string.pat_age, it.first, it.second)
+                }
+            } ?: kotlin.run {
+                    binding.patAgeTextView.text = ""
+            }
+        }
     }
 
+
+    /**
+     * Set Mail Button color
+     */
+
+    private fun setMail() = with(binding) {
+        mailButton.apply {
+            setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+            setBackgroundResource(R.drawable.bg_round_green_12)
+        }
+
+
+        femailButton.apply {
+            setTextColor(ContextCompat.getColor(requireContext(), R.color.gray_e0))
+            setBackgroundResource(R.drawable.bg_round_white_12)
+        }
+    }
+
+
+    private fun setFemail() = with(binding) {
+        mailButton.apply {
+            setTextColor(ContextCompat.getColor(requireContext(), R.color.gray_e0))
+            setBackgroundResource(R.drawable.bg_round_white_12)
+        }
+
+
+        femailButton.apply {
+            setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+            setBackgroundResource(R.drawable.bg_round_green_12)
+        }
+    }
+
+    private fun setData() {
+        viewModel.isMail.value?.let { if (it) setMail() else setFemail() }
+        viewModel.name.value?.let { binding.patNameEditText.setText(it) }
+        viewModel.type.value?.let { binding.typeEditText.setText(it) }
+        viewModel.birthday.value?.let { binding.birthdayEditText.setText(it) }
+        viewModel.weight.value?.let { binding.weightEditText.setText(it) }
+    }
+
+
+    class DateInputMask(val input : EditText) {
+        fun listen() {
+            input.addTextChangedListener(mDateEntryWatcher)
+        }
+
+        private val mDateEntryWatcher = object : TextWatcher {
+
+            var edited = false
+            val dividerCharacter = "-"
+
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                if (edited) {
+                    edited = false
+                    return
+                }
+
+                var working = getEditText()
+                working = manageDateDivider(working, 4, start, before)
+                working = manageDateDivider(working, 7, start, before)
+
+                edited = true
+                input.setText(working)
+                input.setSelection(input.text.length)
+            }
+
+            private fun manageDateDivider(working: String, position : Int, start: Int, before: Int) : String{
+                if (working.length == position) {
+                    return if (before <= position && start < position)
+                        working + dividerCharacter
+                    else
+                        working.dropLast(1)
+                }
+                return working
+            }
+
+            private fun getEditText() : String {
+                return if (input.text.length >= 10)
+                    input.text.toString().substring(0,10)
+                else
+                    input.text.toString()
+            }
+
+            override fun afterTextChanged(s: Editable) {}
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+        }
+    }
 }

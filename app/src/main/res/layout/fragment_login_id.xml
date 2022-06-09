@@ -9,14 +9,85 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/stateView"
-        android:layout_width="120dp"
-        android:layout_height="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="12dp"
         android:layout_marginTop="45dp"
-        android:background="@color/green"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <View
+            android:id="@+id/dot1"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/dot_green"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/dot2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="3dp"
+            android:layout_marginHorizontal="1dp"
+            android:background="@color/black_a20"
+            app:layout_constraintBottom_toBottomOf="@id/dot1"
+            app:layout_constraintEnd_toStartOf="@id/dot2"
+            app:layout_constraintStart_toEndOf="@id/dot1"
+            app:layout_constraintTop_toTopOf="@id/dot1" />
+
+        <View
+            android:id="@+id/dot2"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/dot_gray"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/dot3"
+            app:layout_constraintStart_toEndOf="@id/dot1"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="3dp"
+            android:layout_marginHorizontal="1dp"
+            android:background="@color/black_a20"
+            app:layout_constraintBottom_toBottomOf="@id/dot1"
+            app:layout_constraintEnd_toStartOf="@id/dot3"
+            app:layout_constraintStart_toEndOf="@id/dot2"
+            app:layout_constraintTop_toTopOf="@id/dot1" />
+
+        <View
+            android:id="@+id/dot3"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/dot_gray"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/dot4"
+            app:layout_constraintStart_toEndOf="@id/dot2"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="3dp"
+            android:layout_marginHorizontal="1dp"
+            android:background="@color/black_a20"
+            app:layout_constraintBottom_toBottomOf="@id/dot1"
+            app:layout_constraintEnd_toStartOf="@id/dot4"
+            app:layout_constraintStart_toEndOf="@id/dot3"
+            app:layout_constraintTop_toTopOf="@id/dot1" />
+
+        <View
+            android:id="@+id/dot4"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:background="@drawable/dot_gray"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/dot3"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -40,6 +111,7 @@
         android:paddingHorizontal="24dp"
         android:paddingTop="12dp"
         android:paddingBottom="12dp"
+        android:singleLine="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/idTextView"
@@ -65,6 +137,7 @@
         android:paddingHorizontal="24dp"
         android:paddingTop="12dp"
         android:paddingBottom="12dp"
+        android:singleLine="true"
         app:layout_constraintEnd_toEndOf="@id/idEditText"
         app:layout_constraintStart_toStartOf="@id/idEditText"
         app:layout_constraintTop_toBottomOf="@id/passwordTextView"
@@ -90,10 +163,25 @@
         android:paddingHorizontal="24dp"
         android:paddingTop="12dp"
         android:paddingBottom="12dp"
+        android:singleLine="true"
         app:layout_constraintEnd_toEndOf="@id/idEditText"
         app:layout_constraintStart_toStartOf="@id/idEditText"
         app:layout_constraintTop_toBottomOf="@id/passwordCheckTextView"
         tools:text="asdnflk@naver.com" />
+
+    <TextView
+        android:id="@+id/passwordErrorTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="12dp"
+        android:text="@string/password_is_not_same"
+        android:textColor="@color/green"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@id/idEditText"
+        app:layout_constraintTop_toBottomOf="@id/passwordCheckEditText"
+        tools:visibility="visible" />
 
 
     <TextView

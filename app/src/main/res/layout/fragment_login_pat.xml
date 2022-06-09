@@ -9,14 +9,85 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/stateView"
-        android:layout_width="120dp"
-        android:layout_height="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="12dp"
         android:layout_marginTop="45dp"
-        android:background="@color/green"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <View
+            android:id="@+id/dot1"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/dot_green"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/dot2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="3dp"
+            android:layout_marginHorizontal="1dp"
+            android:background="@color/green"
+            app:layout_constraintBottom_toBottomOf="@id/dot1"
+            app:layout_constraintEnd_toStartOf="@id/dot2"
+            app:layout_constraintStart_toEndOf="@id/dot1"
+            app:layout_constraintTop_toTopOf="@id/dot1" />
+
+        <View
+            android:id="@+id/dot2"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/dot_green"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/dot3"
+            app:layout_constraintStart_toEndOf="@id/dot1"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="3dp"
+            android:layout_marginHorizontal="1dp"
+            android:background="@color/black_a20"
+            app:layout_constraintBottom_toBottomOf="@id/dot1"
+            app:layout_constraintEnd_toStartOf="@id/dot3"
+            app:layout_constraintStart_toEndOf="@id/dot2"
+            app:layout_constraintTop_toTopOf="@id/dot1" />
+
+        <View
+            android:id="@+id/dot3"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/dot_gray"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/dot4"
+            app:layout_constraintStart_toEndOf="@id/dot2"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="3dp"
+            android:layout_marginHorizontal="1dp"
+            android:background="@color/black_a20"
+            app:layout_constraintBottom_toBottomOf="@id/dot1"
+            app:layout_constraintEnd_toStartOf="@id/dot4"
+            app:layout_constraintStart_toEndOf="@id/dot3"
+            app:layout_constraintTop_toTopOf="@id/dot1" />
+
+        <View
+            android:id="@+id/dot4"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:background="@drawable/dot_gray"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/dot3"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -41,40 +112,43 @@
         android:paddingHorizontal="24dp"
         android:paddingTop="12dp"
         android:paddingBottom="12dp"
-        app:layout_constraintEnd_toStartOf="@id/mailTextView"
+        android:singleLine="true"
+        app:layout_constraintEnd_toStartOf="@id/mailButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/patNameTextView"
         tools:text="뭉치" />
 
 
     <TextView
-        android:id="@+id/mailTextView"
+        android:id="@+id/mailButton"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/bg_round_white_12"
         android:gravity="center"
-        app:layout_constraintDimensionRatio="1.1:1"
         android:paddingHorizontal="18dp"
-        android:text="♂"
+        android:text="@string/character_mail"
+        android:textColor="@color/gray_e0"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@id/patNameEditText"
-        app:layout_constraintEnd_toStartOf="@id/femailTextView"
+        app:layout_constraintDimensionRatio="1.1:1"
+        app:layout_constraintEnd_toStartOf="@id/femailButton"
         app:layout_constraintStart_toEndOf="@id/patNameEditText"
         app:layout_constraintTop_toTopOf="@id/patNameEditText" />
 
     <TextView
-        android:id="@+id/femailTextView"
+        android:id="@+id/femailButton"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
+        android:layout_marginEnd="50dp"
         android:background="@drawable/bg_round_white_12"
         android:gravity="center"
-        app:layout_constraintDimensionRatio="1.1:1"
         android:paddingHorizontal="18dp"
-        android:layout_marginEnd="50dp"
-        android:text="♀"
+        android:text="@string/character_femail"
+        android:textColor="@color/gray_e0"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@id/patNameEditText"
+        app:layout_constraintDimensionRatio="1.1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/patNameEditText" />
 
@@ -98,6 +172,7 @@
         android:paddingHorizontal="24dp"
         android:paddingTop="12dp"
         android:paddingBottom="12dp"
+        android:singleLine="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/typeTextView"
@@ -118,14 +193,28 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
+        android:inputType="number"
         android:background="@drawable/bg_round_white_32"
         android:paddingHorizontal="24dp"
         android:paddingTop="12dp"
         android:paddingBottom="12dp"
+        android:singleLine="true"
         app:layout_constraintEnd_toEndOf="@id/typeEditText"
         app:layout_constraintStart_toStartOf="@id/typeEditText"
         app:layout_constraintTop_toBottomOf="@id/birthdayTextView"
         tools:text="2020-02-12" />
+
+    <TextView
+        android:id="@+id/patAgeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/green"
+        android:textStyle="bold"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintStart_toStartOf="@id/patNameTextView"
+        app:layout_constraintTop_toBottomOf="@id/birthdayEditText"
+        tools:text="2년 3개월"/>
 
     <TextView
         android:id="@+id/weightTextView"
@@ -145,6 +234,7 @@
         android:paddingHorizontal="24dp"
         android:paddingTop="12dp"
         android:paddingBottom="12dp"
+        android:singleLine="true"
         app:layout_constraintEnd_toEndOf="@id/typeEditText"
         app:layout_constraintStart_toStartOf="@id/typeEditText"
         app:layout_constraintTop_toBottomOf="@id/weightTextView"

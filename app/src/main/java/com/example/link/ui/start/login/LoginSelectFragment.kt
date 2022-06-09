@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.link.R
 import com.example.link.databinding.FragmentLoginSelectBinding
 import com.example.link.ui.start.StartSharedViewModel
@@ -40,19 +41,19 @@ class LoginSelectFragment : Fragment() {
     private fun bindViews() = with(binding) {
         googleLoginButton.setOnClickListener {
             findNavController().navigate(R.id.action_loginSelectFragment_to_loginIdFragment)
-            sharedViewModel.onNavClick()
+            sharedViewModel.onNavChange()
         }
         facebookLoginButton.setOnClickListener {
             findNavController().navigate(R.id.action_loginSelectFragment_to_loginIdFragment)
-            sharedViewModel.onNavClick()
+            sharedViewModel.onNavChange()
         }
         twitterLoginButton.setOnClickListener {
             findNavController().navigate(R.id.action_loginSelectFragment_to_loginIdFragment)
-            sharedViewModel.onNavClick()
+            sharedViewModel.onNavChange()
         }
         appleLoginButton.setOnClickListener {
             findNavController().navigate(R.id.action_loginSelectFragment_to_loginIdFragment)
-            sharedViewModel.onNavClick()
+            sharedViewModel.onNavChange()
         }
     }
 

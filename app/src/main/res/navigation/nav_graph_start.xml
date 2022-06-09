@@ -53,5 +53,34 @@
         android:id="@+id/loginProfileFragment"
         android:name="com.example.link.ui.start.login.LoginProfileFragment"
         android:label="LoginProfileFragment"
-        tools:layout="@layout/fragment_login_profile" />
+        tools:layout="@layout/fragment_login_profile" >
+        <action
+            android:id="@+id/action_loginProfileFragment_to_educationFirstFragment"
+            app:destination="@id/educationFirstFragment" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/educationFirstFragment"
+        android:name="com.example.link.ui.start.login.education.EducationFirstFragment"
+        android:label="EducationFirstFragment"
+        tools:layout="@layout/fragment_education_first">
+        <action
+            android:id="@+id/action_educationFirstFragment_to_educationSecondFragment"
+            app:destination="@id/educationSecondFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/educationSecondFragment"
+        android:name="com.example.link.ui.start.login.education.EducationSecondFragment"
+        android:label="EducationSecondFragment"
+        tools:layout="@layout/fragment_education_second">
+        <action
+            android:id="@+id/action_educationSecondFragment_to_educationThirdFragment"
+            app:destination="@id/educationThirdFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/educationThirdFragment"
+        android:name="com.example.link.ui.start.login.education.EducationThirdFragment"
+        android:label="EducationThirdFragment"
+        tools:layout="@layout/fragment_education_third"/>
 </navigation>

@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.link">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:name="com.example.link.App"
         android:allowBackup="true"
@@ -14,7 +16,8 @@
 
         <activity
             android:name="com.example.link.ui.start.StartActivity"
-            android:exported="true">
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

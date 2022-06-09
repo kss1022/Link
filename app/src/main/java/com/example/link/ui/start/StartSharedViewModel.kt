@@ -17,7 +17,9 @@ class StartSharedViewModel @Inject constructor(
 
     val navChangeEvent = SingleLiveEvent<Unit>()
 
-    fun onNavClick(){
+
+    fun onNavChange(){
         navChangeEvent.call()
     }
+
 }
