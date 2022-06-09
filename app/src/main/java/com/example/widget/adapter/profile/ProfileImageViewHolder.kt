@@ -17,9 +17,9 @@ class ProfileImageViewHolder(
         binding.profileImageView.load(id)
     }
 
-    fun bindViews(id: Int, listener: ProfileImageClickListener) {
+    fun bindViews(id: Int, position: Int, listener: ProfileImageClickListener) {
         binding.root.setOnClickListener {
-            listener.clickProfile(id)
+            listener.clickProfile(id, position)
         }
     }
 }

@@ -1,6 +1,5 @@
 package com.example.widget.adapter.profile
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -21,7 +20,7 @@ class ProfileImageRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: ProfileImageViewHolder, position: Int) {
         holder.bindData( profiles[position] )
-        holder.bindViews(profiles[position] , listener)
+        holder.bindViews( profiles[position] , position, listener)
     }
 
     override fun getItemCount(): Int{

@@ -18,9 +18,12 @@
     <string name="character_mail">♂</string>
     <string name="character_femail">♀</string>
     <string name="password_is_not_same">비밀번호가 일치하지 않습니다</string>
+    <string name="signIn_fail_check_your_email">회원가입에 실패 했습니다.\n이메일과 비밀번호를 확인해주세요😭</string>
+    <string name="logIn_fail_check_your_email">로그인에 실패 했습니다.\n이메일과 비밀번호를 확인해주세요😭</string>
 
     <string name="pat_age">%d년 %d개월</string>
-    <string name="day_is_error">날자가 잘못 입력하였습니다😭\n다시 확인해주세요</string>
+    <string name="check_input_please">잘못된 입력이 있습니다. 확인해주세요!</string>
+    <string name="day_is_error">잘못된 입력입니다 ( yyyy-mm-dd )</string>
     <string name="default_user_name">집사123</string>
     <string name="negative">취소</string>
     <string name="positive">확인</string>
@@ -39,6 +42,7 @@
     <string name="education_second_message">하고싶은 말을 메모에\n남겨놓아요</string>
     <string name="education_third_message">반려동물과 함께 갈 수\n있는 공간 찾아보아요</string>
     <string name="start">시작하기</string>
+
 
 
 </resources>

@@ -3,14 +3,13 @@ package com.example.link.ui.start.login
 import android.app.AlertDialog
 import android.view.LayoutInflater
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.link.R
 import com.example.link.databinding.FragmentLoginProfileBinding
 import com.example.link.ui.base.BaseFragment
-import com.example.link.ui.main.MainActivity
 import com.example.link.ui.start.StartSharedViewModel
 import com.example.link.util.ext.load
 import com.example.widget.adapter.profile.ProfileImageClickListener
@@ -29,12 +28,14 @@ class LoginProfileFragment : BaseFragment<FragmentLoginProfileBinding, LoginProf
 
     override fun getViewBinding(): FragmentLoginProfileBinding =FragmentLoginProfileBinding.inflate(layoutInflater)
 
+    private val args :LoginProfileFragmentArgs by navArgs()
+
     private val profileAdapter by lazy {
         ProfileImageRecyclerViewAdapter(
             ProfileCategory.values().toList().map { it.imageId },
             object  : ProfileImageClickListener{
-                override fun clickProfile(id: Int) {
-                    viewModel.setProfile(id)
+                override fun clickProfile(id: Int, position: Int) {
+                    viewModel.setProfile(id , position)
                 }
             }
         )
@@ -42,6 +43,7 @@ class LoginProfileFragment : BaseFragment<FragmentLoginProfileBinding, LoginProf
     }
 
     override fun initViews() {
+        binding.patNameTextView.text = args.patName
         initRecyclerView()
     }
 

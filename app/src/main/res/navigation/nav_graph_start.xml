@@ -54,6 +54,11 @@
         android:name="com.example.link.ui.start.login.LoginProfileFragment"
         android:label="LoginProfileFragment"
         tools:layout="@layout/fragment_login_profile" >
+
+        <argument
+            android:name="patName"
+            app:argType="string"/>
+
         <action
             android:id="@+id/action_loginProfileFragment_to_educationFirstFragment"
             app:destination="@id/educationFirstFragment" />

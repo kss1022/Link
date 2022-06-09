@@ -1,17 +1,13 @@
 package com.example.link.ui.start.login
 
-import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.view.isGone
 import androidx.core.widget.addTextChangedListener
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.link.R
@@ -40,6 +36,7 @@ class LoginPatFragment : BaseFragment<FragmentLoginPatBinding, LoginPatViewModel
 
     override fun bindViews() {
         binding.nextButton.setOnClickListener {
+            binding.progressBar.visibility = View.VISIBLE
             viewModel.clickNext()
         }
 
@@ -66,8 +63,8 @@ class LoginPatFragment : BaseFragment<FragmentLoginPatBinding, LoginPatViewModel
         //Set Text YYYY-MM-DD
         DateInputMask(binding.birthdayEditText).listen()
 
-        binding.weightTextView.addTextChangedListener {
-            viewModel.setWeight(binding.weightTextView.text.toString())
+        binding.weightEditText.addTextChangedListener {
+            viewModel.setWeight(binding.weightEditText.text.toString())
         }
     }
 
@@ -75,7 +72,16 @@ class LoginPatFragment : BaseFragment<FragmentLoginPatBinding, LoginPatViewModel
     override fun observeData() {
         viewModel.nextClickEvent.observe(viewLifecycleOwner){ goNext->
             goNext?.let {
-                if(it) findNavController().navigate(R.id.action_loginPatFragment_to_loginProfileFragment)
+                if(it) {
+                    findNavController().navigate(
+                        LoginPatFragmentDirections.actionLoginPatFragmentToLoginProfileFragment(
+                            viewModel.name.value.toString()
+                        )
+                    )
+                }else{
+                    binding.progressBar.isGone = true
+                    Toast.makeText(requireContext(), getString(R.string.check_input_please), Toast.LENGTH_SHORT).show()
+                }
             }
         }
 
@@ -93,8 +99,7 @@ class LoginPatFragment : BaseFragment<FragmentLoginPatBinding, LoginPatViewModel
             patAge?.let {
                 if(it.first < 0) {
                     //error
-                    binding.patAgeTextView.text = ""
-                    Toast.makeText(requireContext(), getString(R.string.day_is_error), Toast.LENGTH_SHORT).show()
+                    binding.patAgeTextView.text = getString(R.string.day_is_error)
                 }else{
                     binding.patAgeTextView.text = getString(R.string.pat_age, it.first, it.second)
                 }
@@ -141,7 +146,7 @@ class LoginPatFragment : BaseFragment<FragmentLoginPatBinding, LoginPatViewModel
         viewModel.name.value?.let { binding.patNameEditText.setText(it) }
         viewModel.type.value?.let { binding.typeEditText.setText(it) }
         viewModel.birthday.value?.let { binding.birthdayEditText.setText(it) }
-        viewModel.weight.value?.let { binding.weightEditText.setText(it) }
+        viewModel.weight.value?.let { binding.weightEditText.setText(it.toString()) }
     }
 
 

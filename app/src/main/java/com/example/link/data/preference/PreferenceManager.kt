@@ -12,8 +12,8 @@ class PreferenceManager(private val preferences: SharedPreferences) {
         private const val INVALID_LONG_VALUE = Long.MIN_VALUE
         private const val INVALID_INT_VALUE = Int.MIN_VALUE
 
-        private const val USER_LONG_KEY = "user_long"
-        private const val BASE_STRING_KEY = "base_string"
+        private const val USER_ID_STRING_KEY = "user_id"
+        private const val USER_PROFILE_INT_KEY = "profile_id"
     }
 
     private val editor by lazy { preferences.edit() }
@@ -26,17 +26,36 @@ class PreferenceManager(private val preferences: SharedPreferences) {
 
 
     /**
-     * String 값 저장
+     * Save User Id ( String 값 저장)
      */
-    fun setString(value: String) {
-        editor.putString(BASE_STRING_KEY, value)
+    fun setUserId(value: String) {
+        editor.putString(USER_ID_STRING_KEY, value)
         editor.apply()
     }
 
-    fun getString(): String? {
-        val value = preferences.getString(BASE_STRING_KEY, INVALID_STRING_VALUE)
+    fun getUserId(): String? {
+        val value = preferences.getString(USER_ID_STRING_KEY, INVALID_STRING_VALUE)
 
-        return if (value == "") {
+        return if (value == INVALID_STRING_VALUE) {
+            null
+        } else {
+            value
+        }
+    }
+
+
+    /**
+     * Save Profile Id ( Int 값 저장)
+     */
+    fun setProfileId(value: Int) {
+        editor.putInt(USER_PROFILE_INT_KEY, value)
+        editor.apply()
+    }
+
+    fun getProfileId(): Int? {
+        val value = preferences.getInt(USER_PROFILE_INT_KEY, INVALID_INT_VALUE)
+
+        return if (value == INVALID_INT_VALUE) {
             null
         } else {
             value

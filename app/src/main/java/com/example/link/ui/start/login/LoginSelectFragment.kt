@@ -9,6 +9,8 @@ import androidx.navigation.fragment.findNavController
 import com.example.link.R
 import com.example.link.databinding.FragmentLoginSelectBinding
 import com.example.link.ui.start.StartSharedViewModel
+import com.example.link.util.lifecycle.SingleLiveEvent
+import com.example.link.util.lifecycle.SystemUIType
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -18,6 +20,8 @@ class LoginSelectFragment : Fragment() {
     @Inject
     lateinit var sharedViewModel: StartSharedViewModel
 
+    @Inject
+    lateinit var systemUIEvent: SingleLiveEvent<SystemUIType>
 
     private var _binding: FragmentLoginSelectBinding? = null
     private val binding get() = _binding!!
@@ -34,10 +38,10 @@ class LoginSelectFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        systemUIEvent.value = SystemUIType.NORMAL
         bindViews()
     }
 
-    //todo  로그인을 제대로 구현해야되는지 다시 물어보기
     private fun bindViews() = with(binding) {
         googleLoginButton.setOnClickListener {
             findNavController().navigate(R.id.action_loginSelectFragment_to_loginIdFragment)
