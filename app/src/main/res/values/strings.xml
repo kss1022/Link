@@ -8,10 +8,11 @@
     <!--Start-->
     <string name="subtitle">나의 반려견을 잇다</string>
     <string name="start_with_this_profile">이 프로필로 시작하기</string>
+    <string name="login_fail">로그인에 실패했습니다</string>
     <string name="id">아이디</string>
     <string name="password">비밀번호</string>
     <string name="check_password">비밀번호 확인</string>
-    <string name="pat_name">반려견 이름</string>
+    <string name="pet_name">반려견 이름</string>
     <string name="type">종류</string>
     <string name="birthday">생일</string>
     <string name="weight">몸무게</string>
@@ -21,7 +22,7 @@
     <string name="signIn_fail_check_your_email">회원가입에 실패 했습니다.\n이메일과 비밀번호를 확인해주세요😭</string>
     <string name="logIn_fail_check_your_email">로그인에 실패 했습니다.\n이메일과 비밀번호를 확인해주세요😭</string>
 
-    <string name="pat_age">%d년 %d개월</string>
+    <string name="pet_age">%d년 %d개월</string>
     <string name="check_input_please">잘못된 입력이 있습니다. 확인해주세요!</string>
     <string name="day_is_error">잘못된 입력입니다 ( yyyy-mm-dd )</string>
     <string name="default_user_name">집사123</string>
@@ -44,5 +45,15 @@
     <string name="start">시작하기</string>
 
 
+
+
+    <string name="last_meal_temp">50분전에 밥 먹었어요!</string>
+    <string name="memo">메모</string>
+    <string name="meal">밥</string>
+    <string name="snack">간식</string>
+    <string name="medicine">약</string>
+    <string name="walk">산책</string>
+    <string name="shower">목욕</string>
+    <string name="pet_record_title">%s의 기록</string>
 
 </resources>

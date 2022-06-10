@@ -1,8 +1,6 @@
-package com.example.widget.adapter.profile
+package com.example.link.widget.adapter.profile
 
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.example.link.R
 import com.example.link.databinding.ViewholderProfileImageBinding
 import com.example.link.util.ext.clear
 import com.example.link.util.ext.load

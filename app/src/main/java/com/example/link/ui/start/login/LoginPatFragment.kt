@@ -64,6 +64,7 @@ class LoginPatFragment : BaseFragment<FragmentLoginPatBinding, LoginPatViewModel
         DateInputMask(binding.birthdayEditText).listen()
 
         binding.weightEditText.addTextChangedListener {
+            //todo 뒤에 kg 을 붙이기
             viewModel.setWeight(binding.weightEditText.text.toString())
         }
     }
@@ -101,7 +102,8 @@ class LoginPatFragment : BaseFragment<FragmentLoginPatBinding, LoginPatViewModel
                     //error
                     binding.patAgeTextView.text = getString(R.string.day_is_error)
                 }else{
-                    binding.patAgeTextView.text = getString(R.string.pat_age, it.first, it.second)
+                    //todo 년이 0인경우 개월만 보여주기
+                    binding.patAgeTextView.text = getString(R.string.pet_age, it.first, it.second)
                 }
             } ?: kotlin.run {
                     binding.patAgeTextView.text = ""
@@ -117,13 +119,13 @@ class LoginPatFragment : BaseFragment<FragmentLoginPatBinding, LoginPatViewModel
     private fun setMail() = with(binding) {
         mailButton.apply {
             setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
-            setBackgroundResource(R.drawable.bg_round_green_12)
+            setBackgroundResource(R.drawable.bg_corner_green_18)
         }
 
 
         femailButton.apply {
             setTextColor(ContextCompat.getColor(requireContext(), R.color.gray_e0))
-            setBackgroundResource(R.drawable.bg_round_white_12)
+            setBackgroundResource(R.drawable.bg_corner_white_18)
         }
     }
 
@@ -131,13 +133,13 @@ class LoginPatFragment : BaseFragment<FragmentLoginPatBinding, LoginPatViewModel
     private fun setFemail() = with(binding) {
         mailButton.apply {
             setTextColor(ContextCompat.getColor(requireContext(), R.color.gray_e0))
-            setBackgroundResource(R.drawable.bg_round_white_12)
+            setBackgroundResource(R.drawable.bg_corner_white_18)
         }
 
 
         femailButton.apply {
             setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
-            setBackgroundResource(R.drawable.bg_round_green_12)
+            setBackgroundResource(R.drawable.bg_corner_green_18)
         }
     }
 

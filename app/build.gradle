@@ -14,7 +14,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.link"
-        minSdk 23
+        minSdk 24
         targetSdk 32
         versionCode 1
         versionName "1.0"
@@ -87,5 +87,6 @@ dependencies {
     //Firebase
     implementation 'com.google.firebase:firebase-auth-ktx:21.0.5'
     implementation 'com.google.firebase:firebase-firestore-ktx:24.1.2'
+    implementation 'com.google.android.gms:play-services-auth:20.2.0'
 
 }

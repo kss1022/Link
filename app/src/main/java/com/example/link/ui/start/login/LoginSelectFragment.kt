@@ -1,21 +1,28 @@
 package com.example.link.ui.start.login
 
+import android.app.Activity
 import android.os.Bundle
-import android.view.LayoutInflater
+import android.util.Log
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.link.R
 import com.example.link.databinding.FragmentLoginSelectBinding
+import com.example.link.ui.base.BaseFragment
+import com.example.link.ui.main.MainActivity
 import com.example.link.ui.start.StartSharedViewModel
 import com.example.link.util.lifecycle.SingleLiveEvent
 import com.example.link.util.lifecycle.SystemUIType
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class LoginSelectFragment : Fragment() {
+class LoginSelectFragment : BaseFragment<FragmentLoginSelectBinding, LoginSelectViewModel>() {
 
     @Inject
     lateinit var sharedViewModel: StartSharedViewModel
@@ -23,48 +30,101 @@ class LoginSelectFragment : Fragment() {
     @Inject
     lateinit var systemUIEvent: SingleLiveEvent<SystemUIType>
 
-    private var _binding: FragmentLoginSelectBinding? = null
-    private val binding get() = _binding!!
+
+    override val viewModel: LoginSelectViewModel by viewModels()
+
+    override fun getViewBinding(): FragmentLoginSelectBinding =
+        FragmentLoginSelectBinding.inflate(layoutInflater)
+
+    private val gso: GoogleSignInOptions by lazy {
+        GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+    }
+
+    private val gsc by lazy { GoogleSignIn.getClient(requireContext(), gso) }
 
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentLoginSelectBinding.inflate(layoutInflater)
-        return binding.root
+    private val loginLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
+                try {
+                    task.getResult(ApiException::class.java)?.let { account ->
+                        Log.e("Login", "firebaseAuthWithGoogle: ${account.id} , ${account.idToken}")
+                        viewModel.setUserIdAndToken(account.id, account.idToken)
+                    } ?: throw Exception()
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
+        }
+
+
+    override fun initViews() {
+        systemUIEvent.value = SystemUIType.NORMAL
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        systemUIEvent.value = SystemUIType.NORMAL
+
         bindViews()
     }
 
-    private fun bindViews() = with(binding) {
-        googleLoginButton.setOnClickListener {
+
+    override fun bindViews() {
+        binding.googleLoginButton.setOnClickListener {
+            viewModel.clickGoogleLogin()
+            sharedViewModel.onNavChange()
+        }
+
+        binding.facebookLoginButton.setOnClickListener {
             findNavController().navigate(R.id.action_loginSelectFragment_to_loginIdFragment)
             sharedViewModel.onNavChange()
         }
-        facebookLoginButton.setOnClickListener {
+
+        binding.twitterLoginButton.setOnClickListener {
             findNavController().navigate(R.id.action_loginSelectFragment_to_loginIdFragment)
             sharedViewModel.onNavChange()
         }
-        twitterLoginButton.setOnClickListener {
-            findNavController().navigate(R.id.action_loginSelectFragment_to_loginIdFragment)
-            sharedViewModel.onNavChange()
-        }
-        appleLoginButton.setOnClickListener {
+
+        binding.appleLoginButton.setOnClickListener {
             findNavController().navigate(R.id.action_loginSelectFragment_to_loginIdFragment)
             sharedViewModel.onNavChange()
         }
     }
 
 
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
+    override fun observeData() {
+        viewModel.googleLoginClickEvent.observe(viewLifecycleOwner) {
+            signInGoogle()
+        }
+
+
+        viewModel.loginSuccess.observe(viewLifecycleOwner) { result ->
+            result?.let {
+                if (it) viewModel.saveUserData() else Toast.makeText(
+                    requireContext(),
+                    getString(R.string.login_fail),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+
+        viewModel.saveUserData.observe(viewLifecycleOwner) { isExist ->
+            if (isExist!!) {
+                startActivity(MainActivity.newIntent(requireContext()))
+                requireActivity().finish()
+            } else {
+                findNavController().navigate(R.id.action_loginSelectFragment_to_loginPatFragment)
+            }
+
+        }
     }
 
+    private fun signInGoogle() {
+        val signInIntent = gsc.signInIntent
+        loginLauncher.launch(signInIntent)
+    }
 }

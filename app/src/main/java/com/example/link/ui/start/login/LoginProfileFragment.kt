@@ -12,8 +12,8 @@ import com.example.link.databinding.FragmentLoginProfileBinding
 import com.example.link.ui.base.BaseFragment
 import com.example.link.ui.start.StartSharedViewModel
 import com.example.link.util.ext.load
-import com.example.widget.adapter.profile.ProfileImageClickListener
-import com.example.widget.adapter.profile.ProfileImageRecyclerViewAdapter
+import com.example.link.widget.adapter.profile.ProfileImageClickListener
+import com.example.link.widget.adapter.profile.ProfileImageRecyclerViewAdapter
 import com.google.android.material.textfield.TextInputEditText
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject

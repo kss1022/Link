@@ -1,4 +1,4 @@
-package com.example.widget.adapter.profile
+package com.example.link.widget.adapter.profile
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

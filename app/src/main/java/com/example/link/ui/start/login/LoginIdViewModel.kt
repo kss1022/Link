@@ -48,8 +48,8 @@ class LoginIdViewModel @Inject constructor(
         }else{
             //로그인
             val password = password.value!!
-            loginWithEmailAndPassword(id , password)
-//            signInWithEmailAndPassword(id , password)
+//            loginWithEmailAndPassword(id , password)
+            signInWithEmailAndPassword(id , password)
         }
     }
 

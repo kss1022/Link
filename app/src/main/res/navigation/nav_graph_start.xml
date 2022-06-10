@@ -24,6 +24,9 @@
         <action
             android:id="@+id/action_loginSelectFragment_to_loginIdFragment"
             app:destination="@id/loginIdFragment" />
+        <action
+            android:id="@+id/action_loginSelectFragment_to_loginPatFragment"
+            app:destination="@id/loginPatFragment" />
     </fragment>
 
 

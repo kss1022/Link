@@ -1,8 +1,9 @@
 package com.example.link.data.api
 
-import android.util.Log
-import com.example.link.data.entity.PatEntity
+import com.example.link.data.entity.PetEntity
+import com.example.link.model.User
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.toObject
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
@@ -11,7 +12,7 @@ class FireStoreApiImpl @Inject constructor(
 ) : FireStoreApi {
 
 
-    override suspend fun saveUserId(id: String, email : String) {
+    override suspend fun saveUserId(id: String, email: String) {
         val user = hashMapOf(
             "id" to id,
             EMAIL to email
@@ -26,29 +27,67 @@ class FireStoreApiImpl @Inject constructor(
 
     override suspend fun saveUserNameWithProfileNum(id: String, name: String, num: Int) {
         try {
-            Log.e("dafsdaf" ,"$name , $num")
             fireStore.collection(USER).document(id).apply {
                 update(NAME, name)
-                update(PROFILE, num )
+                update(PROFILE, num)
             }
-            Log.e("Update" ,"$name , $num")
-        }catch (e: Exception){
+        } catch (e: Exception) {
             e.printStackTrace()
         }
     }
 
-    override suspend fun savePetData(patEntity: PatEntity, userId: String) {
-        fireStore.collection(PET).document(userId).set(patEntity)
+    override suspend fun savePetData(petEntity: PetEntity, userId: String) {
+        fireStore.collection(PET).document(userId).set(petEntity)
+    }
+
+    override suspend fun getPetData(userId: String): PetEntity? {
+        val pet = fireStore.collection(PET).document(userId)
+            .get()
+            .await()
+            .toObject<PetEntity>()
+        return pet
+    }
+
+    override suspend fun checkUserIsExist(userId: String): Boolean {
+        val user = fireStore.collection(USER).document(userId)
+            .get()
+            .await()
+
+        return user.exists()
+    }
+
+    override suspend fun checkPetIsExist(userId: String): Boolean {
+        val pet = fireStore.collection(USER).document(userId)
+            .get()
+            .await()
+
+        return pet.exists()
     }
 
 
-    companion object{
-        const val  USER = "user"
-        const val  Id = "id"
-        const val  EMAIL = "email"
-        const val  NAME = "name"
-        const val  PROFILE = "profileNum"
+    override suspend fun getUserProfileNum(userId: String): Int =
+         fireStore.collection(USER).document(userId)
+           .get()
+           .await()
+           .get(PROFILE).toString().toInt()
 
-        const val  PET="pet"
+    override suspend fun getUserData(userId: String): User? {
+        val user = fireStore.collection(USER).document(userId)
+            .get()
+            .await()
+            .toObject<User>()
+
+        return  user
+    }
+
+
+    companion object {
+        const val USER = "user"
+        const val Id = "id"
+        const val EMAIL = "email"
+        const val NAME = "name"
+        const val PROFILE = "profileNum"
+
+        const val PET = "pet"
     }
 }

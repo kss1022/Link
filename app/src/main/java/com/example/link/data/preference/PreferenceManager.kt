@@ -13,6 +13,7 @@ class PreferenceManager(private val preferences: SharedPreferences) {
         private const val INVALID_INT_VALUE = Int.MIN_VALUE
 
         private const val USER_ID_STRING_KEY = "user_id"
+        private const val USER_TOKEN_STRING_KEY = "token_id"
         private const val USER_PROFILE_INT_KEY = "profile_id"
     }
 
@@ -61,4 +62,24 @@ class PreferenceManager(private val preferences: SharedPreferences) {
             value
         }
     }
+
+    /**
+     * Save User Token ( Int 값 저장)
+     */
+
+    fun setUserToken(value: String) {
+        editor.putString(USER_TOKEN_STRING_KEY, value)
+        editor.apply()
+    }
+
+    fun getUserToken(): String? {
+        val value = preferences.getString(USER_TOKEN_STRING_KEY, INVALID_STRING_VALUE)
+
+        return if (value == INVALID_STRING_VALUE) {
+            null
+        } else {
+            value
+        }
+    }
+
 }

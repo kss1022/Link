@@ -40,8 +40,6 @@ class LoginIdFragment : BaseFragment<FragmentLoginIdBinding, LoginIdViewModel>()
 
     override fun bindViews() {
         binding.nextButton.setOnClickListener {
-            //todo 나중에 변경해줄것  이메일 check
-//            findNavController().navigate(R.id.action_loginIdFragment_to_loginPatFragment)
             binding.progressBar.visibility = View.VISIBLE
             viewModel.clickNext()
         }

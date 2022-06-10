@@ -47,7 +47,7 @@ class LoginProfileViewModel @Inject constructor(
     }
 
     fun clickNext() = viewModelScope.launch{
-        userRepository.saveUserNameWithProfileNum(userName.value!!, profilePos.value!!)
+        userRepository.saveUserNameWithProfileNum(userName.value!!, profile.value!!,profilePos.value!!)
         nextClickEvent.value = true
     }
 }
