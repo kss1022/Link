@@ -228,7 +228,7 @@
                 android:paddingTop="12dp"
                 android:paddingBottom="12dp"
                 android:text="친구 팔로우 및 초대"
-                app:drawableEndCompat="@drawable/ic_baseline_keyboard_arrow_right_24" />
+                app:drawableEndCompat="@drawable/arrow_right" />
 
             <View
                 android:layout_width="match_parent"
@@ -243,7 +243,7 @@
                 android:paddingTop="12dp"
                 android:paddingBottom="12dp"
                 android:text="알림"
-                app:drawableEndCompat="@drawable/ic_baseline_keyboard_arrow_right_24" />
+                app:drawableEndCompat="@drawable/arrow_right" />
 
             <View
                 android:layout_width="match_parent"
@@ -257,7 +257,7 @@
                 android:paddingTop="12dp"
                 android:paddingBottom="12dp"
                 android:text="도움말"
-                app:drawableEndCompat="@drawable/ic_baseline_keyboard_arrow_right_24" />
+                app:drawableEndCompat="@drawable/arrow_right" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

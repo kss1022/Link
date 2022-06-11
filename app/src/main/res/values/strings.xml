@@ -46,7 +46,7 @@
 
 
 
-
+    <!-- home -->
     <string name="last_meal_temp">50분전에 밥 먹었어요!</string>
     <string name="memo">메모</string>
     <string name="meal">밥</string>
@@ -55,5 +55,29 @@
     <string name="walk">산책</string>
     <string name="shower">목욕</string>
     <string name="pet_record_title">%s의 기록</string>
+
+    <!--tab detail menu-->
+    <string name="category_all">전체</string>
+    <string name="category_meal">섭식</string>
+    <string name="category_walk">산책</string>
+    <string name="category_sleep">수면</string>
+
+
+    <!-- detail-->
+    <string name="today">오늘</string>
+    <string name="week">주</string>
+    <string name="month">월</string>
+    <string name="year">년</string>
+    <string name="eating">섭식</string>
+    <string name="eating_count">식사 횟수</string>
+    <string name="eating_amount">식사 양</string>
+    <string name="count">횟수</string>
+    <string name="walk_time">활동시간</string>
+
+    <string name="sleep">수면</string>
+    <string name="average_heart_count">평균 심박수</string>
+    <string name="sleep_score">수면 점수</string>
+    <string name="snack_count">간식 횟수</string>
+    <string name="snack_amount">간식 양</string>
 
 </resources>

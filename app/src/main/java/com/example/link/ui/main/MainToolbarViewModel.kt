@@ -36,6 +36,8 @@ class MainToolbarViewModel @Inject constructor(
     val navClickEvent = SingleLiveEvent<Unit>()
     val navChangeEvent = SingleLiveEvent<Unit>()
 
+    val bottomNavigationIsShow = SingleLiveEvent<Boolean>()
+
     fun setTitle(charSequence: CharSequence): MainToolbarViewModel {
         savedStateHandle.set(KEY_TITLE, charSequence)
         return this

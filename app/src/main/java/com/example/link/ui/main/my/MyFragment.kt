@@ -1,9 +1,9 @@
 package com.example.link.ui.main.my
 
+import android.annotation.SuppressLint
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.example.link.R
-import com.example.link.databinding.FragmentHomeBinding
 import com.example.link.databinding.FragmentMyBinding
 import com.example.link.model.PetModel
 import com.example.link.model.User
@@ -11,7 +11,6 @@ import com.example.link.ui.base.BaseFragment
 import com.example.link.ui.main.MainSharedViewModel
 import com.example.link.ui.main.MainToolbarViewModel
 import com.example.link.util.ext.toReadableDateString
-import com.example.link.util.lifecycle.SystemUIType
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 import javax.inject.Inject
@@ -62,6 +61,8 @@ class MyFragment : BaseFragment<FragmentMyBinding, MyViewModel>() {
         toolbarViewModel.setTitle(getString(R.string.app_name))
             .setNavIconRes(null)
             .onChange()
+
+        toolbarViewModel.bottomNavigationIsShow.value = true
     }
 
 
@@ -74,13 +75,15 @@ class MyFragment : BaseFragment<FragmentMyBinding, MyViewModel>() {
         binding.userEmailTextView.text = it.email
     }
 
+
+    @SuppressLint("SetTextI18n")
     private fun setPetData(pet: PetModel) = with(binding) {
         petNameTextView.text = pet.name
         petYearTextView.text = getYear(pet.birthDay)
         petTypeTextView.text = pet.type
         petMailTextView.text =
             if (pet.isMail) getString(R.string.character_mail) else getString(R.string.character_femail)
-        petWeightTextView.text = pet.weight.toString()
+        petWeightTextView.text = "${pet.weight}kg"
     }
 
 

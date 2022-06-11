@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.link.R
 import com.example.link.databinding.FragmentStartBinding
@@ -14,6 +15,8 @@ import com.example.link.util.lifecycle.SystemUIType
 import com.example.yourchoice.data.preference.PreferenceManager
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -50,25 +53,31 @@ class StartFragment : Fragment(){
 
     private fun initViews() {
         systemUIEvent.value = SystemUIType.FULLSCREEN
-    }
 
-    private fun bindViews() {
-        binding.titleTextView.setOnClickListener {
-            val id = preferenceManager.getUserId()
+        viewLifecycleOwner.lifecycleScope.launch {
+            delay(1000)
 
-            if(id == null){
-                findNavController().navigate(R.id.action_startFragment_to_loginSelectFragment)
-            }else{
-                startActivity(MainActivity.newIntent(requireContext()))
-                requireActivity().finish()
-            }
+            startApp()
         }
     }
 
+    private fun bindViews() {
+    }
 
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
     }
 
+
+    private fun startApp() {
+        val id = preferenceManager.getUserId()
+
+        if (id == null) {
+            findNavController().navigate(R.id.action_startFragment_to_loginSelectFragment)
+        } else {
+            startActivity(MainActivity.newIntent(requireContext()))
+            requireActivity().finish()
+        }
+    }
 }

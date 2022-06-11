@@ -2,6 +2,8 @@ package com.example.link.ui.start.login
 
 import android.app.Application
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.example.link.data.repository.PetRepository
@@ -27,9 +29,9 @@ class LoginSelectViewModel @Inject constructor(
     val loginSuccess = SingleLiveEvent<Boolean>()
     val saveUserData = SingleLiveEvent<Boolean>()
 
-    val id = savedStateHandle.getLiveData<String>(KEY_ID, "")
-    val email = savedStateHandle.getLiveData<String>(KEY_EMAIL, "")
-    val idToken = savedStateHandle.getLiveData<String>(KEY_ID_TOKEN, "")
+    val id : LiveData<String> = savedStateHandle.getLiveData(KEY_ID, "")
+    val email : LiveData<String> = savedStateHandle.getLiveData(KEY_EMAIL, "")
+    val idToken : LiveData<String> = savedStateHandle.getLiveData(KEY_ID_TOKEN, "")
 
     companion object {
         const val KEY_ID = "id"

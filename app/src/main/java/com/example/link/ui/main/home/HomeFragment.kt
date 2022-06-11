@@ -1,9 +1,7 @@
 package com.example.link.ui.main.home
 
 import android.graphics.Rect
-import android.util.Log
 import android.view.View
-import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
@@ -74,16 +72,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+
+    override fun onDestroyView() {
+        super.onDestroyView()
         binding.memoViewPager.unregisterOnPageChangeCallback(viewPagerOnPageChangeCallback)
     }
-
 
     fun initActionBar() {
         toolbarViewModel.setTitle(getString(R.string.app_name))
             .setNavIconRes(null)
             .onChange()
+
+        toolbarViewModel.bottomNavigationIsShow.value = true
     }
 
     private fun initViewModel() {

@@ -1,6 +1,7 @@
 package com.example.link.ui.main
 
 import android.app.Application
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
@@ -25,7 +26,7 @@ class MainSharedViewModel @Inject constructor(
     private val preferenceManager: PreferenceManager
 ) : BaseViewModel(app){
 
-    val userId = savedStateHandle.getLiveData(KEY_USER_ID, "")
+    val userId : LiveData<String> = savedStateHandle.getLiveData(KEY_USER_ID, "")
 
     val petModel = MutableLiveData<PetModel>()
     val userModel = MutableLiveData<User>()

@@ -1,0 +1,541 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/topMenuContainer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="32dp"
+            android:layout_marginTop="24dp"
+            android:weightSum="4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/topMenuDayTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/bg_corner_left_18"
+                android:backgroundTint="@color/green"
+                android:gravity="center"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:text="@string/today"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/topMenuWeekTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/gray_e0"
+                android:gravity="center"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:text="@string/week"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/topMenuMonthTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/gray_e0"
+                android:gravity="center"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:text="@string/month"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/topMenuYearTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/bg_corner_right_18"
+                android:backgroundTint="@color/gray_e0"
+                android:gravity="center"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:text="@string/year"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/myPetContainer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/topMenuContainer">
+
+
+            <View
+                android:id="@+id/backGroundView"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@drawable/detail_my_pet"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="H,3:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/petNameTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="12dp"
+                android:textColor="@color/green"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/backGroundView"
+                tools:text="뭉치" />
+
+            <TextView
+                android:id="@+id/petWeightTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toTopOf="@id/petYearTextView"
+                app:layout_constraintStart_toStartOf="@id/petNameTextView"
+                app:layout_constraintTop_toBottomOf="@id/petNameTextView"
+                tools:text="3.2kg" />
+
+            <TextView
+                android:id="@+id/petYearTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toTopOf="@id/petTypeTextView"
+                app:layout_constraintStart_toStartOf="@id/petNameTextView"
+                tools:text="2년 3개월" />
+
+            <TextView
+                android:id="@+id/petTypeTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@id/petYearTextView"
+                app:layout_constraintTop_toBottomOf="@id/petYearTextView"
+                tools:text="토이푸들" />
+
+
+            <TextView
+                android:id="@+id/petMailTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="16dp"
+                android:textColor="@color/green"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/petTypeTextView"
+                app:layout_constraintTop_toTopOf="@id/petTypeTextView"
+                tools:text="@string/character_mail" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <TextView
+            android:id="@+id/eatingTitleTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:text="@string/eating"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:drawableEndCompat="@drawable/arrow_right"
+            app:drawableTint="@color/green"
+            app:layout_constraintEnd_toEndOf="@id/myPetContainer"
+            app:layout_constraintStart_toStartOf="@id/myPetContainer"
+            app:layout_constraintTop_toBottomOf="@id/myPetContainer" />
+
+        <TextView
+            android:id="@+id/mealTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/meal"
+            app:layout_constraintStart_toStartOf="@id/eatingTitleTextView"
+            app:layout_constraintTop_toBottomOf="@id/eatingTitleTextView" />
+
+        <TextView
+            android:id="@+id/mealCountTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2회"
+            app:layout_constraintBottom_toBottomOf="@id/mealTitleTextView"
+            app:layout_constraintEnd_toStartOf="@id/mealAmountTextView"
+            app:layout_constraintStart_toEndOf="@id/mealTitleTextView"
+            app:layout_constraintTop_toTopOf="@id/mealTitleTextView" />
+
+        <TextView
+            android:id="@+id/mealAmountTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="550g"
+            app:layout_constraintBottom_toBottomOf="@id/mealTitleTextView"
+            app:layout_constraintEnd_toStartOf="@id/mealInputPercentTextView"
+            app:layout_constraintStart_toEndOf="@id/mealCountTextView"
+            app:layout_constraintTop_toTopOf="@id/mealTitleTextView" />
+
+        <TextView
+            android:id="@+id/mealInputPercentTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2"
+            app:layout_constraintBottom_toBottomOf="@id/mealTitleTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/mealAmountTextView"
+            app:layout_constraintTop_toTopOf="@id/mealTitleTextView" />
+
+        <TextView
+            android:id="@+id/mealPercentTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="/2"
+            android:textColor="@color/green"
+            app:layout_constraintBottom_toBottomOf="@id/mealTitleTextView"
+            app:layout_constraintStart_toEndOf="@id/mealInputPercentTextView"
+            app:layout_constraintTop_toTopOf="@id/mealTitleTextView" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="12dp"
+            android:background="@color/black"
+            app:layout_constraintEnd_toEndOf="@id/eatingTitleTextView"
+            app:layout_constraintStart_toStartOf="@id/eatingTitleTextView"
+            app:layout_constraintTop_toBottomOf="@id/mealTitleTextView" />
+
+
+        <TextView
+            android:id="@+id/snackTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/snack"
+            app:layout_constraintStart_toStartOf="@id/mealTitleTextView"
+            app:layout_constraintTop_toBottomOf="@id/mealTitleTextView" />
+
+        <TextView
+            android:id="@+id/snackCountTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1회"
+            app:layout_constraintBottom_toBottomOf="@id/snackTitleTextView"
+            app:layout_constraintStart_toStartOf="@id/mealCountTextView"
+            app:layout_constraintTop_toTopOf="@id/snackTitleTextView" />
+
+        <TextView
+            android:id="@+id/snackAmountTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="15g"
+            app:layout_constraintBottom_toBottomOf="@id/snackTitleTextView"
+            app:layout_constraintStart_toStartOf="@id/mealAmountTextView"
+            app:layout_constraintTop_toTopOf="@id/snackTitleTextView" />
+
+
+        <TextView
+            android:id="@+id/snackInputPercentTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1"
+            app:layout_constraintBottom_toBottomOf="@id/snackTitleTextView"
+            app:layout_constraintEnd_toStartOf="@id/snackPercentTextView"
+            app:layout_constraintTop_toTopOf="@id/snackTitleTextView" />
+
+        <TextView
+            android:id="@+id/snackPercentTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="/2"
+            android:textColor="@color/green"
+            app:layout_constraintBottom_toBottomOf="@id/snackTitleTextView"
+            app:layout_constraintStart_toStartOf="@id/mealPercentTextView"
+            app:layout_constraintTop_toTopOf="@id/snackTitleTextView" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="12dp"
+            android:background="@color/black"
+            app:layout_constraintEnd_toEndOf="@id/eatingTitleTextView"
+            app:layout_constraintStart_toStartOf="@id/eatingTitleTextView"
+            app:layout_constraintTop_toBottomOf="@id/snackTitleTextView" />
+
+        <TextView
+            android:id="@+id/subMealTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/meal"
+            app:layout_constraintStart_toStartOf="@id/snackTitleTextView"
+            app:layout_constraintTop_toBottomOf="@id/snackTitleTextView" />
+
+        <TextView
+            android:id="@+id/subMealCountTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0회"
+            app:layout_constraintBottom_toBottomOf="@id/subMealTitleTextView"
+            app:layout_constraintStart_toStartOf="@id/mealCountTextView"
+            app:layout_constraintTop_toTopOf="@id/subMealTitleTextView" />
+
+        <TextView
+            android:id="@+id/subMealAmountTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="감기약"
+            app:layout_constraintBottom_toBottomOf="@id/subMealTitleTextView"
+            app:layout_constraintStart_toStartOf="@id/mealAmountTextView"
+            app:layout_constraintTop_toTopOf="@id/subMealTitleTextView" />
+
+        <TextView
+            android:id="@+id/subMealInputPercentTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            app:layout_constraintBottom_toBottomOf="@id/subMealTitleTextView"
+            app:layout_constraintEnd_toStartOf="@id/subMealPercentTextView"
+            app:layout_constraintTop_toTopOf="@id/subMealTitleTextView" />
+
+        <TextView
+            android:id="@+id/subMealPercentTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="/2"
+            android:textColor="@color/green"
+            app:layout_constraintBottom_toBottomOf="@id/subMealTitleTextView"
+            app:layout_constraintStart_toStartOf="@id/mealPercentTextView"
+            app:layout_constraintTop_toTopOf="@id/subMealTitleTextView" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="12dp"
+            android:background="@color/black"
+            app:layout_constraintEnd_toEndOf="@id/eatingTitleTextView"
+            app:layout_constraintStart_toStartOf="@id/eatingTitleTextView"
+            app:layout_constraintTop_toBottomOf="@id/subMealTitleTextView" />
+
+
+        <View
+            android:id="@+id/gridView"
+            android:layout_width="0dp"
+            android:layout_height="6dp"
+            android:layout_marginTop="30dp"
+            android:background="@color/gray_e0"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/subMealTitleTextView" />
+
+        <TextView
+            android:id="@+id/walkTitleTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:text="@string/walk"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:drawableEndCompat="@drawable/arrow_right"
+            app:drawableTint="@color/green"
+            app:layout_constraintEnd_toEndOf="@id/myPetContainer"
+            app:layout_constraintStart_toStartOf="@id/myPetContainer"
+            app:layout_constraintTop_toBottomOf="@id/gridView" />
+
+
+        <TextView
+            android:id="@+id/walkCountTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/count"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/walkTitleTextView" />
+
+
+        <TextView
+            android:id="@+id/walkCountTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="2회"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="@id/walkCountTitleTextView"
+            app:layout_constraintStart_toStartOf="@id/walkCountTitleTextView"
+            app:layout_constraintTop_toBottomOf="@id/walkCountTitleTextView" />
+
+        <TextView
+            android:id="@+id/walkTimeTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/walk_time"
+            app:layout_constraintBottom_toBottomOf="@id/walkCountTitleTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/walkCountTitleTextView" />
+
+        <TextView
+            android:id="@+id/walkTimeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="2h 10m"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="@id/walkTimeTitleTextView"
+            app:layout_constraintStart_toStartOf="@id/walkTimeTitleTextView"
+            app:layout_constraintTop_toBottomOf="@id/walkTimeTitleTextView" />
+
+
+        <TextView
+            android:id="@+id/walkLengthTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="100dp"
+            android:text="@string/count"
+            app:layout_constraintBottom_toBottomOf="@id/walkCountTitleTextView"
+            app:layout_constraintStart_toEndOf="@id/walkTimeTitleTextView"
+            app:layout_constraintTop_toTopOf="@id/walkCountTitleTextView" />
+
+
+        <TextView
+            android:id="@+id/walkLengthTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="5km"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="@id/walkLengthTitleTextView"
+            app:layout_constraintStart_toStartOf="@id/walkLengthTitleTextView"
+            app:layout_constraintTop_toBottomOf="@id/walkLengthTitleTextView" />
+
+
+        <View
+            android:id="@+id/gridView2"
+            android:layout_width="0dp"
+            android:layout_height="6dp"
+            android:layout_marginTop="24dp"
+            android:background="@color/gray_e0"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/walkCountTextView" />
+
+        <TextView
+            android:id="@+id/sleepTitleTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:text="@string/sleep"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:drawableEndCompat="@drawable/arrow_right"
+            app:drawableTint="@color/green"
+            app:layout_constraintEnd_toEndOf="@id/myPetContainer"
+            app:layout_constraintStart_toStartOf="@id/myPetContainer"
+            app:layout_constraintTop_toBottomOf="@id/gridView2" />
+
+        <TextView
+            android:id="@+id/averageHeartCountTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/average_heart_count"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sleepTitleTextView" />
+
+
+        <TextView
+            android:id="@+id/averageHeartCountTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="86회"
+            app:layout_constraintEnd_toEndOf="@id/averageHeartCountTitleTextView"
+            app:layout_constraintStart_toStartOf="@id/averageHeartCountTitleTextView"
+            app:layout_constraintTop_toBottomOf="@id/averageHeartCountTitleTextView" />
+
+
+        <TextView
+            android:id="@+id/sleepScoreTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sleep_score"
+            app:layout_constraintBottom_toBottomOf="@id/averageHeartCountTitleTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/averageHeartCountTitleTextView"
+            app:layout_constraintTop_toTopOf="@id/averageHeartCountTitleTextView" />
+
+
+        <TextView
+            android:id="@+id/sleepScoreTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="87점"
+            app:layout_constraintEnd_toEndOf="@id/sleepScoreTitleTextView"
+            app:layout_constraintStart_toStartOf="@id/sleepScoreTitleTextView"
+            app:layout_constraintTop_toBottomOf="@id/sleepScoreTitleTextView" />
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/heart_count"
+            app:layout_constraintEnd_toStartOf="@id/sleepScoreTitleTextView"
+            app:layout_constraintStart_toEndOf="@id/averageHeartCountTitleTextView"
+            app:layout_constraintTop_toTopOf="@id/averageHeartCountTitleTextView" />
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/heart_score"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/sleepScoreTitleTextView"
+            app:layout_constraintTop_toTopOf="@id/averageHeartCountTitleTextView" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

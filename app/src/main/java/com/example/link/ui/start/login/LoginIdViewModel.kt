@@ -2,6 +2,7 @@ package com.example.link.ui.start.login
 
 import android.app.Application
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.example.link.R
@@ -25,9 +26,9 @@ class LoginIdViewModel @Inject constructor(
     val passwordSameEvent = SingleLiveEvent<Boolean>()
     val signInSuccessEvent = SingleLiveEvent<String?>()
 
-    val id = savedStateHandle.getLiveData<String>(KET_ID, "")
-    val password = savedStateHandle.getLiveData<String>(KEY_PASSWORD, "")
-    val passwordCheck = savedStateHandle.getLiveData<String>(KEY_PASSWORD_CHECK, "")
+    val id  : LiveData<String> = savedStateHandle.getLiveData(KET_ID, "")
+    val password : LiveData<String> = savedStateHandle.getLiveData(KEY_PASSWORD, "")
+    val passwordCheck : LiveData<String> = savedStateHandle.getLiveData(KEY_PASSWORD_CHECK, "")
 
     companion object {
         const val KET_ID = "id"

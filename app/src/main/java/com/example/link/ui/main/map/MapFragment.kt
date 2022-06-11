@@ -2,12 +2,10 @@ package com.example.link.ui.main.map
 
 import androidx.fragment.app.viewModels
 import com.example.link.R
-import com.example.link.databinding.FragmentHomeBinding
 import com.example.link.databinding.FragmentMapBinding
 import com.example.link.ui.base.BaseFragment
 import com.example.link.ui.main.MainSharedViewModel
 import com.example.link.ui.main.MainToolbarViewModel
-import com.example.link.util.lifecycle.SystemUIType
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -27,6 +25,7 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>() {
         FragmentMapBinding.inflate(layoutInflater)
 
     override fun initViews() {
+        initActionBar()
         showBottomSheet()
     }
 
@@ -43,6 +42,7 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>() {
         toolbarViewModel.setTitle(getString(R.string.app_name))
             .setDefaultNavIcon()
             .onChange()
+        toolbarViewModel.bottomNavigationIsShow.value = false
     }
 
     private fun showBottomSheet() {

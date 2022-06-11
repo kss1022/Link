@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/topMenuContainer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="32dp"
+            android:layout_marginTop="24dp"
+            android:weightSum="4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/bg_corner_left_18"
+                android:backgroundTint="@color/green"
+                android:gravity="center"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:text="오늘"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/gray_e0"
+                android:gravity="center"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:text="주"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/gray_e0"
+                android:gravity="center"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:text="월"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/bg_corner_right_18"
+                android:backgroundTint="@color/gray_e0"
+                android:gravity="center"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:text="년"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/myPetContainer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/topMenuContainer">
+
+
+            <View
+                android:id="@+id/backGroundView"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@drawable/detail_my_pet"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="H,3:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/petNameTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="12dp"
+                android:textColor="@color/green"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/backGroundView"
+                tools:text="뭉치" />
+
+            <TextView
+                android:id="@+id/petWeightTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toTopOf="@id/petYearTextView"
+                app:layout_constraintStart_toStartOf="@id/petNameTextView"
+                app:layout_constraintTop_toBottomOf="@id/petNameTextView"
+                tools:text="3.2kg" />
+
+            <TextView
+                android:id="@+id/petYearTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toTopOf="@id/petTypeTextView"
+                app:layout_constraintStart_toStartOf="@id/petNameTextView"
+                tools:text="2년 3개월" />
+
+            <TextView
+                android:id="@+id/petTypeTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@id/petYearTextView"
+                app:layout_constraintTop_toBottomOf="@id/petYearTextView"
+                tools:text="토이푸들" />
+
+
+            <TextView
+                android:id="@+id/petMailTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="16dp"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/petTypeTextView"
+                app:layout_constraintTop_toTopOf="@id/petTypeTextView"
+                tools:text="@string/character_mail" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <TextView
+            android:id="@+id/eatingTitleTextView"
+            android:text="@string/eating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:layout_marginTop="24dp"
+            app:layout_constraintTop_toBottomOf="@id/myPetContainer"
+            app:layout_constraintStart_toStartOf="@id/myPetContainer"/>
+
+        <TextView
+            android:id="@+id/eatingCountTitleTextView"
+            android:text="@string/eating_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/eatingTitleTextView"
+            app:layout_constraintStart_toStartOf="@id/eatingTitleTextView"/>
+
+        <TextView
+            android:id="@+id/eatingCountTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            app:layout_constraintTop_toBottomOf="@id/eatingCountTitleTextView"
+            app:layout_constraintStart_toStartOf="@id/eatingCountTitleTextView"
+            android:text="6회"/>
+
+        <TextView
+            android:id="@+id/eatingAmountTitleTextView"
+            android:text="@string/eating_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="130dp"
+            app:layout_constraintTop_toTopOf="@id/eatingCountTitleTextView"
+            app:layout_constraintBottom_toBottomOf="@id/eatingCountTitleTextView"
+            app:layout_constraintStart_toEndOf="@id/eatingCountTitleTextView"/>
+
+        <TextView
+            android:id="@+id/eatingAmountTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            app:layout_constraintTop_toBottomOf="@id/eatingAmountTitleTextView"
+            app:layout_constraintStart_toStartOf="@id/eatingAmountTitleTextView"
+            android:text="500g"/>
+
+
+        <androidx.viewpager2.widget.ViewPager2
+            tools:background="@color/gray_e0"
+            android:id="@+id/viewPager"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            app:layout_constraintTop_toBottomOf="@id/eatingCountTextView"
+            app:layout_constraintStart_toStartOf="@id/myPetContainer"
+            app:layout_constraintEnd_toEndOf="@id/myPetContainer"
+            tools:layout_height="120dp"/>
+
+
+        <View
+            android:id="@+id/gridView"
+            android:layout_width="0dp"
+            android:layout_height="6dp"
+            android:layout_marginTop="32dp"
+            android:background="@color/gray_e0"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/viewPager" />
+
+        <TextView
+            android:id="@+id/snackTitleTextView"
+            android:text="@string/snack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:layout_marginTop="24dp"
+            app:layout_constraintTop_toBottomOf="@id/gridView"
+            app:layout_constraintStart_toStartOf="@id/myPetContainer"/>
+
+        <TextView
+            android:id="@+id/snackCountTitleTextView"
+            android:text="@string/snack_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/snackTitleTextView"
+            app:layout_constraintStart_toStartOf="@id/snackTitleTextView"/>
+
+        <TextView
+            android:id="@+id/snackCountTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            app:layout_constraintTop_toBottomOf="@id/snackCountTitleTextView"
+            app:layout_constraintStart_toStartOf="@id/snackCountTitleTextView"
+            android:text="6회"/>
+
+        <TextView
+            android:id="@+id/snackAmountTitleTextView"
+            android:text="@string/snack_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="130dp"
+            app:layout_constraintTop_toTopOf="@id/snackCountTitleTextView"
+            app:layout_constraintBottom_toBottomOf="@id/snackCountTitleTextView"
+            app:layout_constraintStart_toEndOf="@id/snackCountTitleTextView"/>
+
+        <TextView
+            android:id="@+id/snackAmountTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            app:layout_constraintTop_toBottomOf="@id/snackAmountTitleTextView"
+            app:layout_constraintStart_toStartOf="@id/snackAmountTitleTextView"
+            android:text="500g"/>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

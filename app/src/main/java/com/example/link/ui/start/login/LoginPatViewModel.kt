@@ -2,6 +2,7 @@ package com.example.link.ui.start.login
 
 import android.app.Application
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.example.link.data.repository.PetRepository
@@ -24,11 +25,11 @@ class LoginPatViewModel @Inject constructor(
     val patAge = SingleLiveEvent<Pair<Int, Int>?>(100)
     val nextClickEvent = SingleLiveEvent<Boolean>(100)
 
-    val isMail = savedStateHandle.getLiveData<Boolean?>(KEY_IS_MAIL, null)
-    val name = savedStateHandle.getLiveData<String>(KEY_NAME, "")
-    val type = savedStateHandle.getLiveData<String>(KEY_TYPE, "")
-    val birthday = savedStateHandle.getLiveData<String>(KEY_BIRTHDAY, "")
-    val weight = savedStateHandle.getLiveData<Int>(KEY_WEIGHT, 0)
+    val isMail : LiveData<Boolean> = savedStateHandle.getLiveData(KEY_IS_MAIL, null)
+    val name : LiveData<String> = savedStateHandle.getLiveData(KEY_NAME, "")
+    val type : LiveData<String> = savedStateHandle.getLiveData(KEY_TYPE, "")
+    val birthday : LiveData<String> = savedStateHandle.getLiveData(KEY_BIRTHDAY, "")
+    val weight : LiveData<Int> = savedStateHandle.getLiveData(KEY_WEIGHT, 0)
 
     companion object {
         const val KEY_IS_MAIL = "is_mail"
@@ -98,12 +99,13 @@ class LoginPatViewModel @Inject constructor(
     }
 
 
+    //todo weigth를 소수점으로 받는다.
     fun setWeight(str: String) {
         if (checkStringIsNum(str)) {
             savedStateHandle.set(KEY_WEIGHT, str.toInt())
         } else {
             //숫자가 아닌 값이 들어가있음
-            Log.e("Wieght Error", str)
+            Log.e("Weight Error", str)
         }
     }
 

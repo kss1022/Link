@@ -21,9 +21,9 @@ class LoginProfileViewModel @Inject constructor(
 
     val nextClickEvent = SingleLiveEvent<Boolean>(100)
 
-    val userName = savedStateHandle.getLiveData<String>(KEY_USER_NAME, app.getString(R.string.default_user_name))
-    val profile = savedStateHandle.getLiveData<Int>(KEY_PROFILE, R.drawable.profile11)
-    private val profilePos = savedStateHandle.getLiveData<Int>(KEY_PROFILE_POSITION, 11-1)
+    val userName = savedStateHandle.getLiveData(KEY_USER_NAME, app.getString(R.string.default_user_name))
+    val profile = savedStateHandle.getLiveData(KEY_PROFILE, R.drawable.profile11)
+    private val profilePos = savedStateHandle.getLiveData(KEY_PROFILE_POSITION, 11-1)
 
     val changeUseName = SingleLiveEvent<Unit>(100)
 

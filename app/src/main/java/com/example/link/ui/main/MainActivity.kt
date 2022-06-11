@@ -43,10 +43,15 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), Navigat
 
     override fun observeData() {
         toolbarViewModel.navClickEvent.observe(this) {
+            showFragment(HomeFragment.newInstance(), HomeFragment.TAG)
         }
 
         toolbarViewModel.navChangeEvent.observe(this) {
             setToolbar()
+        }
+
+        toolbarViewModel.bottomNavigationIsShow.observe(this){
+            it?.let{ setBottomNavigation(it) }
         }
 
         viewModel.profileImage.observe(this){
@@ -57,6 +62,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), Navigat
                 .into(binding.mainProfileImageView)
         }
     }
+
 
 
     private fun initViewModel() {
@@ -151,6 +157,9 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), Navigat
         binding.toolbarTitleTextView.text = toolbarViewModel.title.value
     }
 
+    private fun setBottomNavigation(it: Boolean) {
+        binding.bottomNavigationView.isVisible = it
+    }
 
 
 
