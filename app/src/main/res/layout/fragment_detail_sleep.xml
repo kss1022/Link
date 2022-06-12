@@ -1,18 +1,371 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:text="수면"
-        android:textSize="50sp"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/topMenuContainer"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="24dp"
+        android:weightSum="3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/todayMenuTodayTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/bg_corner_left_18"
+            android:backgroundTint="@color/green"
+            android:gravity="center"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:text="@string/today"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/topMenuRecordTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/gray_e0"
+            android:gravity="center"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:text="@string/record"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:id="@+id/topMenuAnalysisTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/bg_corner_right_18"
+            android:backgroundTint="@color/gray_e0"
+            android:gravity="center"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:text="@string/analysis"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/todayContainer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topMenuContainer"
+        tools:visibility="gone">
+
+        <ProgressBar
+            android:id="@+id/totalSleepProgressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:background="@drawable/progress_circle_bg_big"
+            android:indeterminate="false"
+            android:max="100"
+            android:progress="66"
+            android:progressDrawable="@drawable/progress_circle_big"
+            app:layout_constraintBottom_toTopOf="@id/lightSleepProgressBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/totalProgressTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
+            android:text="66"
+            android:textColor="@color/green"
+            android:textSize="50sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/totalSleepProgressBar"
+            app:layout_constraintEnd_toEndOf="@id/totalSleepProgressBar"
+            app:layout_constraintStart_toStartOf="@id/totalSleepProgressBar"
+            app:layout_constraintTop_toTopOf="@id/totalSleepProgressBar" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginBottom="12dp"
+            android:text="@string/percent"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@id/totalProgressTextView"
+            app:layout_constraintStart_toEndOf="@id/totalProgressTextView" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/quality_of_sleep"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/totalProgressTextView" />
+
+
+        <ProgressBar
+            android:id="@+id/lightSleepProgressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:background="@drawable/progress_circle_bg_middle"
+            android:indeterminate="false"
+            android:max="100"
+            android:progress="34"
+            android:progressDrawable="@drawable/progress_circle_middle"
+            app:layout_constraintBottom_toTopOf="@id/lightSleepTitleTextView"
+            app:layout_constraintEnd_toStartOf="@id/deepSleepProgressBar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/totalSleepProgressBar" />
+
+        <TextView
+            android:id="@+id/lightSleepPercentTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="6dp"
+            android:text="34"
+            android:textColor="@color/green"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/lightSleepProgressBar"
+            app:layout_constraintEnd_toEndOf="@id/lightSleepProgressBar"
+            app:layout_constraintStart_toStartOf="@id/lightSleepProgressBar"
+            app:layout_constraintTop_toTopOf="@id/lightSleepProgressBar" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp"
+            android:text="%"
+            app:layout_constraintBottom_toBottomOf="@id/lightSleepPercentTextView"
+            app:layout_constraintStart_toEndOf="@id/lightSleepPercentTextView" />
+
+        <TextView
+            android:id="@+id/lightSleepTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="@string/light_sleep"
+            app:layout_constraintBottom_toTopOf="@id/lightSleepTextView"
+            app:layout_constraintEnd_toEndOf="@id/lightSleepProgressBar"
+            app:layout_constraintStart_toStartOf="@id/lightSleepProgressBar" />
+
+        <TextView
+            android:id="@+id/lightSleepTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            android:text="2h 34m"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/lightSleepProgressBar"
+            app:layout_constraintStart_toStartOf="@id/lightSleepProgressBar" />
+
+        <ProgressBar
+            android:id="@+id/deepSleepProgressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:background="@drawable/progress_circle_bg_middle"
+            android:indeterminate="false"
+            android:max="100"
+            android:progress="50"
+            android:progressDrawable="@drawable/progress_circle_middle"
+            app:layout_constraintBottom_toBottomOf="@id/lightSleepProgressBar"
+            app:layout_constraintEnd_toStartOf="@id/wakeProgressBar"
+            app:layout_constraintStart_toEndOf="@id/lightSleepProgressBar"
+            app:layout_constraintTop_toTopOf="@id/lightSleepProgressBar" />
+
+
+        <TextView
+            android:id="@+id/deepSleepPercentTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="6dp"
+            android:text="50"
+            android:textColor="@color/green"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/deepSleepProgressBar"
+            app:layout_constraintEnd_toEndOf="@id/deepSleepProgressBar"
+            app:layout_constraintStart_toStartOf="@id/deepSleepProgressBar"
+            app:layout_constraintTop_toTopOf="@id/deepSleepProgressBar" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp"
+            android:text="@string/percent"
+            app:layout_constraintBottom_toBottomOf="@id/deepSleepPercentTextView"
+            app:layout_constraintStart_toEndOf="@id/deepSleepPercentTextView" />
+
+        <TextView
+            android:id="@+id/deepSleepTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="@string/deep_sleep"
+            app:layout_constraintBottom_toTopOf="@id/deepSleepTextView"
+            app:layout_constraintEnd_toEndOf="@id/deepSleepProgressBar"
+            app:layout_constraintStart_toStartOf="@id/deepSleepProgressBar" />
+
+        <TextView
+            android:id="@+id/deepSleepTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            android:text="2h 34m"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/deepSleepProgressBar"
+            app:layout_constraintStart_toStartOf="@id/deepSleepProgressBar" />
+
+
+        <ProgressBar
+            android:id="@+id/wakeProgressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:background="@drawable/progress_circle_bg_middle"
+            android:indeterminate="false"
+            android:max="100"
+            android:progress="16"
+            android:progressDrawable="@drawable/progress_circle_middle"
+            app:layout_constraintBottom_toBottomOf="@id/lightSleepProgressBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/deepSleepProgressBar"
+            app:layout_constraintTop_toTopOf="@id/lightSleepProgressBar" />
+
+
+        <TextView
+            android:id="@+id/wakePercentTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="6dp"
+            android:text="16"
+            android:textColor="@color/green"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/wakeProgressBar"
+            app:layout_constraintEnd_toEndOf="@id/wakeProgressBar"
+            app:layout_constraintStart_toStartOf="@id/wakeProgressBar"
+            app:layout_constraintTop_toTopOf="@id/wakeProgressBar" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp"
+            android:text="@string/percent"
+            app:layout_constraintBottom_toBottomOf="@id/wakePercentTextView"
+            app:layout_constraintStart_toEndOf="@id/wakePercentTextView" />
+
+        <TextView
+            android:id="@+id/wakeTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="@string/light_sleep"
+            app:layout_constraintBottom_toTopOf="@id/wakeTextView"
+            app:layout_constraintEnd_toEndOf="@id/wakeProgressBar"
+            app:layout_constraintStart_toStartOf="@id/wakeProgressBar" />
+
+        <TextView
+            android:id="@+id/wakeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            android:text="2h 34m"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/wakeProgressBar"
+            app:layout_constraintStart_toStartOf="@id/wakeProgressBar" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <ScrollView
+        android:id="@+id/recordContainer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topMenuContainer"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/analysisContainer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/topMenuContainer"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:visibility="visible">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/qualityGraphLayout"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="16dp"
+            android:background="@drawable/bg_corner_gray_18"
+            android:layout_marginBottom="12dp"
+            android:layout_marginTop="42dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintHeight_percent="0.5">
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:text="@string/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintStart_toStartOf="@id/timeGraphLayout"
+            app:layout_constraintBottom_toTopOf="@id/timeGraphLayout"
+            android:layout_marginStart="18dp"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/timeGraphLayout"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/bg_corner_gray_18"
+            app:layout_constraintStart_toStartOf="@id/qualityGraphLayout"
+            app:layout_constraintEnd_toEndOf="@id/qualityGraphLayout"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHeight_percent="0.3"
+            android:layout_marginBottom="32dp">
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

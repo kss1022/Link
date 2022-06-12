@@ -32,6 +32,9 @@ class ModelRecyclerViewAdapter<M : Model>(
     }
 
 
+    override fun getItemViewType(position: Int): Int = modelList[position].cellType.ordinal
+
+
     override fun getItemCount(): Int = modelList.size
 
 

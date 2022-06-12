@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:scrollbars="none">
 
 
@@ -24,6 +24,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
+                android:id="@+id/topMenuDayTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -32,12 +33,13 @@
                 android:gravity="center"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
-                android:text="오늘"
+                android:text="@string/today"
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/topMenuWeekTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -45,11 +47,12 @@
                 android:gravity="center"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
-                android:text="주"
+                android:text="@string/week"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/topMenuMonthTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -57,11 +60,12 @@
                 android:gravity="center"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
-                android:text="월"
+                android:text="@string/month"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/topMenuYearTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -70,7 +74,7 @@
                 android:gravity="center"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
-                android:text="년"
+                android:text="@string/year"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -164,64 +168,302 @@
 
         <TextView
             android:id="@+id/eatingTitleTextView"
-            android:text="@string/eating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:textColor="@color/black"
             android:layout_marginTop="24dp"
-            app:layout_constraintTop_toBottomOf="@id/myPetContainer"
-            app:layout_constraintStart_toStartOf="@id/myPetContainer"/>
+            android:text="@string/eating"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@id/myPetContainer"
+            app:layout_constraintTop_toBottomOf="@id/myPetContainer" />
 
         <TextView
             android:id="@+id/eatingCountTitleTextView"
-            android:text="@string/eating_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            app:layout_constraintTop_toBottomOf="@id/eatingTitleTextView"
-            app:layout_constraintStart_toStartOf="@id/eatingTitleTextView"/>
+            android:text="@string/eating_count"
+            app:layout_constraintStart_toStartOf="@id/eatingTitleTextView"
+            app:layout_constraintTop_toBottomOf="@id/eatingTitleTextView" />
 
         <TextView
             android:id="@+id/eatingCountTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
-            app:layout_constraintTop_toBottomOf="@id/eatingCountTitleTextView"
+            android:text="6회"
             app:layout_constraintStart_toStartOf="@id/eatingCountTitleTextView"
-            android:text="6회"/>
+            app:layout_constraintTop_toBottomOf="@id/eatingCountTitleTextView" />
 
         <TextView
             android:id="@+id/eatingAmountTitleTextView"
-            android:text="@string/eating_amount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="130dp"
-            app:layout_constraintTop_toTopOf="@id/eatingCountTitleTextView"
+            android:text="@string/eating_amount"
             app:layout_constraintBottom_toBottomOf="@id/eatingCountTitleTextView"
-            app:layout_constraintStart_toEndOf="@id/eatingCountTitleTextView"/>
+            app:layout_constraintStart_toEndOf="@id/eatingCountTitleTextView"
+            app:layout_constraintTop_toTopOf="@id/eatingCountTitleTextView" />
 
         <TextView
             android:id="@+id/eatingAmountTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
-            app:layout_constraintTop_toBottomOf="@id/eatingAmountTitleTextView"
+            android:text="500g"
             app:layout_constraintStart_toStartOf="@id/eatingAmountTitleTextView"
-            android:text="500g"/>
+            app:layout_constraintTop_toBottomOf="@id/eatingAmountTitleTextView" />
 
 
-        <androidx.viewpager2.widget.ViewPager2
-            tools:background="@color/gray_e0"
-            android:id="@+id/viewPager"
+        <com.example.link.ui.main.detail.fragmentlist.NestedScrollableHost
+            android:id="@+id/viewPagerContainer"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/eatingCountTextView"
-            app:layout_constraintStart_toStartOf="@id/myPetContainer"
-            app:layout_constraintEnd_toEndOf="@id/myPetContainer"
-            tools:layout_height="120dp"/>
+            tools:background="@color/gray_e0"
+            tools:layout_height="120dp"
+            tools:visibility="invisible">
 
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </com.example.link.ui.main.detail.fragmentlist.NestedScrollableHost>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/mealGraphLayout"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="16dp"
+            android:background="@drawable/bg_corner_gray_18"
+            app:layout_constraintBottom_toTopOf="@id/gridView"
+            android:layout_marginBottom="12dp"
+            app:layout_constraintEnd_toEndOf="@id/viewPagerContainer"
+            app:layout_constraintStart_toStartOf="@id/viewPagerContainer"
+            app:layout_constraintTop_toTopOf="@id/viewPagerContainer"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <TextView
+                android:text="100g"
+                android:id="@+id/gram100textView"
+                android:textSize="8sp"
+                android:layout_marginStart="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/sundayTextView"/>
+
+
+            <TextView
+                android:text="200g"
+                android:id="@+id/gram200textView"
+                android:textSize="8sp"
+                android:layout_marginBottom="3dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/gram100textView"
+                app:layout_constraintBottom_toTopOf="@id/gram100textView"/>
+
+            <TextView
+                android:text="300g"
+                android:id="@+id/gram300textView"
+                android:textSize="8sp"
+                android:layout_marginBottom="4dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/gram100textView"
+                app:layout_constraintBottom_toTopOf="@id/gram200textView"/>
+
+
+            <TextView
+                android:text="400g"
+                android:id="@+id/gram400textView"
+                android:textSize="8sp"
+                android:layout_marginBottom="4dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/gram100textView"
+                app:layout_constraintBottom_toTopOf="@id/gram300textView"/>
+
+
+            <TextView
+                android:text="500g"
+                android:id="@+id/gram500textView"
+                android:textSize="8sp"
+                android:layout_marginBottom="4dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/gram100textView"
+                app:layout_constraintBottom_toTopOf="@id/gram400textView"/>
+
+
+            <TextView
+                android:text="600g"
+                android:id="@+id/gram600textView"
+                android:textSize="8sp"
+                android:layout_marginBottom="4dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/gram100textView"
+                app:layout_constraintBottom_toTopOf="@id/gram500textView"/>
+
+            <TextView
+                android:text="일"
+                android:id="@+id/sundayTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="6dp"
+                android:layout_marginStart="32dp"
+                app:layout_constraintStart_toEndOf="@id/gram100textView"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+            <TextView
+                android:text="월"
+                android:id="@+id/mondayTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                app:layout_constraintBottom_toBottomOf="@id/sundayTextView"
+                app:layout_constraintStart_toEndOf="@id/sundayTextView"
+                app:layout_constraintTop_toTopOf="@id/sundayTextView" />
+
+
+
+            <TextView
+                android:text="화"
+                android:id="@+id/tuesdayTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                app:layout_constraintBottom_toBottomOf="@id/sundayTextView"
+                app:layout_constraintStart_toEndOf="@id/mondayTextView"
+                app:layout_constraintTop_toTopOf="@id/sundayTextView" />
+
+            <TextView
+                android:text="수"
+                android:id="@+id/wednesdaysTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                app:layout_constraintBottom_toBottomOf="@id/sundayTextView"
+                app:layout_constraintStart_toEndOf="@id/tuesdayTextView"
+                app:layout_constraintTop_toTopOf="@id/sundayTextView" />
+
+            <TextView
+                android:text="목"
+                android:id="@+id/thursdayTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                app:layout_constraintBottom_toBottomOf="@id/sundayTextView"
+                app:layout_constraintStart_toEndOf="@id/wednesdaysTextView"
+                app:layout_constraintTop_toTopOf="@id/sundayTextView" />
+
+            <TextView
+                android:text="금"
+                android:id="@+id/fridayTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                app:layout_constraintBottom_toBottomOf="@id/sundayTextView"
+                app:layout_constraintStart_toEndOf="@id/thursdayTextView"
+                app:layout_constraintTop_toTopOf="@id/sundayTextView" />
+
+            <TextView
+                android:text="토"
+                android:id="@+id/saturdayTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                app:layout_constraintBottom_toBottomOf="@id/sundayTextView"
+                app:layout_constraintStart_toEndOf="@id/fridayTextView"
+                app:layout_constraintTop_toTopOf="@id/sundayTextView" />
+
+
+            <ImageView
+                android:src="@drawable/dot_lines"
+                android:layout_width="0dp"
+                android:layout_height="3dp"
+                app:layout_constraintStart_toEndOf="@id/gram500textView"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="24dp"
+                android:layout_marginStart="16dp"
+                app:layout_constraintTop_toTopOf="@id/gram500textView"
+                app:layout_constraintBottom_toBottomOf="@id/gram500textView"/>
+
+            <View
+                android:background="@color/green"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintStart_toStartOf="@id/sundayTextView"
+                app:layout_constraintEnd_toEndOf="@id/sundayTextView"
+                app:layout_constraintBottom_toTopOf="@id/sundayTextView"
+                app:layout_constraintHeight_percent="0.6"/>
+
+
+            <View
+                android:background="@color/green"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintStart_toStartOf="@id/mondayTextView"
+                app:layout_constraintEnd_toEndOf="@id/mondayTextView"
+                app:layout_constraintBottom_toTopOf="@id/mondayTextView"
+                app:layout_constraintHeight_percent="0.4"/>
+
+
+            <View
+                android:background="@color/green"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintStart_toStartOf="@id/tuesdayTextView"
+                app:layout_constraintEnd_toEndOf="@id/tuesdayTextView"
+                app:layout_constraintBottom_toTopOf="@id/tuesdayTextView"
+                app:layout_constraintHeight_percent="0.5"/>
+
+            <View
+                android:background="@color/dark_green"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintStart_toStartOf="@id/wednesdaysTextView"
+                app:layout_constraintEnd_toEndOf="@id/wednesdaysTextView"
+                app:layout_constraintBottom_toTopOf="@id/wednesdaysTextView"
+                app:layout_constraintHeight_percent="0.6"/>
+
+            <View
+                android:background="@color/green"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintStart_toStartOf="@id/thursdayTextView"
+                app:layout_constraintEnd_toEndOf="@id/thursdayTextView"
+                app:layout_constraintBottom_toTopOf="@id/thursdayTextView"
+                app:layout_constraintHeight_percent="0.5"/>
+
+
+            <View
+                android:background="@color/green"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintStart_toStartOf="@id/fridayTextView"
+                app:layout_constraintEnd_toEndOf="@id/fridayTextView"
+                app:layout_constraintBottom_toTopOf="@id/fridayTextView"
+                app:layout_constraintHeight_percent="0.4"/>
+
+            <View
+                android:background="@color/green"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintStart_toStartOf="@id/saturdayTextView"
+                app:layout_constraintEnd_toEndOf="@id/saturdayTextView"
+                app:layout_constraintBottom_toTopOf="@id/saturdayTextView"
+                app:layout_constraintHeight_percent="0.5"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <View
             android:id="@+id/gridView"
@@ -231,56 +473,56 @@
             android:background="@color/gray_e0"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/viewPager" />
+            app:layout_constraintTop_toBottomOf="@id/viewPagerContainer" />
 
         <TextView
             android:id="@+id/snackTitleTextView"
-            android:text="@string/snack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:textColor="@color/black"
             android:layout_marginTop="24dp"
-            app:layout_constraintTop_toBottomOf="@id/gridView"
-            app:layout_constraintStart_toStartOf="@id/myPetContainer"/>
+            android:text="@string/snack"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@id/myPetContainer"
+            app:layout_constraintTop_toBottomOf="@id/gridView" />
 
         <TextView
             android:id="@+id/snackCountTitleTextView"
-            android:text="@string/snack_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            app:layout_constraintTop_toBottomOf="@id/snackTitleTextView"
-            app:layout_constraintStart_toStartOf="@id/snackTitleTextView"/>
+            android:text="@string/snack_count"
+            app:layout_constraintStart_toStartOf="@id/snackTitleTextView"
+            app:layout_constraintTop_toBottomOf="@id/snackTitleTextView" />
 
         <TextView
             android:id="@+id/snackCountTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
-            app:layout_constraintTop_toBottomOf="@id/snackCountTitleTextView"
+            android:paddingBottom="16dp"
+            android:text="6회"
             app:layout_constraintStart_toStartOf="@id/snackCountTitleTextView"
-            android:text="6회"/>
+            app:layout_constraintTop_toBottomOf="@id/snackCountTitleTextView" />
 
         <TextView
             android:id="@+id/snackAmountTitleTextView"
-            android:text="@string/snack_amount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="130dp"
-            app:layout_constraintTop_toTopOf="@id/snackCountTitleTextView"
+            android:text="@string/snack_amount"
             app:layout_constraintBottom_toBottomOf="@id/snackCountTitleTextView"
-            app:layout_constraintStart_toEndOf="@id/snackCountTitleTextView"/>
+            app:layout_constraintStart_toEndOf="@id/snackCountTitleTextView"
+            app:layout_constraintTop_toTopOf="@id/snackCountTitleTextView" />
 
         <TextView
             android:id="@+id/snackAmountTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
-            app:layout_constraintTop_toBottomOf="@id/snackAmountTitleTextView"
+            android:text="500g"
             app:layout_constraintStart_toStartOf="@id/snackAmountTitleTextView"
-            android:text="500g"/>
-
+            app:layout_constraintTop_toBottomOf="@id/snackAmountTitleTextView" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -14,7 +14,7 @@ class DetailAllViewModel @Inject constructor(
     override val savedStateHandle: SavedStateHandle
 ) :BaseViewModel(app) {
 
-    val menu : LiveData<String> = savedStateHandle.getLiveData(KEY_TOP_MENU, "day")
+    val menu : LiveData<String> = savedStateHandle.getLiveData(KEY_TOP_MENU, DAY)
 
     companion object{
         const val DAY = "day"

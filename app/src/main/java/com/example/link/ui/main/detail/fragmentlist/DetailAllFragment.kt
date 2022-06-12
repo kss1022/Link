@@ -68,7 +68,7 @@ class DetailAllFragment : BaseFragment<FragmentDetailAllBinding, DetailAllViewMo
         val green = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.green))
         val gray = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.gray_e0))
 
-        val black = ContextCompat.getColor(requireContext(), R.color.black)
+        val black = ContextCompat.getColor(requireContext(), R.color.text_gray)
         val white = ContextCompat.getColor(requireContext(), R.color.white)
 
         //이전뷰 변경

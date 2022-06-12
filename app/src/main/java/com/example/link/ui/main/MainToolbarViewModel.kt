@@ -1,6 +1,7 @@
 package com.example.link.ui.main
 
 import android.app.Application
+import android.util.Log
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
@@ -24,6 +25,8 @@ class MainToolbarViewModel @Inject constructor(
         private const val KEY_VISIBLE = "visible"
         private const val KEY_NAV_ICON_RES = "navIconRes"
         private const val KEY_NAV_ICON_TINT = "navIconTint"
+
+        private const val KEY_IS_GPS = "is_gps"
     }
 
     var title: LiveData<CharSequence> = savedStateHandle.getLiveData(KEY_TITLE, app.getString(R.string.app_name))
@@ -36,7 +39,8 @@ class MainToolbarViewModel @Inject constructor(
     val navClickEvent = SingleLiveEvent<Unit>()
     val navChangeEvent = SingleLiveEvent<Unit>()
 
-    val bottomNavigationIsShow = SingleLiveEvent<Boolean>()
+    val bottomNavigationIsVisible = SingleLiveEvent<Boolean>()
+    var isGps: LiveData<Boolean> = savedStateHandle.getLiveData(KEY_IS_GPS, false)
 
     fun setTitle(charSequence: CharSequence): MainToolbarViewModel {
         savedStateHandle.set(KEY_TITLE, charSequence)
@@ -74,5 +78,13 @@ class MainToolbarViewModel @Inject constructor(
 
     fun onChange(){
         navChangeEvent.call()
+    }
+
+    fun onChangeBottomNavigation( isVisible: Boolean){
+        bottomNavigationIsVisible.value = isVisible
+    }
+
+    fun setGps(isGps : Boolean){
+        savedStateHandle.set(KEY_IS_GPS, isGps )
     }
 }

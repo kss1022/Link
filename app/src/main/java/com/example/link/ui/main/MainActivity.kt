@@ -50,7 +50,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), Navigat
             setToolbar()
         }
 
-        toolbarViewModel.bottomNavigationIsShow.observe(this){
+        toolbarViewModel.bottomNavigationIsVisible.observe(this){
             it?.let{ setBottomNavigation(it) }
         }
 

@@ -1,19 +1,353 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
 
-    <TextView
-        android:text="산책"
-        android:textSize="50sp"
+    <ImageView
+        android:id="@+id/mapSampleImageView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:layout_marginBottom="150dp"
+        android:src="@drawable/map_sample4"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/topMenuContainer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="24dp"
+        android:weightSum="3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/topMenuStepTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/bg_corner_left_18"
+            android:backgroundTint="@color/green"
+            android:gravity="center"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:text="@string/step"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/topMenuGpsTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/gray_e0"
+            android:gravity="center"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:text="@string/gps"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:id="@+id/topMenuAnalysisTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/bg_corner_right_18"
+            android:backgroundTint="@color/gray_e0"
+            android:gravity="center"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:text="@string/analysis"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/stepContainer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topMenuContainer">
+
+        <TextView
+            android:id="@+id/countTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/count"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/countTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="2회"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="@id/countTitleTextView"
+            app:layout_constraintStart_toStartOf="@id/countTitleTextView"
+            app:layout_constraintTop_toBottomOf="@id/countTitleTextView" />
+
+
+        <TextView
+            android:id="@+id/activityTimeTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/activity_time"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/activityTimeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2h 10m"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@id/countTextView"
+            app:layout_constraintEnd_toEndOf="@id/activityTimeTitleTextView"
+            app:layout_constraintStart_toStartOf="@id/activityTimeTitleTextView"
+            app:layout_constraintTop_toTopOf="@id/countTextView" />
+
+        <TextView
+            android:id="@+id/lengthTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="48dp"
+            android:text="@string/length"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/lengthTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5km"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@id/countTextView"
+            app:layout_constraintEnd_toEndOf="@id/lengthTitleTextView"
+            app:layout_constraintStart_toStartOf="@id/lengthTitleTextView"
+            app:layout_constraintTop_toTopOf="@id/countTextView" />
+
+        <ImageView
+            android:id="@+id/walkCenterGraphImageView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="64dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="32dp"
+            android:src="@drawable/walk_center_graph"
+            app:layout_constraintBottom_toTopOf="@id/walKDownGraphImageView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/countTextView" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/walk_center_graph_bottom"
+            app:layout_constraintBottom_toBottomOf="@id/walkCenterGraphImageView"
+            app:layout_constraintEnd_toEndOf="@id/walkCenterGraphImageView"
+            app:layout_constraintStart_toStartOf="@id/walkCenterGraphImageView" />
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/walk_center_graph_mark"
+            app:layout_constraintCircle="@id/walkCenterGraphImageView"
+            app:layout_constraintCircleAngle="80"
+            app:layout_constraintCircleRadius="145dp"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginBottom="12dp"
+            android:gravity="center"
+            android:text="오늘"
+            android:textSize="10sp"
+            app:drawableEndCompat="@drawable/ic_baseline_keyboard_arrow_down_24"
+            app:drawableTint="@color/gray_e0"
+            app:layout_constraintBottom_toTopOf="@id/walkCenterGraphCountTextView"
+            app:layout_constraintEnd_toEndOf="@id/walkCenterGraphCountTextView"
+            app:layout_constraintStart_toStartOf="@id/walkCenterGraphCountTextView" />
+
+        <TextView
+            android:id="@+id/walkCenterGraphCountTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="8124"
+            android:textColor="@color/green"
+            android:textSize="50sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/walkCenterGraphImageView"
+            app:layout_constraintEnd_toEndOf="@id/walkCenterGraphImageView"
+            app:layout_constraintStart_toStartOf="@id/walkCenterGraphImageView"
+            app:layout_constraintTop_toTopOf="@id/walkCenterGraphImageView" />
+
+
+        <TextView
+            android:id="@+id/walKGoalTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="8dp"
+            android:gravity="center"
+            android:text="걸음 수 목표 : 10000"
+            android:textSize="10sp"
+            app:layout_constraintEnd_toEndOf="@id/walkCenterGraphCountTextView"
+            app:layout_constraintStart_toStartOf="@id/walkCenterGraphCountTextView"
+            app:layout_constraintTop_toBottomOf="@id/walkCenterGraphCountTextView" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="8dp"
+            android:gravity="center"
+            android:text="81% 완료"
+            android:textSize="10sp"
+            app:layout_constraintEnd_toEndOf="@id/walKGoalTextView"
+            app:layout_constraintStart_toStartOf="@id/walKGoalTextView"
+            app:layout_constraintTop_toBottomOf="@id/walKGoalTextView" />
+
+
+        <ImageView
+            android:id="@+id/walKDownGraphImageView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="18dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="16dp"
+            android:src="@drawable/walk_down_graph"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/walkCenterGraphImageView" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <ImageView
+        android:id="@+id/walk_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="12dp"
+        android:src="@drawable/walk_start_button"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mapSampleImageView" />
+
+    <ImageView
+        android:id="@+id/bottomWalkDataButton"
+        android:layout_width="40dp"
+        android:layout_height="15dp"
+        android:background="@color/white"
+        android:src="@drawable/ic_baseline_keyboard_arrow_up_24"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/mapSampleImageView"
+        app:layout_constraintEnd_toEndOf="@id/mapSampleImageView"
+        app:layout_constraintStart_toStartOf="@id/mapSampleImageView" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bottomWalkDataContainer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/mapSampleImageView"
+        app:layout_constraintEnd_toEndOf="@id/mapSampleImageView"
+        app:layout_constraintStart_toStartOf="@id/mapSampleImageView">
+
+        <TextView
+            android:id="@+id/bottomStepCountTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/walk_count"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/bottomStepCountTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="5000"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="@id/bottomStepCountTitleTextView"
+            app:layout_constraintStart_toStartOf="@id/bottomStepCountTitleTextView"
+            app:layout_constraintTop_toBottomOf="@id/bottomStepCountTitleTextView" />
+
+        <TextView
+            android:id="@+id/bottomActivityTimeTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/walk_time"
+            app:layout_constraintBottom_toBottomOf="@id/bottomStepCountTitleTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/bottomStepCountTitleTextView" />
+
+        <TextView
+            android:id="@+id/bottomActivityTimeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="00:58:41"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="@id/bottomActivityTimeTitleTextView"
+            app:layout_constraintStart_toStartOf="@id/bottomActivityTimeTitleTextView"
+            app:layout_constraintTop_toBottomOf="@id/bottomActivityTimeTitleTextView" />
+
+
+        <TextView
+            android:id="@+id/bottomWalkLengthTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="100dp"
+            android:text="@string/length"
+            app:layout_constraintBottom_toBottomOf="@id/bottomStepCountTitleTextView"
+            app:layout_constraintStart_toEndOf="@id/bottomActivityTimeTitleTextView"
+            app:layout_constraintTop_toTopOf="@id/bottomStepCountTitleTextView" />
+
+
+        <TextView
+            android:id="@+id/bottomWalkLengthTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="2.1km"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="@id/bottomWalkLengthTitleTextView"
+            app:layout_constraintStart_toStartOf="@id/bottomWalkLengthTitleTextView"
+            app:layout_constraintTop_toBottomOf="@id/bottomWalkLengthTitleTextView" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

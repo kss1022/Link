@@ -2,6 +2,7 @@ package com.example.link.ui.main.detail
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.viewpager2.widget.ViewPager2
 import com.example.link.R
 import com.example.link.databinding.FragmentDetailBinding
 import com.example.link.ui.base.BaseFragment
@@ -45,13 +46,36 @@ class DetailFragment : BaseFragment<FragmentDetailBinding, DetailViewModel>() {
 
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding.viewPager.unregisterOnPageChangeCallback(viewPagerOnPageChangeCallback)
+    }
+
     fun initActionBar() {
         toolbarViewModel.setTitle(getString(R.string.app_name))
             .setDefaultNavIcon()
             .onChange()
 
-        toolbarViewModel.bottomNavigationIsShow.value = true
+        toolbarViewModel.onChangeBottomNavigation(true)
+
+
+        checkBottomNavigationVisible(binding.viewPager.currentItem)
     }
+
+
+
+    /**
+     * ViewPager With TabBar
+     */
+
+    private val viewPagerOnPageChangeCallback by lazy {
+        object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                checkBottomNavigationVisible(position)
+            }
+        }
+    }
+
 
     private fun initTabBar() = with(binding) {
         val menuCategories = DetailMenuCategory.values()
@@ -60,7 +84,7 @@ class DetailFragment : BaseFragment<FragmentDetailBinding, DetailViewModel>() {
 
             val fragmentList = listOf<Fragment>(
                 DetailAllFragment.newInstance(), DetailMealFragment.newInstance(),
-                DetailSleepFragment.newInstance(), DetailWalkFragment.newInstance()
+                DetailWalkFragment.newInstance(), DetailSleepFragment.newInstance()
             )
 
 
@@ -75,8 +99,22 @@ class DetailFragment : BaseFragment<FragmentDetailBinding, DetailViewModel>() {
             TabLayoutMediator(tabLayout, viewPager) { tab, position ->
                 tab.setText(menuCategories[position].categoryNameId)
             }.attach()
+
+        }
+        viewPager.registerOnPageChangeCallback(viewPagerOnPageChangeCallback)
+    }
+
+
+    private fun checkBottomNavigationVisible(currentItem : Int) {
+        if (currentItem == 2 && toolbarViewModel.isGps.value!!) {
+            toolbarViewModel.onChangeBottomNavigation(false)
+        } else if(currentItem==3){
+            toolbarViewModel.onChangeBottomNavigation(false)
+        }else{
+            toolbarViewModel.onChangeBottomNavigation(true)
         }
     }
+
 
     companion object {
         fun newInstance() = DetailFragment()

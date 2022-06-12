@@ -42,7 +42,7 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>() {
         toolbarViewModel.setTitle(getString(R.string.app_name))
             .setDefaultNavIcon()
             .onChange()
-        toolbarViewModel.bottomNavigationIsShow.value = false
+        toolbarViewModel.onChangeBottomNavigation(false)
     }
 
     private fun showBottomSheet() {

@@ -83,7 +83,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
             .setNavIconRes(null)
             .onChange()
 
-        toolbarViewModel.bottomNavigationIsShow.value = true
+        toolbarViewModel.onChangeBottomNavigation(true)
     }
 
     private fun initViewModel() {
@@ -112,7 +112,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
             adapter = memoAdapter
 
             //양 옆에 미리보기
-            val currentVisibleItemPx = 20f.fromDpToPx()
+            val currentVisibleItemPx = 30f.fromDpToPx()
             val nextVisibleItemPx = 10.fromDpToPx()
             val pageTranslationX = nextVisibleItemPx + currentVisibleItemPx
 

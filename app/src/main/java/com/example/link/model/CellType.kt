@@ -1,5 +1,6 @@
 package com.example.link.model
 
 enum class CellType {
-    MEMO
+    MEMO,
+    EAT_MEMO
 }

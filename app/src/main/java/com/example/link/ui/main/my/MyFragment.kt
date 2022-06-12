@@ -62,7 +62,7 @@ class MyFragment : BaseFragment<FragmentMyBinding, MyViewModel>() {
             .setNavIconRes(null)
             .onChange()
 
-        toolbarViewModel.bottomNavigationIsShow.value = true
+        toolbarViewModel.onChangeBottomNavigation(true)
     }
 
 
