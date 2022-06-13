@@ -107,5 +107,16 @@
     <string name="please_record_walk">산책을 기록해주세요!</string>
     <string name="activity_time_minutes">활동시간(분)</string>
     <string name="length_km">거리(km)</string>
+    <string name="default_time">00:00:00</string>
+    <string name="please_check_storage_permission"><![CDATA[[애플리케이션 정보 > 권한]에서 [저장소] 권한을 허용하고 다시 해보세요]]></string>
+    <string name="detail_setting">상세 설정</string>
+    <string name="cancel">취소</string>
+
+    <string name="count_with_int">%d회</string>
+    <string name="amount_with_int">%dg</string>
+    <string name="km_with_double">%.1fkm</string>
+    <string name="hour_and_minutes_with_double">%dh %dm</string>
+    <string name="minutes_with_double">%dm</string>
+    <string name="percent_with_double">%.0f%% 완료</string>
 
 </resources>

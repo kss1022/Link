@@ -3,10 +3,7 @@ package com.example.link
 import android.content.Context
 import com.example.link.data.api.FireStoreApi
 import com.example.link.data.api.FireStoreApiImpl
-import com.example.link.data.repository.PetRepository
-import com.example.link.data.repository.PetRepositoryImpl
-import com.example.link.data.repository.UserRepository
-import com.example.link.data.repository.UserRepositoryImpl
+import com.example.link.data.repository.*
 import com.example.link.util.lifecycle.SingleLiveEvent
 import com.example.link.util.lifecycle.SystemUIType
 import com.example.link.util.resource.DefaultResourceProvider
@@ -80,4 +77,8 @@ abstract class AppModuleBinds {
     @Singleton
     @Binds
     abstract fun bindPetRepository(repositoryImpl: PetRepositoryImpl) : PetRepository
+
+    @Singleton
+    @Binds
+    abstract fun bindRecordRepository(repositoryImpl: RecordRepositoryImpl) : RecordRepository
 }

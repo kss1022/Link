@@ -114,7 +114,7 @@ class HomeRecordFragment : BaseFragment<FragmentHomeRecordBinding, HomeRecordVie
         val eatingEditText =    getEatingAlertDialog.findViewById<TextInputEditText>(R.id.eatingEditText)
 
         getEatingAlertDialog.findViewById<TextView>(R.id.positiveButton).setOnClickListener {
-            val amount = eatingEditText.text.toString()
+            val amount = eatingEditText.text.toString().toInt()
             sharedViewModel.saveEating( isEating,  amount)
             dialog.dismiss()
         }
@@ -135,13 +135,13 @@ class HomeRecordFragment : BaseFragment<FragmentHomeRecordBinding, HomeRecordVie
             .inflate(R.layout.alert_dialog_get_walk, null)
 
 
-        val lengthEditText =  getWalkAlertDialog.findViewById<TextInputEditText>(R.id.timeEditText)
-        val timeEditText =  getWalkAlertDialog.findViewById<TextInputEditText>(R.id.lengthEditText)
+        val timeEditText =  getWalkAlertDialog.findViewById<TextInputEditText>(R.id.timeEditText)
+        val lengthEditText =  getWalkAlertDialog.findViewById<TextInputEditText>(R.id.lengthEditText)
 
         getWalkAlertDialog.findViewById<TextView>(R.id.positiveButton).setOnClickListener {
-            val length = lengthEditText.text.toString()
-            val time = timeEditText.text.toString()
-            sharedViewModel.saveWalk( length,  time)
+            val length = lengthEditText.text.toString().toDouble()
+            val time = timeEditText.text.toString().toInt()
+            sharedViewModel.saveWalk( 0, length,  time)
             dialog.dismiss()
         }
 

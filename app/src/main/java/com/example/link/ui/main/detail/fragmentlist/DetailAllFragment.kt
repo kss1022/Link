@@ -7,6 +7,7 @@ import androidx.fragment.app.viewModels
 import com.example.link.R
 import com.example.link.databinding.FragmentDetailAllBinding
 import com.example.link.model.PetModel
+import com.example.link.model.RecordModel
 import com.example.link.ui.base.BaseFragment
 import com.example.link.ui.main.MainSharedViewModel
 import com.example.link.ui.main.detail.fragmentlist.DetailAllViewModel.Companion.DAY
@@ -46,6 +47,10 @@ class DetailAllFragment : BaseFragment<FragmentDetailAllBinding, DetailAllViewMo
 
         sharedViewModel.petModel.observe(viewLifecycleOwner) {
             setPetData(it)
+        }
+
+        sharedViewModel.todayRecord.observe(viewLifecycleOwner) {
+
         }
     }
 
@@ -128,6 +133,7 @@ class DetailAllFragment : BaseFragment<FragmentDetailAllBinding, DetailAllViewMo
             }
         }
 
+        setRecordData()
         before = menu
     }
 
@@ -164,6 +170,106 @@ class DetailAllFragment : BaseFragment<FragmentDetailAllBinding, DetailAllViewMo
         }
 
         return getString(R.string.pet_age, year, month)
+    }
+
+
+    /**
+     * Set RecordData
+     */
+
+    private fun setRecordData() {
+        when (viewModel.menu.value) {
+            DAY -> {
+                setTodayData(sharedViewModel.todayRecord.value!!)
+            }
+            WEEK -> {
+                setWeekData(sharedViewModel.weekRecord.value!!)
+            }
+            MONTH -> {
+                setMonthData()
+            }
+            YEAR -> {
+                setYearData()
+            }
+        }
+    }
+
+
+    private fun setTodayData(model: RecordModel) = with(binding) {
+        mealCountTextView.text = getString(R.string.amount_with_int, model.meal.size)
+        mealAmountTextView.text = getString(R.string.count_with_int, model.meal.sum())
+        mealInputPercentTextView.text = model.meal.size.toString()
+
+        snackCountTextView.text = getString(R.string.amount_with_int, model.snack.size)
+        snackAmountTextView.text = getString(R.string.count_with_int, model.snack.sum())
+        snackInputPercentTextView.text = model.snack.size.toString()
+
+        val m = model.walkTime.sum()
+        val h = m / 60
+
+
+        walkCountTextView.text = getString(R.string.amount_with_int, model.walkLength.size)
+        walkTimeTextView.text =
+            if (h > 0) {
+                getString(R.string.hour_and_minutes_with_double, h,  (m - h * 60) )
+            } else{
+                getString(R.string.minutes_with_double, m)
+            }
+        walkLengthTextView.text = getString(R.string.km_with_double, model.walkLength.sum())
+    }
+
+
+    private fun setWeekData(models: List<RecordModel>) = with(binding) {
+
+        var mealCountSum = 0
+        var mealAmountSum = 0
+
+        var snackCountSum = 0
+        var snackAmountSum = 0
+
+        for (i in models) {
+            mealCountSum += i.meal.size
+            mealAmountSum += i.meal.sum()
+
+            snackCountSum += i.snack.size
+            snackAmountSum += i.snack.sum()
+        }
+
+        mealCountTextView.text = getString(R.string.amount_with_int, mealCountSum)
+        mealAmountTextView.text = getString(R.string.count_with_int, mealAmountSum)
+        mealInputPercentTextView.text = mealCountSum.toString()
+
+        snackCountTextView.text = getString(R.string.amount_with_int, snackCountSum)
+        snackAmountTextView.text = getString(R.string.count_with_int, snackAmountSum)
+        snackInputPercentTextView.text = snackCountSum.toString()
+    }
+
+    private fun setYearData() = with(binding) {
+        mealCountTextView.text = "0g"
+        mealAmountTextView.text = "0회"
+        mealInputPercentTextView.text = "0"
+
+        snackCountTextView.text = "0g"
+        snackAmountTextView.text = "0회"
+        snackInputPercentTextView.text = "0"
+
+        walkCountTextView.text = "0회"
+        walkTimeTextView.text = "0m"
+        walkLengthTextView.text = "0km"
+    }
+
+    private fun setMonthData() = with(binding) {
+        mealCountTextView.text = "0g"
+        mealAmountTextView.text = "0회"
+        mealInputPercentTextView.text = "0"
+
+        snackCountTextView.text = "0g"
+        snackAmountTextView.text = "0회"
+        snackInputPercentTextView.text = "0"
+
+        walkCountTextView.text = "0회"
+        walkTimeTextView.text = "0m"
+        walkLengthTextView.text = "0km"
     }
 
     companion object {

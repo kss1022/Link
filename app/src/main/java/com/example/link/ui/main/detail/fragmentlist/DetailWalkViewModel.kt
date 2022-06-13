@@ -1,6 +1,7 @@
 package com.example.link.ui.main.detail.fragmentlist
 
 import android.app.Application
+import android.location.Location
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
@@ -49,5 +50,14 @@ class DetailWalkViewModel @Inject constructor(
         } ?: kotlin.run {
             isBottomViewVisible.value = true
         }
+    }
+
+    fun setBottomButton(show: Boolean) {
+        isBottomViewVisible.value = show
+    }
+
+
+    fun setLocation(location: Location) {
+
     }
 }

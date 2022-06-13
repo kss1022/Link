@@ -1,8 +1,5 @@
 package com.example.link.data.entity
 
-import androidx.annotation.DrawableRes
-import com.example.link.model.CellType
-
 
 data class EatMemoEntity(
     val id: String,

@@ -72,6 +72,10 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), Navigat
                 .circleCrop()
                 .into(binding.mainProfileImageView)
         }
+
+        sharedViewModel.updateEvent.observe(this){
+            Toast.makeText(this, "기록되었습니다", Toast.LENGTH_SHORT).show()
+        }
     }
 
 

@@ -15,6 +15,7 @@ import com.example.link.R
 import com.example.link.databinding.FragmentDetailMealBinding
 import com.example.link.model.EatMemoModel
 import com.example.link.model.PetModel
+import com.example.link.model.RecordModel
 import com.example.link.ui.base.BaseFragment
 import com.example.link.ui.main.MainSharedViewModel
 import com.example.link.ui.main.detail.fragmentlist.DetailMealViewModel.Companion.DAY
@@ -82,10 +83,13 @@ class DetailMealFragment : BaseFragment<FragmentDetailMealBinding, DetailMealVie
             setPetData(it)
         }
 
-        clickEditMemo.observe(viewLifecycleOwner) { memo->
+        clickEditMemo.observe(viewLifecycleOwner) { memo ->
             memo?.let { showEditDialog(it) }
         }
 
+        sharedViewModel.todayRecord.observe(viewLifecycleOwner) {
+            setRecordData()
+        }
     }
 
 
@@ -210,6 +214,7 @@ class DetailMealFragment : BaseFragment<FragmentDetailMealBinding, DetailMealVie
             }
         }
 
+        setRecordData()
         before = menu
     }
 
@@ -246,6 +251,83 @@ class DetailMealFragment : BaseFragment<FragmentDetailMealBinding, DetailMealVie
         return getString(R.string.pet_age, year, month)
     }
 
+
+    /**
+     * Set RecordData
+     */
+
+    private fun setRecordData() {
+        when (viewModel.menu.value!!) {
+            DAY -> {
+                setTodayData(sharedViewModel.todayRecord.value!!)
+            }
+            WEEK -> {
+                setWeekData(sharedViewModel.weekRecord.value!!)
+            }
+            MONTH -> {
+                setMonthData()
+            }
+            YEAR -> {
+                setYearData()
+            }
+        }
+    }
+
+
+
+    private fun setTodayData(model: RecordModel) = with(binding) {
+        eatingCountTextView.text = getString(R.string.amount_with_int, model.meal.size)
+        eatingAmountTextView.text = getString(R.string.count_with_int, model.meal.sum())
+
+        snackAmountTextView.text = getString(R.string.amount_with_int, model.snack.sum())
+        snackCountTextView.text = getString(R.string.count_with_int, model.snack.size)
+    }
+
+
+    private fun setWeekData(models: List<RecordModel>) = with(binding) {
+
+        var mealCountSum = 0
+        var mealAmountSum = 0
+
+        var snackCountSum = 0
+        var snackAmountSum = 0
+
+        for (i in models) {
+            mealCountSum += i.meal.size
+            mealAmountSum += i.meal.sum()
+
+            snackCountSum += i.snack.size
+            snackAmountSum += i.snack.sum()
+        }
+
+        eatingCountTextView.text = getString(R.string.count_with_int, mealCountSum)
+        eatingAmountTextView.text = getString(R.string.amount_with_int, mealAmountSum)
+
+
+
+        snackCountTextView.text = getString(R.string.count_with_int, snackCountSum)
+        snackAmountTextView.text = getString(R.string.amount_with_int, snackAmountSum)
+    }
+
+    private fun setYearData() = with(binding){
+        eatingCountTextView.text = ""
+        eatingAmountTextView.text = ""
+
+
+        snackCountTextView.text = ""
+        snackAmountTextView.text = ""
+    }
+
+    private fun setMonthData() = with(binding){
+        eatingCountTextView.text = ""
+        eatingAmountTextView.text = ""
+
+
+        snackCountTextView.text = ""
+        snackAmountTextView.text = ""
+    }
+
+
     /**
      *  Edit AlertDialog
      */
@@ -267,8 +349,8 @@ class DetailMealFragment : BaseFragment<FragmentDetailMealBinding, DetailMealVie
         editMealAlertDialog.findViewById<TextView>(R.id.positiveButton).setOnClickListener {
             val type = eatTypeEditText.text.toString()
             val amount = eatAmountEditText.text.toString()
-            val memo =memoEditText.text.toString()
-            viewModel.editMemo( model ,type, amount, memo )
+            val memo = memoEditText.text.toString()
+            viewModel.editMemo(model, type, amount, memo)
             dialog.dismiss()
         }
 
