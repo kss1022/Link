@@ -5,7 +5,7 @@ import com.example.link.data.entity.PetEntity
 import com.example.link.model.User
 
 interface FireStoreApi {
-
+    //DefaultData
     suspend fun saveUserId(id: String, email: String)
 
     suspend fun saveUserNameWithProfileNum(id :String, name : String, num : Int)
@@ -22,24 +22,34 @@ interface FireStoreApi {
 
     suspend fun getUserData(id: String) : User?
 
+    suspend fun updateUserName(id : String,userName: String)
+
+
+    //Record
 
     suspend fun addRecordToday(id:String) : RecordEntity
+
+    suspend fun addRecordMonth(id:String) : RecordEntity
+
+    suspend fun addRecordYear(id:String) : RecordEntity
 
     suspend fun getRecordToday(id : String) : RecordEntity?
 
     suspend fun getRecordWeek(id : String) : List<RecordEntity>
 
-    suspend fun getRecordMonth(id : String) : List<RecordEntity>
+    suspend fun getRecordMonth(id : String) : RecordEntity?
+
+    suspend fun getRecordYear(id : String) : RecordEntity?
 
     suspend fun updateRecordToday(id: String, recordEntity: RecordEntity)
 
-    suspend fun updateEating( id : String, isEating: Boolean, amount: String)
-
     suspend fun updateShower( id : String)
 
-    suspend fun updateMeal(id: String, list: MutableList<Int>)
+    suspend fun updateMeal(id: String, meal: Long)
 
-    suspend  fun updateSnack(id: String, list: MutableList<Int>)
+    suspend  fun updateSnack(id: String, snack: Long)
 
-    suspend fun updateWalk(id: String, count: MutableList<Int>, length: MutableList<Double>, time: MutableList<Int>)
+    suspend fun updateWalk(id: String, step: Int, length: Double, time: Int)
+
+
 }

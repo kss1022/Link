@@ -3,6 +3,7 @@ package com.example.link.data.api
 import com.example.link.data.entity.PetEntity
 import com.example.link.data.entity.RecordEntity
 import com.example.link.model.User
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObject
 import kotlinx.coroutines.tasks.await
@@ -13,6 +14,9 @@ class FireStoreApiImpl @Inject constructor(
     private val fireStore: FirebaseFirestore
 ) : FireStoreApi {
 
+    /**
+     * Set DefaultData
+     */
 
     override suspend fun saveUserId(id: String, email: String) {
         val user = hashMapOf(
@@ -83,7 +87,13 @@ class FireStoreApiImpl @Inject constructor(
     }
 
 
+    override suspend fun updateUserName(id : String, userName: String) {
+        fireStore.collection(USER).document(id).update(NAME, userName)
+    }
 
+    /**
+     * Record Data
+     */
 
     private val calendar = Calendar.getInstance()
     private val year = calendar.get(Calendar.YEAR) //현재 년도
@@ -92,19 +102,22 @@ class FireStoreApiImpl @Inject constructor(
     private val week = calendar.get(Calendar.WEEK_OF_YEAR) // 현재 년도의 몇째 주
 
     override suspend fun addRecordToday(id: String) : RecordEntity{
-        val today = RecordEntity(
+        val todayEntity = RecordEntity(
             day = day,
             week =week,
-            meal= emptyList(),
-            snack= emptyList(),
-            walkCount = listOf(),
-            walkLength = listOf(),
-            walkTime = listOf(),
+            meal= 0,
+            mealCount =0,
+            snack= 0,
+            snackCount = 0,
+            walkStep = 0,
+            walkLength = 0.0,
+            walkTime = 0,
+            walkCount = 0,
             shower = false,
         )
 
        fireStore.collection(PET).document(id).collection("${year}.${month + 1}").document(day.toString())
-            .set( today )
+            .set( todayEntity )
 
         /**
         fireStore.collection(PET).document(id).collection("${year}.${month + 1}").document((day-1).toString())
@@ -171,7 +184,49 @@ class FireStoreApiImpl @Inject constructor(
 
          */
 
-        return today
+        return todayEntity
+    }
+
+    override suspend fun addRecordMonth(id: String): RecordEntity {
+        val monthEntity = RecordEntity(
+            day = 0,
+            week =0,
+            meal= 0,
+            mealCount =0,
+            snack= 0,
+            snackCount = 0,
+            walkStep = 0,
+            walkLength = 0.0,
+            walkTime = 0,
+            walkCount = 0,
+            shower = false,
+        )
+
+        fireStore.collection(PET).document(id).collection("${year}.${month + 1}").document(DATA)
+            .set( monthEntity )
+
+        return monthEntity
+    }
+
+    override suspend fun addRecordYear(id: String): RecordEntity {
+        val yearEntity = RecordEntity(
+            day = 0,
+            week =0,
+            meal= 0,
+            mealCount =0,
+            snack= 0,
+            snackCount = 0,
+            walkStep = 0,
+            walkLength = 0.0,
+            walkTime = 0,
+            walkCount = 0,
+            shower = false,
+        )
+
+        fireStore.collection(PET).document(id).collection("$year").document(DATA)
+            .set( yearEntity )
+
+        return yearEntity
     }
 
     override suspend fun getRecordToday(id: String): RecordEntity? {
@@ -196,8 +251,24 @@ class FireStoreApiImpl @Inject constructor(
         return weekRecords
     }
 
-    override suspend fun getRecordMonth(id: String): List<RecordEntity> {
-        TODO("Not yet implemented")
+    override suspend fun getRecordMonth(id: String): RecordEntity? {
+        val monthRecord = fireStore.collection(PET).document(id).collection("${year}.${month + 1}").document(DATA)
+            .get()
+            .await()
+            .toObject<RecordEntity>()
+
+
+        return monthRecord
+    }
+
+    override suspend fun getRecordYear(id: String): RecordEntity? {
+        val yearRecord = fireStore.collection(PET).document(id).collection("$year").document(DATA)
+            .get()
+            .await()
+            .toObject<RecordEntity>()
+
+
+        return yearRecord
     }
 
 
@@ -205,38 +276,54 @@ class FireStoreApiImpl @Inject constructor(
         fireStore.collection(PET).document(id).collection("${year}.${month + 1}").document(day.toString())
     }
 
-    override suspend fun updateEating(id: String, isEating: Boolean, amount: String) {
-        fireStore.collection(PET).document(id).collection("${year}.${month + 1}").document(day.toString())
-    }
-
-
     override suspend fun updateWalk(
         id: String,
-        count: MutableList<Int>,
-        length: MutableList<Double>,
-        time: MutableList<Int>
+        step: Int,
+        length: Double,
+        time: Int
     ) {
-        val document = fireStore.collection(PET).document(id).collection("${year}.${month + 1}").document(day.toString())
-//        document.update(WALK_COUNT, count , WALK_LENGTH, length ,WALK_TIME , time)
-        document.update(WALK_COUNT, count)
-        document.update(WALK_LENGTH,length)
-        document.update(WALK_TIME,time)
+        val todayReference = fireStore.collection(PET).document(id).collection("${year}.${month + 1}").document(day.toString())
+        val monthReference = fireStore.collection(PET).document(id).collection("${year}.${month + 1}").document(DATA)
+        val yearReference = fireStore.collection(PET).document(id).collection("$year").document(DATA)
+
+        fireStore.runTransaction { transaction->
+            transaction.update(todayReference, WALK_STEP, step , WALK_LENGTH, length ,WALK_TIME , time, WALK_COUNT, FieldValue.increment(1))
+            transaction.update(monthReference, WALK_STEP, step , WALK_LENGTH, length ,WALK_TIME , time, WALK_COUNT, FieldValue.increment(1))
+            transaction.update(yearReference, WALK_STEP, step , WALK_LENGTH, length ,WALK_TIME , time, WALK_COUNT, FieldValue.increment(1))
+        }
     }
+
+
 
     override suspend fun updateShower(id: String) {
         fireStore.collection(PET).document(id).collection("${year}.${month + 1}").document(day.toString())
             .update(SHOWER, true)
     }
 
-    override suspend fun updateMeal(id: String, list: MutableList<Int>) {
-        fireStore.collection(PET).document(id).collection("${year}.${month + 1}").document(day.toString())
-            .update(MEAL , list)
+    override suspend fun updateMeal(id: String, meal: Long) {
+        val todayReference = fireStore.collection(PET).document(id).collection("${year}.${month + 1}").document(day.toString())
+        val monthReference = fireStore.collection(PET).document(id).collection("${year}.${month + 1}").document(DATA)
+        val yearReference = fireStore.collection(PET).document(id).collection("$year").document(DATA)
+
+        fireStore.runTransaction { transaction->
+            transaction.update(todayReference, MEAL , FieldValue.increment(meal) , MEAL_COUNT, FieldValue.increment(1))
+            transaction.update(monthReference, MEAL , FieldValue.increment(meal) , MEAL_COUNT, FieldValue.increment(1))
+            transaction.update(yearReference, MEAL , FieldValue.increment(meal) , MEAL_COUNT, FieldValue.increment(1))
+        }
     }
 
-    override suspend fun updateSnack(id: String, list: MutableList<Int>) {
-        fireStore.collection(PET).document(id).collection("${year}.${month + 1}").document(day.toString())
-            .update(SNACK , list)
+    override suspend fun updateSnack(id: String, snack: Long) {
+        val todayReference = fireStore.collection(PET).document(id).collection("${year}.${month + 1}").document(day.toString())
+        val monthReference = fireStore.collection(PET).document(id).collection("${year}.${month + 1}").document(DATA)
+        val yearReference = fireStore.collection(PET).document(id).collection("$year").document(DATA)
+
+        fireStore.runTransaction { transaction->
+            transaction.update(todayReference, SNACK , FieldValue.increment(snack) , SNACK_COUNT, FieldValue.increment(1))
+            transaction.update(monthReference, SNACK , FieldValue.increment(snack) , SNACK_COUNT, FieldValue.increment(1))
+            transaction.update(yearReference, SNACK , FieldValue.increment(snack) , SNACK_COUNT, FieldValue.increment(1))
+        }
     }
+
 
 
     companion object {
@@ -251,8 +338,13 @@ class FireStoreApiImpl @Inject constructor(
         const val SHOWER = "shower"
         const val WALK_LENGTH = "walkLength"
         const val WALK_TIME = "walkTime"
+        const val WALK_STEP = "walkStep"
         const val WALK_COUNT = "walkCount"
         const val SNACK = "snack"
+        const val SNACK_COUNT = "snackCount"
         const val MEAL = "meal"
+        const val MEAL_COUNT = "mealCount"
+
+        const val DATA = "data"
     }
 }

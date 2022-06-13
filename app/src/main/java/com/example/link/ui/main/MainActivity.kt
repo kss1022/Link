@@ -2,16 +2,11 @@ package com.example.link.ui.main
 
 import android.content.Context
 import android.content.Intent
-import android.content.res.Configuration
 import android.view.MenuItem
 import android.view.View
-import android.view.ViewGroup
-import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
@@ -23,12 +18,8 @@ import com.example.link.ui.main.home.HomeFragment
 import com.example.link.ui.main.home.HomeRecordFragment
 import com.example.link.ui.main.map.MapFragment
 import com.example.link.ui.main.my.MyFragment
-import com.example.link.util.DeviceUtil
-import com.example.link.util.lifecycle.SingleLiveEvent
-import com.example.link.util.lifecycle.SystemUIType
 import com.google.android.material.navigation.NavigationBarView
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 
 @AndroidEntryPoint
@@ -48,9 +39,12 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), Navigat
     override fun initViews() {
         initToolbar()
         initViewModel()
+        initNfc()
         binding.bottomNavigationView.setOnItemSelectedListener(this@MainActivity)
         showFragment(HomeFragment.newInstance(), HomeFragment.TAG)
     }
+
+
 
 
     override fun observeData() {
@@ -73,8 +67,12 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), Navigat
                 .into(binding.mainProfileImageView)
         }
 
-        sharedViewModel.updateEvent.observe(this){
-            Toast.makeText(this, "기록되었습니다", Toast.LENGTH_SHORT).show()
+        sharedViewModel.updateStartEvent.observe(this){
+            binding.progressBar.visibility = View.VISIBLE
+        }
+
+        sharedViewModel.updateEndEvent.observe(this){
+            binding.progressBar.isGone = true
         }
     }
 
@@ -82,6 +80,11 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), Navigat
 
     private fun initViewModel() {
         sharedViewModel.fetchData()
+    }
+
+
+    private fun initNfc() {
+
     }
 
 
@@ -102,10 +105,10 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), Navigat
                 true
             }
 
-            R.id.menu_map -> {
-                showFragment(MapFragment.newInstance() , MapFragment.TAG)
-                true
-            }
+//            R.id.menu_map -> {
+//                showFragment(MapFragment.newInstance() , MapFragment.TAG)
+//                true
+//            }
 
             R.id.menu_my -> {
                 showFragment(MyFragment.newInstance() , MyFragment.TAG)

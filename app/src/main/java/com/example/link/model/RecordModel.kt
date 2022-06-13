@@ -3,10 +3,13 @@ package com.example.link.model
 data class RecordModel (
     val day : Int,
     val week : Int,
-    val meal : List<Int>,
-    val snack : List<Int>,
-    val walkCount : List<Int>,
-    val walkLength : List<Double>,
-    val walkTime : List<Int>,
+    val meal : Int,
+    val mealCount : Int,
+    val snack : Int,
+    val snackCount : Int,
+    val walkStep : Int,
+    val walkLength : Double,
+    val walkTime : Int,
+    val walkCount : Int,
     val shower : Boolean
 )

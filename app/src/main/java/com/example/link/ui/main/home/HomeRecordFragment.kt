@@ -114,7 +114,7 @@ class HomeRecordFragment : BaseFragment<FragmentHomeRecordBinding, HomeRecordVie
         val eatingEditText =    getEatingAlertDialog.findViewById<TextInputEditText>(R.id.eatingEditText)
 
         getEatingAlertDialog.findViewById<TextView>(R.id.positiveButton).setOnClickListener {
-            val amount = eatingEditText.text.toString().toInt()
+            val amount = eatingEditText.text.toString().toLong()
             sharedViewModel.saveEating( isEating,  amount)
             dialog.dismiss()
         }
@@ -160,7 +160,7 @@ class HomeRecordFragment : BaseFragment<FragmentHomeRecordBinding, HomeRecordVie
         AlertDialog.Builder(requireContext())
             .setTitle("목욕을 기록 하시겠어요?")
             .setPositiveButton("확인") { dialog, _ ->
-                sharedViewModel.updateShower()
+                sharedViewModel.saveShower()
                 dialog.dismiss()
             }
             .setNegativeButton("취소") { dialog, _ ->

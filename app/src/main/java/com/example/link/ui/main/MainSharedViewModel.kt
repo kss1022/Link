@@ -15,6 +15,8 @@ import com.example.link.ui.base.BaseViewModel
 import com.example.link.util.lifecycle.SingleLiveEvent
 import com.example.yourchoice.data.preference.PreferenceManager
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
@@ -30,15 +32,20 @@ class MainSharedViewModel @Inject constructor(
     private val preferenceManager: PreferenceManager
 ) : BaseViewModel(app) {
 
-    val userId: LiveData<String> = savedStateHandle.getLiveData(KEY_USER_ID, "")
+    private  val userId: LiveData<String> = savedStateHandle.getLiveData(KEY_USER_ID, "")
 
     val petModel = MutableLiveData<PetModel>()
     val userModel = MutableLiveData<User>()
 
     val weekRecord = MutableLiveData<List<RecordModel>>()
     val todayRecord = MutableLiveData<RecordModel>()
+    val monthRecord = MutableLiveData<RecordModel>()
+    val yearRecord = MutableLiveData<RecordModel>()
 
-    val updateEvent = SingleLiveEvent<Unit>()
+
+
+    val updateStartEvent = SingleLiveEvent<Unit>()
+    val updateEndEvent = SingleLiveEvent<Unit>()
 
     private val today = Calendar.getInstance().get((Calendar.DATE))
 
@@ -53,17 +60,34 @@ class MainSharedViewModel @Inject constructor(
         id?.let { _ ->
             val user = userRepository.getUserData(id)
             val pet = petRepository.getPetData(id)
-            val weekList = recordRepository.getRecordWeek(id)
 
-            weekRecord.value = weekList
-            val today = weekList.find {
+
+            weekRecord.value = recordRepository.getRecordWeek(id)
+            val month = recordRepository.getRecordMonth(id)
+            val year = recordRepository.getRecordYear(id)
+
+
+            val today = weekRecord.value!!.find {
                 it.day == today
             }
 
+            // if is no Exist
             if (today == null) {
                 todayRecord.value = recordRepository.addRecordToday(id)
             } else {
                 todayRecord.value = today!!
+            }
+
+            if (month == null) {
+                monthRecord.value = recordRepository.addRecordMonth(id)
+            } else {
+                monthRecord.value = month!!
+            }
+
+            if (year == null) {
+                yearRecord.value = recordRepository.addRecordYear(id)
+            } else {
+                yearRecord.value = year!!
             }
 
 
@@ -82,45 +106,37 @@ class MainSharedViewModel @Inject constructor(
         } ?: kotlin.run {
             //user id error
         }
+
+        updateEndEvent.call()
     }
 
 
-    fun updateShower() = viewModelScope.launch {
+    fun saveShower() = viewModelScope.launch {
+        updateStartEvent.call()
         recordRepository.updateShower(userId.value!!)
 
         updateData()
     }
 
 
-    fun saveEating(isEating: Boolean, amount: Int) = viewModelScope.launch {
+    fun saveEating(isEating: Boolean, amount: Long) = viewModelScope.launch {
+        updateStartEvent.call()
         if (isEating) {
-            val list = todayRecord.value?.meal?.toMutableList()!!
-            list.add(amount)
-
-            recordRepository.updateMeal(userId.value!!, list)
-
+            recordRepository.updateMeal(userId.value!!, amount)
         } else {
-            val list = todayRecord.value?.snack?.toMutableList()!!
-            list.add(amount)
-
-            recordRepository.updateSnack(userId.value!!, list)
+            recordRepository.updateSnack(userId.value!!, amount)
         }
-
         updateData()
     }
 
 
-    fun saveWalk(count: Int, length: Double, time: Int) = viewModelScope.launch {
-        val walkCountList = todayRecord.value!!.walkCount.toMutableList()
-        walkCountList.add(count)
+    fun saveWalk(step: Int, length: Double, time: Int) = viewModelScope.launch {
+        updateStartEvent.call()
+        val newStep = todayRecord.value!!.walkCount + step
+        val newLength = todayRecord.value!!.walkLength + length
+        val newTime = todayRecord.value!!.walkTime + time
 
-        val walkLengthList = todayRecord.value!!.walkLength.toMutableList()
-        walkLengthList.add(length)
-
-        val walkTimeList = todayRecord.value!!.walkTime.toMutableList()
-        walkTimeList.add(time)
-
-        recordRepository.updateWalk(userId.value!!, walkCountList, walkLengthList, walkTimeList)
+        recordRepository.updateTodayWalk(userId.value!!, newStep, newLength, newTime)
 
         updateData()
     }
@@ -128,6 +144,8 @@ class MainSharedViewModel @Inject constructor(
 
     private fun updateData() = viewModelScope.launch {
         val weekList = recordRepository.getRecordWeek(userId.value!!)
+        monthRecord.value = recordRepository.getRecordMonth(userId.value!!)
+        yearRecord.value = recordRepository.getRecordYear(userId.value!!)
 
         weekRecord.value = weekList
 
@@ -136,6 +154,12 @@ class MainSharedViewModel @Inject constructor(
         }
         todayRecord.value = today!!
 
-        updateEvent.call()
+        updateEndEvent.call()
+    }
+
+
+    fun updateUserName(userName: String) =viewModelScope.launch{
+        userRepository.updateUserName(userId.value!!, userName)
+        userModel.value =userRepository.getUserData(userId.value!!)
     }
 }

@@ -205,12 +205,16 @@ class DetailMealFragment : BaseFragment<FragmentDetailMealBinding, DetailMealVie
                     backgroundTintList = green
                     setTextColor(white)
                 }
+                binding.viewPagerContainer.visibility = View.VISIBLE
+                binding.mealGraphLayout.visibility = View.INVISIBLE
             }
             YEAR -> {
                 topMenuYearTextView.apply {
                     backgroundTintList = green
                     setTextColor(white)
                 }
+                binding.viewPagerContainer.visibility = View.VISIBLE
+                binding.mealGraphLayout.visibility = View.INVISIBLE
             }
         }
 
@@ -259,28 +263,28 @@ class DetailMealFragment : BaseFragment<FragmentDetailMealBinding, DetailMealVie
     private fun setRecordData() {
         when (viewModel.menu.value!!) {
             DAY -> {
-                setTodayData(sharedViewModel.todayRecord.value!!)
+                setData(sharedViewModel.todayRecord.value!!)
             }
             WEEK -> {
                 setWeekData(sharedViewModel.weekRecord.value!!)
             }
             MONTH -> {
-                setMonthData()
+                setData(sharedViewModel.monthRecord.value!!)
             }
             YEAR -> {
-                setYearData()
+                setData(sharedViewModel.yearRecord.value!!)
             }
         }
     }
 
 
 
-    private fun setTodayData(model: RecordModel) = with(binding) {
-        eatingCountTextView.text = getString(R.string.amount_with_int, model.meal.size)
-        eatingAmountTextView.text = getString(R.string.count_with_int, model.meal.sum())
+    private fun setData(model: RecordModel) = with(binding) {
+        eatingCountTextView.text = getString(R.string.count_with_int, model.mealCount)
+        eatingAmountTextView.text = getString(R.string.amount_with_int, model.meal)
 
-        snackAmountTextView.text = getString(R.string.amount_with_int, model.snack.sum())
-        snackCountTextView.text = getString(R.string.count_with_int, model.snack.size)
+        snackCountTextView.text = getString(R.string.count_with_int, model.snackCount)
+        snackAmountTextView.text = getString(R.string.amount_with_int, model.snack)
     }
 
 
@@ -293,11 +297,11 @@ class DetailMealFragment : BaseFragment<FragmentDetailMealBinding, DetailMealVie
         var snackAmountSum = 0
 
         for (i in models) {
-            mealCountSum += i.meal.size
-            mealAmountSum += i.meal.sum()
+            mealCountSum += i.mealCount
+            mealAmountSum += i.meal
 
-            snackCountSum += i.snack.size
-            snackAmountSum += i.snack.sum()
+            snackCountSum += i.snackCount
+            snackAmountSum += i.snack
         }
 
         eatingCountTextView.text = getString(R.string.count_with_int, mealCountSum)
@@ -309,23 +313,7 @@ class DetailMealFragment : BaseFragment<FragmentDetailMealBinding, DetailMealVie
         snackAmountTextView.text = getString(R.string.amount_with_int, snackAmountSum)
     }
 
-    private fun setYearData() = with(binding){
-        eatingCountTextView.text = ""
-        eatingAmountTextView.text = ""
 
-
-        snackCountTextView.text = ""
-        snackAmountTextView.text = ""
-    }
-
-    private fun setMonthData() = with(binding){
-        eatingCountTextView.text = ""
-        eatingAmountTextView.text = ""
-
-
-        snackCountTextView.text = ""
-        snackAmountTextView.text = ""
-    }
 
 
     /**

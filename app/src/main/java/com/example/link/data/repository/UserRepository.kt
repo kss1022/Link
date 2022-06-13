@@ -18,4 +18,6 @@ interface UserRepository {
     suspend fun getUserProfileNum(userId: String) : Int
 
     suspend fun saveUserNameWithProfileNum(name : String, @DrawableRes resId : Int, num : Int )
+
+    suspend fun updateUserName(id : String,userName: String)
 }

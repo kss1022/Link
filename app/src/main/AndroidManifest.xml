@@ -3,12 +3,11 @@
     package="com.example.link">
 
     <uses-permission android:name="android.permission.INTERNET"/>
-
     <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" android:minSdkVersion="29"/>
-
-
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.NFC" />
+
 
 
     <application

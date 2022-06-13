@@ -269,21 +269,21 @@ class DetailWalkFragment : BaseFragment<FragmentDetailWalkBinding, DetailWalkVie
 
 
     private fun setRecordData(model: RecordModel) =with(binding){
-        val m = model.walkTime.sum()
+        val m = model.walkTime
         val h = m / 60
 
-        countTextView.text = getString(R.string.amount_with_int, model.walkLength.size)
+        countTextView.text = getString(R.string.count_with_int, model.walkCount)
         activityTimeTextView.text =
             if (h > 0) {
                 getString(R.string.hour_and_minutes_with_double, h,  (m - h * 60) )
             } else{
                 getString(R.string.minutes_with_double, m)
             }
-        lengthTextView.text = getString(R.string.km_with_double, model.walkLength.sum())
+        lengthTextView.text = getString(R.string.km_with_double, model.walkLength)
 
 
-        val percent = model.walkCount.sum().toDouble() / 10000 * 100
-        walkCenterGraphCountTextView.text = model.walkCount.sum().toString()
+        val percent = model.walkStep.toDouble() / 10000 * 100
+        walkCenterGraphCountTextView.text = model.walkStep.toString()
         walKPercentTextView.text = getString(R.string.percent_with_double, percent)
     }
 
@@ -315,7 +315,8 @@ class DetailWalkFragment : BaseFragment<FragmentDetailWalkBinding, DetailWalkVie
                 h * 60 + m
             } else m
 
-            sharedViewModel.saveWalk(walk, length, totalMinutes)
+            //todo 너무 적은경우 저장하지 않게 처리한다.
+            if(length > 0.05) sharedViewModel.saveWalk(walk, length, totalMinutes)
         } catch (e: Exception) {
             e.printStackTrace()
         }

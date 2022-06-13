@@ -59,6 +59,10 @@ class UserRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun updateUserName(id : String, userName: String) = withContext(ioDispatcher){
+        fireStoreApi.updateUserName(id,userName)
+    }
+
 
     private fun getProfileId(num: Int): Int {
         val category = ProfileCategory.values()

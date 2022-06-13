@@ -11,9 +11,9 @@
         android:icon="@drawable/bottom_menu_detail"/>
 
 
-    <item android:id="@+id/menu_map"
-        android:title=""
-        android:icon="@drawable/bottom_menu_map"/>
+<!--    <item android:id="@+id/menu_map"-->
+<!--        android:title=""-->
+<!--        android:icon="@drawable/bottom_menu_map"/>-->
 
     <item android:id="@+id/menu_my"
         android:title=""

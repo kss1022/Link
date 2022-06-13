@@ -1,8 +1,12 @@
 package com.example.link.ui.main.my
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
+import android.view.LayoutInflater
+import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.example.link.R
 import com.example.link.databinding.FragmentMyBinding
@@ -12,7 +16,11 @@ import com.example.link.ui.base.BaseFragment
 import com.example.link.ui.main.MainSharedViewModel
 import com.example.link.ui.main.MainToolbarViewModel
 import com.example.link.util.ext.toReadableDateString
+import com.example.link.util.lifecycle.SingleLiveEvent
+import com.google.android.material.textfield.TextInputEditText
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
 
@@ -31,12 +39,17 @@ class MyFragment : BaseFragment<FragmentMyBinding, MyViewModel>() {
     override fun getViewBinding(): FragmentMyBinding =
         FragmentMyBinding.inflate(layoutInflater)
 
+    private val editButtonEvent = SingleLiveEvent<Unit>(300)
+
     override fun initViews() {
         initActionBar()
     }
 
     override fun bindViews() {
+        binding.editButton.setOnClickListener { editButtonEvent.call() }
     }
+
+
 
     override fun observeData() {
         viewModel.profileImage.observe(viewLifecycleOwner){
@@ -53,9 +66,11 @@ class MyFragment : BaseFragment<FragmentMyBinding, MyViewModel>() {
         sharedViewModel.petModel.observe(viewLifecycleOwner) {
             setPetData(it)
         }
+
+        editButtonEvent.observe(viewLifecycleOwner){
+            showEditAlertDialog()
+        }
     }
-
-
 
 
     fun initActionBar() {
@@ -107,6 +122,31 @@ class MyFragment : BaseFragment<FragmentMyBinding, MyViewModel>() {
         }
 
         return getString(R.string.pet_age, year, month)
+    }
+
+
+    private fun showEditAlertDialog() {
+        val dialog = AlertDialog.Builder(requireContext()).create()
+        val getUserNameLayout = LayoutInflater.from(requireContext())
+            .inflate(R.layout.alert_dialog_get_user_name, null)
+
+        val editText = getUserNameLayout.findViewById<TextInputEditText>(R.id.userNameEditText)
+
+        editText.setText(binding.userNameTextView.text.toString())
+
+
+        getUserNameLayout.findViewById<TextView>(R.id.negativeButton).setOnClickListener {
+            dialog.dismiss()
+        }
+
+        getUserNameLayout.findViewById<TextView>(R.id.positiveButton).setOnClickListener {
+            sharedViewModel.updateUserName(editText.text.toString())
+            dialog.dismiss()
+        }
+
+        dialog.apply {
+            setView(getUserNameLayout)
+        }.show()
     }
 
 
