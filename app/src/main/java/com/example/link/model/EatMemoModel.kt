@@ -9,7 +9,7 @@ data class EatMemoModel(
     val userName: String,
     @DrawableRes val userProfileImage: Int,
     val memo: String,
-    val time: String,
+    val time: Long,
     val eatType: String,
     val eatAmount: String,
 ) : Model(id, cellType)

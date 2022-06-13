@@ -8,5 +8,5 @@ data class PetModel (
     val isMail : Boolean,
     val type : String,
     val birthDay : List<Int>,
-    val weight : Int
+    val weight : Float
 )

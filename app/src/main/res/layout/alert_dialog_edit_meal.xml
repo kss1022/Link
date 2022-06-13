@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:layout_height="wrap_content">
+
+
+    <TextView
+        android:id="@+id/eatTypeTitleTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/eat_type"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/eatTypeEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:singleLine="true"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@id/eatTypeTitleTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/eatTypeTitleTextView"
+        app:layout_constraintTop_toTopOf="@id/eatTypeTitleTextView"
+        tools:text="웰스비 어덜트 강아지 유기농 사료" />
+
+    <TextView
+        android:id="@+id/eatAmountTitleTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/eating_amount"
+        app:layout_constraintStart_toStartOf="@id/eatTypeTitleTextView"
+        app:layout_constraintTop_toBottomOf="@id/eatTypeTitleTextView" />
+
+    <EditText
+        android:id="@+id/eatAmountEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@id/eatAmountTitleTextView"
+        app:layout_constraintEnd_toEndOf="@id/eatTypeEditText"
+        app:layout_constraintStart_toStartOf="@id/eatTypeEditText"
+        app:layout_constraintTop_toTopOf="@id/eatAmountTitleTextView"
+        tools:text="200g" />
+
+    <TextView
+        android:id="@+id/memoTitleTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/memo"
+        app:layout_constraintStart_toStartOf="@id/eatTypeTitleTextView"
+        app:layout_constraintTop_toBottomOf="@id/eatAmountTitleTextView" />
+
+
+    <EditText
+        android:id="@+id/memoEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@id/eatTypeEditText"
+        app:layout_constraintStart_toStartOf="@id/eatTypeEditText"
+        app:layout_constraintTop_toBottomOf="@id/eatAmountEditText"
+        tools:text="이번에 바꾼 사료 좋아함 ! 저녁에는 100g만 줘" />
+
+
+    <TextView
+        android:id="@+id/negativeButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="24dp"
+        android:text="@string/negative"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/positiveButton"
+        app:layout_constraintTop_toBottomOf="@id/memoEditText" />
+
+    <TextView
+        android:id="@+id/positiveButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:text="@string/positive"
+        app:layout_constraintBottom_toBottomOf="@id/negativeButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/negativeButton" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

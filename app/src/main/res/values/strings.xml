@@ -93,4 +93,19 @@
     <string name="percent">%</string>
     <string name="time">시간</string>
 
+    <string name="year_before">%d년 %d달 %일전</string>
+    <string name="month_before">%d달 %일전</string>
+    <string name="day_before">%d일전</string>
+
+    <string name="hour_before">%d시간전</string>
+    <string name="minutes_before">%d분전</string>
+
+    <string name="record_data_sub">의 데이터를</string>
+    <string name="are_you_record">기록하시겠습니까?</string>
+    <string name="please_record_eat">식사를 기록해주세요!</string>
+    <string name="eating_amount_gram">식사 양(g)</string>
+    <string name="please_record_walk">산책을 기록해주세요!</string>
+    <string name="activity_time_minutes">활동시간(분)</string>
+    <string name="length_km">거리(km)</string>
+
 </resources>

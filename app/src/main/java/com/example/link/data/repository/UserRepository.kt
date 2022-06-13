@@ -1,6 +1,7 @@
 package com.example.link.data.repository
 
 import androidx.annotation.DrawableRes
+import com.example.link.data.entity.EatMemoEntity
 import com.example.link.model.User
 
 interface UserRepository {

@@ -49,10 +49,24 @@
                 android:layout_width="42dp"
                 android:layout_height="42dp"
                 android:layout_marginStart="36dp"
-                app:layout_constraintTop_toTopOf="@id/mainProfileImageView"
-                app:layout_constraintBottom_toBottomOf="@id/mainProfileImageView"
-                app:layout_constraintEnd_toEndOf="@id/mainProfileImageView"
-                app:layout_constraintStart_toStartOf="@id/mainProfileImageView"/>
+                app:layout_constraintTop_toTopOf="@id/mainProfileBackgroundImageView"
+                app:layout_constraintBottom_toBottomOf="@id/mainProfileBackgroundImageView"
+                app:layout_constraintEnd_toEndOf="@id/mainProfileBackgroundImageView"
+                app:layout_constraintStart_toStartOf="@id/mainProfileBackgroundImageView"/>
+
+
+            <View
+                android:id="@+id/mainProfileBackgroundImageView"
+                android:background="@drawable/bg_round_gray"
+                android:backgroundTint="@color/white"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="48dp"
+                android:layout_marginBottom="4dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
 
 
             <ImageView
@@ -60,12 +74,10 @@
                 tools:src="@drawable/profile11"
                 android:layout_width="36dp"
                 android:layout_height="36dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="48dp"
-                android:layout_marginBottom="4dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintStart_toStartOf="@id/mainProfileBackgroundImageView"
+                app:layout_constraintEnd_toEndOf="@id/mainProfileBackgroundImageView"
+                app:layout_constraintTop_toTopOf="@id/mainProfileBackgroundImageView"
+                app:layout_constraintBottom_toBottomOf="@id/mainProfileBackgroundImageView"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.appcompat.widget.Toolbar>

@@ -10,7 +10,6 @@ import com.example.link.data.repository.UserRepository
 import com.example.link.model.PetModel
 import com.example.link.model.User
 import com.example.link.ui.base.BaseViewModel
-import com.example.link.util.lifecycle.SingleLiveEvent
 import com.example.yourchoice.data.preference.PreferenceManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -57,6 +56,20 @@ class MainSharedViewModel @Inject constructor(
         } ?: kotlin.run {
             //user id error
         }
+    }
+
+
+
+    fun updateShower()  =viewModelScope.launch {
+    }
+
+
+    fun saveEating(isEating: Boolean, amount: String) =  viewModelScope.launch {
+
+    }
+
+    fun saveWalk(length: String, time: String) = viewModelScope.launch{
+
     }
 
 }

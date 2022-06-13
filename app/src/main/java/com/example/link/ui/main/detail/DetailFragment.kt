@@ -1,5 +1,6 @@
 package com.example.link.ui.main.detail
 
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.viewpager2.widget.ViewPager2
@@ -53,6 +54,8 @@ class DetailFragment : BaseFragment<FragmentDetailBinding, DetailViewModel>() {
 
     fun initActionBar() {
         toolbarViewModel.setTitle(getString(R.string.app_name))
+            .setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.white))
+            .setTitleColor(ContextCompat.getColor(requireContext(), R.color.green))
             .setDefaultNavIcon()
             .onChange()
 

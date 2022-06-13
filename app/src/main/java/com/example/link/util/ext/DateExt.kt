@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 private val dateFormat = SimpleDateFormat("yyyy.MM.dd", Locale.KOREA)
-private val timeFormat = SimpleDateFormat("HH:mm:ss", Locale.KOREA)
+private val timeFormat = SimpleDateFormat("HH:mm", Locale.KOREA)
 
 
 fun Date.toReadableDateString(): String = dateFormat.format(this)

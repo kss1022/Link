@@ -1,10 +1,13 @@
 package com.example.link.ui.main.detail.fragmentlist
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.res.ColorStateList
 import android.graphics.Rect
+import android.view.LayoutInflater
 import android.view.View
-import android.widget.Toast
+import android.widget.EditText
+import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
@@ -20,9 +23,10 @@ import com.example.link.ui.main.detail.fragmentlist.DetailMealViewModel.Companio
 import com.example.link.ui.main.detail.fragmentlist.DetailMealViewModel.Companion.YEAR
 import com.example.link.util.ext.fromDpToPx
 import com.example.link.util.ext.toReadableDateString
+import com.example.link.util.lifecycle.SingleLiveEvent
 import com.example.link.util.resource.ResourceProvider
 import com.example.link.widget.adapter.model.ModelRecyclerViewAdapter
-import com.example.link.widget.adapter.model.listener.MemoModelAdapterListener
+import com.example.link.widget.adapter.model.listener.EditModelAdapterListener
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 import javax.inject.Inject
@@ -41,14 +45,16 @@ class DetailMealFragment : BaseFragment<FragmentDetailMealBinding, DetailMealVie
     override fun getViewBinding(): FragmentDetailMealBinding =
         FragmentDetailMealBinding.inflate(layoutInflater)
 
+    private val clickEditMemo = SingleLiveEvent<EatMemoModel>(300)
+
 
     private val memoAdapter by lazy {
         ModelRecyclerViewAdapter<EatMemoModel>(
             modelList = listOf(),
             resourcesProvider = resourceProvider,
-            adapterListener = object : MemoModelAdapterListener {
-                override fun click() {
-                    Toast.makeText(requireContext(), "memo Click", Toast.LENGTH_SHORT).show()
+            adapterListener = object : EditModelAdapterListener {
+                override fun clickEditButton(editModel: EatMemoModel) {
+                    clickEditMemo.value = editModel
                 }
             }
         )
@@ -74,6 +80,10 @@ class DetailMealFragment : BaseFragment<FragmentDetailMealBinding, DetailMealVie
 
         sharedViewModel.petModel.observe(viewLifecycleOwner) {
             setPetData(it)
+        }
+
+        clickEditMemo.observe(viewLifecycleOwner) { memo->
+            memo?.let { showEditDialog(it) }
         }
 
     }
@@ -234,6 +244,41 @@ class DetailMealFragment : BaseFragment<FragmentDetailMealBinding, DetailMealVie
         }
 
         return getString(R.string.pet_age, year, month)
+    }
+
+    /**
+     *  Edit AlertDialog
+     */
+
+
+    private fun showEditDialog(model: EatMemoModel) {
+        val dialog = AlertDialog.Builder(requireContext()).create()
+        val editMealAlertDialog = LayoutInflater.from(requireContext())
+            .inflate(R.layout.alert_dialog_edit_meal, null)
+
+        val eatTypeEditText = editMealAlertDialog.findViewById<EditText>(R.id.eatTypeEditText)
+        val eatAmountEditText = editMealAlertDialog.findViewById<EditText>(R.id.eatAmountEditText)
+        val memoEditText = editMealAlertDialog.findViewById<EditText>(R.id.memoEditText)
+
+        eatTypeEditText.setText(model.eatType)
+        eatAmountEditText.setText(model.eatAmount)
+        memoEditText.setText(model.memo)
+
+        editMealAlertDialog.findViewById<TextView>(R.id.positiveButton).setOnClickListener {
+            val type = eatTypeEditText.text.toString()
+            val amount = eatAmountEditText.text.toString()
+            val memo =memoEditText.text.toString()
+            viewModel.editMemo( model ,type, amount, memo )
+            dialog.dismiss()
+        }
+
+        editMealAlertDialog.findViewById<TextView>(R.id.negativeButton).setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.apply {
+            setView(editMealAlertDialog)
+        }.show()
     }
 
 

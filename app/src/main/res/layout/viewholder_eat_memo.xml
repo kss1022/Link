@@ -44,13 +44,23 @@
         android:id="@+id/timeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="1시간전"
-        android:textSize="9sp"
         android:layout_marginStart="6dp"
+        android:textSize="9sp"
         app:layout_constraintBottom_toBottomOf="@id/nameSubTextView"
         app:layout_constraintStart_toEndOf="@id/nameSubTextView"
-        tools:ignore="SmallSp" />
+        tools:ignore="SmallSp"
+        tools:text="1시간전" />
 
+
+    <ImageView
+        android:id="@+id/editButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="12dp"
+        android:src="@drawable/my_edit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/eatTypeTitleTextView"
@@ -68,6 +78,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:ellipsize="end"
+        android:singleLine="true"
         android:text="@string/eat_type"
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="@id/eatTypeTitleTextView"
@@ -91,6 +103,8 @@
         android:id="@+id/eatAmountTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:singleLine="true"
         android:text="@string/eat_type"
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="@id/eatAmountTitleTextView"
@@ -107,7 +121,9 @@
         android:layout_marginStart="21dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="18dp"
+        android:ellipsize="end"
         android:gravity="center"
+        android:singleLine="true"
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"

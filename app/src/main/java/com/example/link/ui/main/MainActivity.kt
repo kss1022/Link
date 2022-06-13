@@ -2,9 +2,16 @@ package com.example.link.ui.main
 
 import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
 import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
@@ -13,14 +20,21 @@ import com.example.link.databinding.ActivityMainBinding
 import com.example.link.ui.base.BaseActivity
 import com.example.link.ui.main.detail.DetailFragment
 import com.example.link.ui.main.home.HomeFragment
+import com.example.link.ui.main.home.HomeRecordFragment
 import com.example.link.ui.main.map.MapFragment
 import com.example.link.ui.main.my.MyFragment
+import com.example.link.util.DeviceUtil
+import com.example.link.util.lifecycle.SingleLiveEvent
+import com.example.link.util.lifecycle.SystemUIType
 import com.google.android.material.navigation.NavigationBarView
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), NavigationBarView.OnItemSelectedListener {
+
+
 
     override val viewModel: MainViewModel by viewModels()
 
@@ -39,8 +53,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), Navigat
     }
 
 
-
-
     override fun observeData() {
         toolbarViewModel.navClickEvent.observe(this) {
             showFragment(HomeFragment.newInstance(), HomeFragment.TAG)
@@ -55,7 +67,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), Navigat
         }
 
         viewModel.profileImage.observe(this){
-            //todo 바깥에 흰색원을 두고 안에 회색원을 두는 방식으로 변경 -> 회색원에 Image 설정
             Glide.with(binding.mainProfileImageView)
                 .load(it)
                 .circleCrop()
@@ -124,6 +135,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), Navigat
             is HomeFragment -> this.initActionBar()
             is DetailFragment -> this.initActionBar()
             is MapFragment -> this.initActionBar()
+            is HomeRecordFragment -> this.initActionBar()
             is MyFragment -> this.initActionBar()
         }
     }
@@ -160,7 +172,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), Navigat
     private fun setBottomNavigation(it: Boolean) {
         binding.bottomNavigationView.isVisible = it
     }
-
 
 
     companion object{

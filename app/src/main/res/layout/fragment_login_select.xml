@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="220dp"
         android:layout_marginTop="40dp"
-        android:src="@drawable/start_main_image"
+        android:src="@drawable/main_pet_image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

@@ -1,6 +1,7 @@
 package com.example.link.ui.main.my
 
 import android.annotation.SuppressLint
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.example.link.R
@@ -59,6 +60,8 @@ class MyFragment : BaseFragment<FragmentMyBinding, MyViewModel>() {
 
     fun initActionBar() {
         toolbarViewModel.setTitle(getString(R.string.app_name))
+            .setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.white))
+            .setTitleColor(ContextCompat.getColor(requireContext(), R.color.green))
             .setNavIconRes(null)
             .onChange()
 

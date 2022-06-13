@@ -29,7 +29,7 @@ class LoginPatViewModel @Inject constructor(
     val name : LiveData<String> = savedStateHandle.getLiveData(KEY_NAME, "")
     val type : LiveData<String> = savedStateHandle.getLiveData(KEY_TYPE, "")
     val birthday : LiveData<String> = savedStateHandle.getLiveData(KEY_BIRTHDAY, "")
-    val weight : LiveData<Int> = savedStateHandle.getLiveData(KEY_WEIGHT, 0)
+    val weight : LiveData<Float> = savedStateHandle.getLiveData(KEY_WEIGHT, 0f)
 
     companion object {
         const val KEY_IS_MAIL = "is_mail"
@@ -117,7 +117,7 @@ class LoginPatViewModel @Inject constructor(
     private fun checkInputData() : Boolean{
         return (name.value != "" && isMail.value != null && type.value != ""
                 && patAge.value != null && patAge.value!!.first != -1
-                &&  weight.value != 0)
+                &&  weight.value!! > 0.0f)
     }
 
 

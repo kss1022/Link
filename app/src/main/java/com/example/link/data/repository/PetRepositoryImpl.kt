@@ -20,7 +20,7 @@ class PetRepositoryImpl @Inject constructor(
         isMail: Boolean,
         type: String,
         birthday: List<Int>,
-        wight: Int
+        wight: Float
     ) = withContext(ioDispatcher){
 
         val userId = preferenceManager.getUserId()

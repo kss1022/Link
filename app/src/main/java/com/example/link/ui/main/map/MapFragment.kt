@@ -1,5 +1,6 @@
 package com.example.link.ui.main.map
 
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import com.example.link.R
 import com.example.link.databinding.FragmentMapBinding
@@ -14,7 +15,7 @@ import javax.inject.Inject
 class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>() {
 
     @Inject
-    lateinit var sharedViewModel : MainSharedViewModel
+    lateinit var sharedViewModel: MainSharedViewModel
 
     @Inject
     lateinit var toolbarViewModel: MainToolbarViewModel
@@ -30,7 +31,6 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>() {
     }
 
 
-
     override fun bindViews() {
     }
 
@@ -40,17 +40,20 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>() {
 
     fun initActionBar() {
         toolbarViewModel.setTitle(getString(R.string.app_name))
+            .setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.white))
+            .setTitleColor(ContextCompat.getColor(requireContext(), R.color.green))
             .setDefaultNavIcon()
             .onChange()
         toolbarViewModel.onChangeBottomNavigation(false)
     }
 
     private fun showBottomSheet() {
-        MapBottomSheetFragment.newInstance().show(requireActivity().supportFragmentManager, MapBottomSheetFragment.TAG)
+        MapBottomSheetFragment.newInstance()
+            .show(requireActivity().supportFragmentManager, MapBottomSheetFragment.TAG)
     }
 
-    companion object{
-        fun newInstance()  = MapFragment()
+    companion object {
+        fun newInstance() = MapFragment()
         const val TAG = "MapFragment"
     }
 }

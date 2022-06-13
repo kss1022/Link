@@ -9,7 +9,7 @@
         android:id="@+id/titleImageView"
         android:layout_width="wrap_content"
         android:layout_height="300dp"
-        android:src="@drawable/start_main_image"
+        android:src="@drawable/main_pet_image"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

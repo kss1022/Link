@@ -3,6 +3,7 @@ package com.example.link.ui.main.home
 import android.graphics.Rect
 import android.view.View
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
@@ -11,10 +12,13 @@ import com.example.link.databinding.FragmentHomeBinding
 import com.example.link.model.MemoModel
 import com.example.link.model.PetModel
 import com.example.link.ui.base.BaseFragment
+import com.example.link.ui.main.MainActivity
 import com.example.link.ui.main.MainSharedViewModel
 import com.example.link.ui.main.MainToolbarViewModel
 import com.example.link.util.ext.fromDpToPx
 import com.example.link.util.ext.toReadableDateString
+import com.example.link.util.lifecycle.SingleLiveEvent
+import com.example.link.util.lifecycle.SystemUIType
 import com.example.link.util.resource.ResourceProvider
 import com.example.link.widget.adapter.model.ModelRecyclerViewAdapter
 import com.example.link.widget.adapter.model.listener.MemoModelAdapterListener
@@ -34,11 +38,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
     @Inject
     lateinit var resourceProvider: ResourceProvider
 
+
     override val viewModel: HomeViewModel by viewModels()
 
     override fun getViewBinding(): FragmentHomeBinding =
         FragmentHomeBinding.inflate(layoutInflater)
 
+    private val clickRecord = SingleLiveEvent<Unit>()
 
     private val memoAdapter by lazy{
         ModelRecyclerViewAdapter<MemoModel>(
@@ -60,6 +66,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
 
     override fun bindViews() {
+        binding.mainPetImageView.setOnClickListener {
+            clickRecord.call()
+        }
     }
 
     override fun observeData() {
@@ -69,6 +78,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
         viewModel.memoList.observe(viewLifecycleOwner) {
             memoAdapter.submitList(it)
+        }
+
+        clickRecord.observe(viewLifecycleOwner){
+            (requireActivity() as MainActivity).showFragment(HomeRecordFragment.newInstance(), HomeRecordFragment.TAG)
         }
     }
 
@@ -80,6 +93,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
     fun initActionBar() {
         toolbarViewModel.setTitle(getString(R.string.app_name))
+            .setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.white))
+            .setTitleColor(ContextCompat.getColor(requireContext(), R.color.green))
             .setNavIconRes(null)
             .onChange()
 
