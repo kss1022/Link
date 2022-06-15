@@ -173,9 +173,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
         petNameTextView.text = pet.name
         petYearTextView.text = getYear(pet.birthDay)
         petTypeTextView.text = pet.type
-        petMailTextView.text =
-            if (pet.isMail) getString(R.string.character_mail) else getString(R.string.character_femail)
+
+        if (pet.isMail) petMailImageView.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_baseline_male_24))
+        else petMailImageView.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_baseline_female_24))
         petRecordTitleTextView.text = getString(R.string.pet_record_title, pet.name)
+
     }
 
     private fun getYear(date: List<Int>): String {

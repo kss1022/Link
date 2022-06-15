@@ -2,8 +2,10 @@ package com.example.link.ui.main.detail.fragmentlist
 
 import android.annotation.SuppressLint
 import android.content.res.ColorStateList
+import android.util.Log
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.example.link.R
 import com.example.link.databinding.FragmentDetailAllBinding
 import com.example.link.model.PetModel
@@ -16,6 +18,7 @@ import com.example.link.ui.main.detail.fragmentlist.DetailAllViewModel.Companion
 import com.example.link.ui.main.detail.fragmentlist.DetailAllViewModel.Companion.YEAR
 import com.example.link.util.ext.toReadableDateString
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
 
@@ -49,8 +52,10 @@ class DetailAllFragment : BaseFragment<FragmentDetailAllBinding, DetailAllViewMo
             setPetData(it)
         }
 
-        sharedViewModel.updateEndEvent.observe(viewLifecycleOwner) {
-            setRecordData()
+        viewLifecycleOwner.lifecycleScope.launch{
+            sharedViewModel.updateEndEvent.collect(){
+                setRecordData()
+            }
         }
     }
 
@@ -147,8 +152,8 @@ class DetailAllFragment : BaseFragment<FragmentDetailAllBinding, DetailAllViewMo
         petNameTextView.text = pet.name
         petYearTextView.text = getYear(pet.birthDay)
         petTypeTextView.text = pet.type
-        petMailTextView.text =
-            if (pet.isMail) getString(R.string.character_mail) else getString(R.string.character_femail)
+        if (pet.isMail)  petMailImageView.setImageDrawable(ContextCompat.getDrawable(requireContext() ,R.drawable.ic_baseline_male_24))
+        else   petMailImageView.setImageDrawable(ContextCompat.getDrawable(requireContext() ,R.drawable.ic_baseline_female_24))
         petWeightTextView.text = "${pet.weight}kg"
     }
 

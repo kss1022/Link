@@ -4,12 +4,14 @@ import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.res.ColorStateList
 import android.graphics.Rect
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import com.example.link.R
 import com.example.link.databinding.FragmentDetailMealBinding
@@ -29,6 +31,7 @@ import com.example.link.util.resource.ResourceProvider
 import com.example.link.widget.adapter.model.ModelRecyclerViewAdapter
 import com.example.link.widget.adapter.model.listener.EditModelAdapterListener
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
 
@@ -87,9 +90,13 @@ class DetailMealFragment : BaseFragment<FragmentDetailMealBinding, DetailMealVie
             memo?.let { showEditDialog(it) }
         }
 
-        sharedViewModel.todayRecord.observe(viewLifecycleOwner) {
-            setRecordData()
+
+        viewLifecycleOwner.lifecycleScope.launch{
+            sharedViewModel.updateEndEvent.collect(){
+                setRecordData()
+            }
         }
+
     }
 
 
@@ -231,8 +238,9 @@ class DetailMealFragment : BaseFragment<FragmentDetailMealBinding, DetailMealVie
         petNameTextView.text = pet.name
         petYearTextView.text = getYear(pet.birthDay)
         petTypeTextView.text = pet.type
-        petMailTextView.text =
-            if (pet.isMail) getString(R.string.character_mail) else getString(R.string.character_femail)
+         if (pet.isMail)  petMailImageView.setImageDrawable(ContextCompat.getDrawable(requireContext() ,R.drawable.ic_baseline_male_24))
+        else   petMailImageView.setImageDrawable(ContextCompat.getDrawable(requireContext() ,R.drawable.ic_baseline_female_24))
+
         petWeightTextView.text = "${pet.weight}kg"
     }
 

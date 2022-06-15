@@ -9,5 +9,6 @@ data class PetEntity (
     val mail : Boolean? = null,
     val type : String? = null,
     val birthDay : List<Int>? = null,
-    val weight : Float? = null
+    val weight : Float? = null,
+    val tag : String? = null
 )

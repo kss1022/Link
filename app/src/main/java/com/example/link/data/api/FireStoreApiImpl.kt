@@ -91,6 +91,7 @@ class FireStoreApiImpl @Inject constructor(
         fireStore.collection(USER).document(id).update(NAME, userName)
     }
 
+
     /**
      * Record Data
      */
@@ -292,6 +293,7 @@ class FireStoreApiImpl @Inject constructor(
             transaction.update(yearReference, WALK_STEP, step , WALK_LENGTH, length ,WALK_TIME , time, WALK_COUNT, FieldValue.increment(1))
         }
     }
+
 
 
 

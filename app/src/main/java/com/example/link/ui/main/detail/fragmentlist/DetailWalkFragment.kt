@@ -26,6 +26,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.example.link.R
 import com.example.link.databinding.FragmentDetailWalkBinding
 import com.example.link.model.RecordModel
@@ -37,6 +38,7 @@ import com.example.link.ui.main.detail.fragmentlist.DetailWalkViewModel.Companio
 import com.example.link.ui.main.detail.fragmentlist.DetailWalkViewModel.Companion.STEP
 import com.example.link.util.DeviceUtil
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 import kotlin.math.roundToInt
 
@@ -105,8 +107,11 @@ class DetailWalkFragment : BaseFragment<FragmentDetailWalkBinding, DetailWalkVie
             isVisible?.let { setBottomView(it) }
         }
 
-        sharedViewModel.todayRecord.observe(viewLifecycleOwner){
-            setRecordData(it)
+
+        viewLifecycleOwner.lifecycleScope.launch{
+            sharedViewModel.updateEndEvent.collect(){
+                setRecordData(sharedViewModel.todayRecord.value!!)
+            }
         }
     }
 
@@ -164,6 +169,7 @@ class DetailWalkFragment : BaseFragment<FragmentDetailWalkBinding, DetailWalkVie
                     setTextColor(black)
                 }
             }
+
         }
 
 
@@ -177,6 +183,7 @@ class DetailWalkFragment : BaseFragment<FragmentDetailWalkBinding, DetailWalkVie
                 binding.stepContainer.visibility = View.VISIBLE
                 toolbarViewModel.onChangeBottomNavigation(true)
                 toolbarViewModel.setGps(false)
+                setRecordData(sharedViewModel.todayRecord.value!!)
             }
             GPS -> {
                 topMenuGpsTextView.apply {

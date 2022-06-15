@@ -120,7 +120,7 @@
         tools:text="뭉치" />
 
 
-    <TextView
+    <ImageView
         android:id="@+id/mailButton"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
@@ -128,16 +128,14 @@
         android:background="@drawable/bg_corner_white_18"
         android:gravity="center"
         android:paddingHorizontal="18dp"
-        android:text="@string/character_mail"
-        android:textColor="@color/gray_e0"
-        android:textSize="18sp"
+        android:src="@drawable/ic_baseline_male_24"
         app:layout_constraintBottom_toBottomOf="@id/patNameEditText"
         app:layout_constraintDimensionRatio="1.1:1"
         app:layout_constraintEnd_toStartOf="@id/femailButton"
         app:layout_constraintStart_toEndOf="@id/patNameEditText"
         app:layout_constraintTop_toTopOf="@id/patNameEditText" />
 
-    <TextView
+    <ImageView
         android:id="@+id/femailButton"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
@@ -145,9 +143,7 @@
         android:background="@drawable/bg_corner_white_18"
         android:gravity="center"
         android:paddingHorizontal="18dp"
-        android:text="@string/character_femail"
-        android:textColor="@color/gray_e0"
-        android:textSize="18sp"
+        android:src="@drawable/ic_baseline_female_24"
         app:layout_constraintBottom_toBottomOf="@id/patNameEditText"
         app:layout_constraintDimensionRatio="1.1:1"
         app:layout_constraintEnd_toEndOf="parent"
@@ -213,8 +209,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="12dp"
-        android:textColor="@color/green"
         android:singleLine="true"
+        android:textColor="@color/green"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@id/patNameTextView"
         app:layout_constraintTop_toBottomOf="@id/birthdayEditText"
@@ -291,10 +287,10 @@
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:visibility="gone"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

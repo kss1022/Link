@@ -118,18 +118,18 @@
                 tools:text="토이푸들" />
 
 
-            <TextView
-                android:id="@+id/petMailTextView"
+            <ImageView
+                android:id="@+id/petMailImageView"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_marginStart="8dp"
-                android:textColor="@color/green"
+                tools:src="@drawable/ic_baseline_female_24"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@id/petTypeTextView"
                 app:layout_constraintStart_toEndOf="@id/petTypeTextView"
                 app:layout_constraintTop_toTopOf="@id/petTypeTextView"
-                tools:text="@string/character_mail" />
+                app:tint="@color/green" />
 
             <TextView
                 android:id="@+id/lastMealTextView"

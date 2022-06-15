@@ -118,13 +118,13 @@ class LoginPatFragment : BaseFragment<FragmentLoginPatBinding, LoginPatViewModel
 
     private fun setMail() = with(binding) {
         mailButton.apply {
-            setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+            setColorFilter(ContextCompat.getColor(context, R.color.white), android.graphics.PorterDuff.Mode.MULTIPLY);
             setBackgroundResource(R.drawable.bg_corner_green_18)
         }
 
 
         femailButton.apply {
-            setTextColor(ContextCompat.getColor(requireContext(), R.color.gray_e0))
+            setColorFilter(ContextCompat.getColor(context, R.color.gray_e0), android.graphics.PorterDuff.Mode.MULTIPLY);
             setBackgroundResource(R.drawable.bg_corner_white_18)
         }
     }
@@ -132,13 +132,13 @@ class LoginPatFragment : BaseFragment<FragmentLoginPatBinding, LoginPatViewModel
 
     private fun setFemail() = with(binding) {
         mailButton.apply {
-            setTextColor(ContextCompat.getColor(requireContext(), R.color.gray_e0))
+            setColorFilter(ContextCompat.getColor(context, R.color.gray_e0), android.graphics.PorterDuff.Mode.MULTIPLY);
             setBackgroundResource(R.drawable.bg_corner_white_18)
         }
 
 
         femailButton.apply {
-            setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+            setColorFilter(ContextCompat.getColor(context, R.color.white), android.graphics.PorterDuff.Mode.MULTIPLY);
             setBackgroundResource(R.drawable.bg_corner_green_18)
         }
     }
@@ -148,7 +148,7 @@ class LoginPatFragment : BaseFragment<FragmentLoginPatBinding, LoginPatViewModel
         viewModel.name.value?.let { binding.patNameEditText.setText(it) }
         viewModel.type.value?.let { binding.typeEditText.setText(it) }
         viewModel.birthday.value?.let { binding.birthdayEditText.setText(it) }
-        viewModel.weight.value?.let { binding.weightEditText.setText(it.toString()) }
+        viewModel.weight.value?.let { if(it == 0f) binding.weightEditText.setText("") else binding.weightEditText.setText(it.toString()) }
     }
 
 

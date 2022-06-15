@@ -16,7 +16,6 @@ import com.example.link.util.lifecycle.SingleLiveEvent
 import com.example.yourchoice.data.preference.PreferenceManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
@@ -31,8 +30,8 @@ class MainSharedViewModel @Inject constructor(
     private val recordRepository: RecordRepository,
     private val preferenceManager: PreferenceManager
 ) : BaseViewModel(app) {
-
-    private  val userId: LiveData<String> = savedStateHandle.getLiveData(KEY_USER_ID, "")
+    val userId: LiveData<String> = savedStateHandle.getLiveData(KEY_USER_ID, "")
+    val petId: LiveData<String?> = savedStateHandle.getLiveData(KEY_PET_ID, null)
 
     val petModel = MutableLiveData<PetModel>()
     val userModel = MutableLiveData<User>()
@@ -45,16 +44,29 @@ class MainSharedViewModel @Inject constructor(
 
 
     val updateStartEvent = SingleLiveEvent<Unit>()
-    val updateEndEvent = SingleLiveEvent<Unit>()
+    val updateEndEvent = MutableSharedFlow<Unit>(replay = 0)
+
+
+    val getSleepDataEvent = SingleLiveEvent<Unit>()
+    val heartBeat = MutableLiveData<Int>()
 
     private val today = Calendar.getInstance().get((Calendar.DATE))
 
     companion object {
         const val KEY_USER_ID = "user_id"
+        const val KEY_PET_ID = "pet_id"
     }
 
+    fun changePetId( id : String) {
+        savedStateHandle.set(KEY_PET_ID, id)
+        fetchData()
+    }
+
+
     fun fetchData() = viewModelScope.launch {
-        val id = preferenceManager.getUserId()
+        val id = if(petId.value ==null) preferenceManager.getUserId()
+            else petId.value!!
+
         savedStateHandle.set(KEY_USER_ID, id)
 
         id?.let { _ ->
@@ -107,45 +119,58 @@ class MainSharedViewModel @Inject constructor(
             //user id error
         }
 
-        updateEndEvent.call()
+        updateEndEvent.emit(Unit)
     }
 
 
     fun saveShower() = viewModelScope.launch {
+        val id = if(petId.value ==null) userId.value!!
+        else petId.value!!
+
         updateStartEvent.call()
-        recordRepository.updateShower(userId.value!!)
+        recordRepository.updateShower(id)
 
         updateData()
     }
 
 
     fun saveEating(isEating: Boolean, amount: Long) = viewModelScope.launch {
+        val id = if(petId.value ==null) userId.value!!
+        else petId.value!!
+
         updateStartEvent.call()
         if (isEating) {
-            recordRepository.updateMeal(userId.value!!, amount)
+            recordRepository.updateMeal(id, amount)
         } else {
-            recordRepository.updateSnack(userId.value!!, amount)
+            recordRepository.updateSnack(id, amount)
         }
         updateData()
     }
 
 
     fun saveWalk(step: Int, length: Double, time: Int) = viewModelScope.launch {
+        val id = if(petId.value ==null) userId.value!!
+        else petId.value!!
+
+
         updateStartEvent.call()
         val newStep = todayRecord.value!!.walkCount + step
         val newLength = todayRecord.value!!.walkLength + length
         val newTime = todayRecord.value!!.walkTime + time
 
-        recordRepository.updateTodayWalk(userId.value!!, newStep, newLength, newTime)
+        recordRepository.updateTodayWalk(id, newStep, newLength, newTime)
 
         updateData()
     }
 
 
     private fun updateData() = viewModelScope.launch {
-        val weekList = recordRepository.getRecordWeek(userId.value!!)
-        monthRecord.value = recordRepository.getRecordMonth(userId.value!!)
-        yearRecord.value = recordRepository.getRecordYear(userId.value!!)
+        val id = if(petId.value ==null) userId.value!!
+        else petId.value!!
+
+        val weekList = recordRepository.getRecordWeek(id)
+        monthRecord.value = recordRepository.getRecordMonth(id)
+        yearRecord.value = recordRepository.getRecordYear(id)
 
         weekRecord.value = weekList
 
@@ -154,12 +179,23 @@ class MainSharedViewModel @Inject constructor(
         }
         todayRecord.value = today!!
 
-        updateEndEvent.call()
+
+        updateEndEvent.emit(Unit)
     }
 
 
     fun updateUserName(userName: String) =viewModelScope.launch{
         userRepository.updateUserName(userId.value!!, userName)
         userModel.value =userRepository.getUserData(userId.value!!)
+    }
+
+    fun getSleepData() {
+        getSleepDataEvent.call()
+    }
+
+    fun setSleepData(data: Int) {
+        if(data in 30..150){
+            heartBeat.value = data
+        }
     }
 }

@@ -16,8 +16,6 @@
     <string name="type">종류</string>
     <string name="birthday">생일</string>
     <string name="weight">몸무게</string>
-    <string name="character_mail">♂</string>
-    <string name="character_femail">♀</string>
     <string name="password_is_not_same">비밀번호가 일치하지 않습니다</string>
     <string name="signIn_fail_check_your_email">회원가입에 실패 했습니다.\n이메일과 비밀번호를 확인해주세요😭</string>
     <string name="logIn_fail_check_your_email">로그인에 실패 했습니다.\n이메일과 비밀번호를 확인해주세요😭</string>
@@ -118,5 +116,10 @@
     <string name="hour_and_minutes_with_double">%dh %dm</string>
     <string name="minutes_with_double">%dm</string>
     <string name="percent_with_double">%.0f%% 완료</string>
+    <string name="step_count_goal_10000">걸음 수 목표 : 10000</string>
+    <string name="set_nfc_data">Nfc 에 펫 정보를 저장하시겠어요?</string>
+    <string name="get_heart_bit">심장 박동수를 가져오기</string>
+    <string name="bpm">bpm</string>
+    <string name="check_heart_bit">심장박동 측정중</string>
 
 </resources>

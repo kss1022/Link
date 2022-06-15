@@ -8,6 +8,7 @@ import androidx.core.content.ContextCompat
 
 object DeviceUtil {
 
+    fun isAndroid12Later() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
     fun isAndroid11Later() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.R
     fun isAndroid10Later() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q
     fun isAndroid5Later() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP

@@ -2,20 +2,27 @@ package com.example.link.ui.main.detail.fragmentlist
 
 import android.content.res.ColorStateList
 import android.view.View
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.content.ContextCompat
 import androidx.core.view.isGone
 import androidx.fragment.app.viewModels
 import com.example.link.R
-import com.example.link.databinding.FragmentDetailAllBinding
 import com.example.link.databinding.FragmentDetailSleepBinding
 import com.example.link.ui.base.BaseFragment
+import com.example.link.ui.main.MainSharedViewModel
 import com.example.link.ui.main.detail.fragmentlist.DetailSleepViewModel.Companion.ANALYSIS
 import com.example.link.ui.main.detail.fragmentlist.DetailSleepViewModel.Companion.RECORD
 import com.example.link.ui.main.detail.fragmentlist.DetailSleepViewModel.Companion.TODAY
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class DetailSleepFragment : BaseFragment<FragmentDetailSleepBinding, DetailSleepViewModel>(){
+
+    @Inject
+    lateinit var sharedViewModel: MainSharedViewModel
+
 
     override val viewModel: DetailSleepViewModel by viewModels()
 
@@ -28,13 +35,21 @@ class DetailSleepFragment : BaseFragment<FragmentDetailSleepBinding, DetailSleep
 
     override fun bindViews() {
         bindTopMenu()
+        binding.totalSleepProgressBar.setOnClickListener { sharedViewModel.getSleepData() }
     }
 
     override fun observeData() {
         viewModel.menu.observe(viewLifecycleOwner) {
             changeMenu(it)
         }
+
+        sharedViewModel.heartBeat.observe(viewLifecycleOwner){
+            setSleepData(it)
+        }
+
     }
+
+
 
     /**
      * TopMenuClick
@@ -109,6 +124,57 @@ class DetailSleepFragment : BaseFragment<FragmentDetailSleepBinding, DetailSleep
 
         before = menu
     }
+
+    private fun setSleepData(data: Int) = with(binding){
+        binding.totalProgressTextView.text = data.toString()
+
+
+        when {
+            data > 90 -> {
+                qualityCountTextView.text = "10"
+                (binding.qualityBarGreenView.layoutParams as ConstraintLayout.LayoutParams)
+                    .matchConstraintPercentWidth = 0.1f
+                binding.totalSleepProgressBar.progress = 90
+                heartBeatCheckView.progress = 90
+            }
+            data >80 -> {
+                qualityCountTextView.text = "30"
+                (binding.qualityBarGreenView.layoutParams as ConstraintLayout.LayoutParams)
+                    .matchConstraintPercentWidth = 0.3f
+                binding.totalSleepProgressBar.progress = 80
+                heartBeatCheckView.progress = 80
+            }
+            data >70 -> {
+                qualityCountTextView.text = "50"
+                (binding.qualityBarGreenView.layoutParams as ConstraintLayout.LayoutParams)
+                    .matchConstraintPercentWidth = 0.5f
+                binding.totalSleepProgressBar.progress = 60
+                heartBeatCheckView.progress = 70
+            }
+            data >60 -> {
+                qualityCountTextView.text = "70"
+                (binding.qualityBarGreenView.layoutParams as ConstraintLayout.LayoutParams)
+                    .matchConstraintPercentWidth = 0.7f
+
+                binding.totalSleepProgressBar.progress = 50
+            }
+            data >50 -> {
+                qualityCountTextView.text = "90"
+                (binding.qualityBarGreenView.layoutParams as ConstraintLayout.LayoutParams)
+                    .matchConstraintPercentWidth = 0.9f
+                binding.totalSleepProgressBar.progress = 30
+            }
+            else -> {
+                qualityCountTextView.text = "100"
+                (binding.qualityBarGreenView.layoutParams as ConstraintLayout.LayoutParams)
+                    .matchConstraintPercentWidth = 1f
+                binding.totalSleepProgressBar.progress = 10
+            }
+        }
+
+        binding.qualityBarGreenView.requestLayout()
+    }
+
 
 
     companion object{

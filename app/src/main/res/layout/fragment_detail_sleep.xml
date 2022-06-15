@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:id="@+id/topMenuContainer"
@@ -68,8 +68,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/topMenuContainer"
-        tools:visibility="gone">
+        app:layout_constraintTop_toBottomOf="@id/topMenuContainer">
+
 
         <ProgressBar
             android:id="@+id/totalSleepProgressBar"
@@ -81,17 +81,118 @@
             android:max="100"
             android:progress="66"
             android:progressDrawable="@drawable/progress_circle_big"
-            app:layout_constraintBottom_toTopOf="@id/lightSleepProgressBar"
+            app:layout_constraintBottom_toTopOf="@id/heartBeatTitleTextView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/heartBeatTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginBottom="16dp"
+            android:text="심장 박동"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@id/heartBeatContainer"
+            app:layout_constraintStart_toStartOf="@id/heartBeatContainer" />
+
+        <ImageView
+            android:id="@+id/heartBeatSubTitleImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:src="@drawable/ic_outline_info_24"
+            app:layout_constraintBottom_toBottomOf="@id/heartBeatSubTitleTextView"
+            app:layout_constraintEnd_toStartOf="@id/heartBeatSubTitleTextView"
+            app:layout_constraintStart_toEndOf="@id/heartBeatTitleTextView"
+            app:layout_constraintTop_toTopOf="@id/heartBeatSubTitleTextView" />
+
+        <TextView
+            android:id="@+id/heartBeatSubTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/green"
+            android:text="심장 박동은 일반적으로 60~100을 유지합니다"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="@id/heartBeatTitleTextView"
+            app:layout_constraintStart_toEndOf="@id/heartBeatSubTitleImageView" />
+
+        <LinearLayout
+            android:id="@+id/heartBeatContainer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:weightSum="3"
+            app:layout_constraintBottom_toTopOf="@id/qualityCountTitleTextView"
+            app:layout_constraintEnd_toEndOf="@id/qualityBarBackgroundView"
+            app:layout_constraintStart_toStartOf="@id/qualityBarBackgroundView">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:alpha="0.5"
+                android:background="@drawable/bg_corner_left_18"
+                android:backgroundTint="@color/green"
+                android:gravity="center"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:text="느림"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/green"
+                android:gravity="center"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:text="정상"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/bg_corner_right_18"
+                android:backgroundTint="@color/dark_green"
+                android:gravity="center"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:text="빠름"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+
+        <SeekBar
+            android:id="@+id/heartBeatCheckView"
+            android:layout_width="0dp"
+            android:layout_height="15dp"
+            android:progress="0"
+            android:thumb="@drawable/triangle"
+            android:progressDrawable="@null"
+            app:layout_constraintBottom_toTopOf="@id/qualityCountTextView"
+            app:layout_constraintEnd_toEndOf="@id/heartBeatContainer"
+            app:layout_constraintStart_toStartOf="@id/heartBeatContainer"
+            app:layout_constraintTop_toBottomOf="@id/heartBeatContainer"/>
 
         <TextView
             android:id="@+id/totalProgressTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="12dp"
-            android:text="66"
+            android:text="0"
             android:textColor="@color/green"
             android:textSize="50sp"
             android:textStyle="bold"
@@ -100,12 +201,23 @@
             app:layout_constraintStart_toStartOf="@id/totalSleepProgressBar"
             app:layout_constraintTop_toTopOf="@id/totalSleepProgressBar" />
 
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/heart"
+            android:text="♥"
+            android:textColor="@color/green"
+            app:layout_constraintBottom_toTopOf="@id/bmpTitleTextView"
+            app:layout_constraintStart_toStartOf="@id/bmpTitleTextView" />
+
         <TextView
+            android:id="@+id/bmpTitleTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
             android:layout_marginBottom="12dp"
-            android:text="@string/percent"
+            android:text="@string/bpm"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="@id/totalProgressTextView"
             app:layout_constraintStart_toEndOf="@id/totalProgressTextView" />
@@ -113,188 +225,68 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/quality_of_sleep"
+            android:text="@string/check_heart_bit"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/totalProgressTextView" />
 
 
-        <ProgressBar
-            android:id="@+id/lightSleepProgressBar"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:background="@drawable/progress_circle_bg_middle"
-            android:indeterminate="false"
-            android:max="100"
-            android:progress="34"
-            android:progressDrawable="@drawable/progress_circle_middle"
-            app:layout_constraintBottom_toTopOf="@id/lightSleepTitleTextView"
-            app:layout_constraintEnd_toStartOf="@id/deepSleepProgressBar"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/totalSleepProgressBar" />
-
         <TextView
-            android:id="@+id/lightSleepPercentTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="6dp"
-            android:text="34"
+            android:layout_marginStart="12dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/quality_of_sleep"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@id/qualityBarBackgroundView"
+            app:layout_constraintStart_toStartOf="@id/qualityBarBackgroundView" />
+
+
+        <TextView
+            android:id="@+id/qualityCountTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:textColor="@color/green"
             android:textSize="32sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@id/lightSleepProgressBar"
-            app:layout_constraintEnd_toEndOf="@id/lightSleepProgressBar"
-            app:layout_constraintStart_toStartOf="@id/lightSleepProgressBar"
-            app:layout_constraintTop_toTopOf="@id/lightSleepProgressBar" />
+            app:layout_constraintBottom_toBottomOf="@id/qualityCountTitleTextView"
+            app:layout_constraintEnd_toStartOf="@id/qualityCountTitleTextView"
+            android:text="0" />
+
 
         <TextView
+            android:id="@+id/qualityCountTitleTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="6dp"
-            android:text="%"
-            app:layout_constraintBottom_toBottomOf="@id/lightSleepPercentTextView"
-            app:layout_constraintStart_toEndOf="@id/lightSleepPercentTextView" />
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="점"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@id/qualityBarBackgroundView"
+            app:layout_constraintEnd_toEndOf="@id/qualityBarBackgroundView" />
 
-        <TextView
-            android:id="@+id/lightSleepTitleTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:text="@string/light_sleep"
-            app:layout_constraintBottom_toTopOf="@id/lightSleepTextView"
-            app:layout_constraintEnd_toEndOf="@id/lightSleepProgressBar"
-            app:layout_constraintStart_toStartOf="@id/lightSleepProgressBar" />
 
-        <TextView
-            android:id="@+id/lightSleepTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="32dp"
-            android:text="2h 34m"
-            android:textSize="16sp"
+        <View
+            android:id="@+id/qualityBarBackgroundView"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginHorizontal="32dp"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/bg_corner_gray_18"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/lightSleepProgressBar"
-            app:layout_constraintStart_toStartOf="@id/lightSleepProgressBar" />
-
-        <ProgressBar
-            android:id="@+id/deepSleepProgressBar"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:background="@drawable/progress_circle_bg_middle"
-            android:indeterminate="false"
-            android:max="100"
-            android:progress="50"
-            android:progressDrawable="@drawable/progress_circle_middle"
-            app:layout_constraintBottom_toBottomOf="@id/lightSleepProgressBar"
-            app:layout_constraintEnd_toStartOf="@id/wakeProgressBar"
-            app:layout_constraintStart_toEndOf="@id/lightSleepProgressBar"
-            app:layout_constraintTop_toTopOf="@id/lightSleepProgressBar" />
-
-
-        <TextView
-            android:id="@+id/deepSleepPercentTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="6dp"
-            android:text="50"
-            android:textColor="@color/green"
-            android:textSize="32sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@id/deepSleepProgressBar"
-            app:layout_constraintEnd_toEndOf="@id/deepSleepProgressBar"
-            app:layout_constraintStart_toStartOf="@id/deepSleepProgressBar"
-            app:layout_constraintTop_toTopOf="@id/deepSleepProgressBar" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="6dp"
-            android:text="@string/percent"
-            app:layout_constraintBottom_toBottomOf="@id/deepSleepPercentTextView"
-            app:layout_constraintStart_toEndOf="@id/deepSleepPercentTextView" />
-
-        <TextView
-            android:id="@+id/deepSleepTitleTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:text="@string/deep_sleep"
-            app:layout_constraintBottom_toTopOf="@id/deepSleepTextView"
-            app:layout_constraintEnd_toEndOf="@id/deepSleepProgressBar"
-            app:layout_constraintStart_toStartOf="@id/deepSleepProgressBar" />
-
-        <TextView
-            android:id="@+id/deepSleepTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="32dp"
-            android:text="2h 34m"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/deepSleepProgressBar"
-            app:layout_constraintStart_toStartOf="@id/deepSleepProgressBar" />
-
-
-        <ProgressBar
-            android:id="@+id/wakeProgressBar"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:background="@drawable/progress_circle_bg_middle"
-            android:indeterminate="false"
-            android:max="100"
-            android:progress="16"
-            android:progressDrawable="@drawable/progress_circle_middle"
-            app:layout_constraintBottom_toBottomOf="@id/lightSleepProgressBar"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/deepSleepProgressBar"
-            app:layout_constraintTop_toTopOf="@id/lightSleepProgressBar" />
+            app:layout_constraintStart_toStartOf="parent" />
 
 
-        <TextView
-            android:id="@+id/wakePercentTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="6dp"
-            android:text="16"
-            android:textColor="@color/green"
-            android:textSize="32sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@id/wakeProgressBar"
-            app:layout_constraintEnd_toEndOf="@id/wakeProgressBar"
-            app:layout_constraintStart_toStartOf="@id/wakeProgressBar"
-            app:layout_constraintTop_toTopOf="@id/wakeProgressBar" />
+        <View
+            android:id="@+id/qualityBarGreenView"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_corner_green_18"
+            app:layout_constraintBottom_toBottomOf="@id/qualityBarBackgroundView"
+            app:layout_constraintStart_toStartOf="@id/qualityBarBackgroundView"
+            app:layout_constraintTop_toTopOf="@id/qualityBarBackgroundView"
+            app:layout_constraintWidth_percent="0.0" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="6dp"
-            android:text="@string/percent"
-            app:layout_constraintBottom_toBottomOf="@id/wakePercentTextView"
-            app:layout_constraintStart_toEndOf="@id/wakePercentTextView" />
-
-        <TextView
-            android:id="@+id/wakeTitleTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:text="@string/light_sleep"
-            app:layout_constraintBottom_toTopOf="@id/wakeTextView"
-            app:layout_constraintEnd_toEndOf="@id/wakeProgressBar"
-            app:layout_constraintStart_toStartOf="@id/wakeProgressBar" />
-
-        <TextView
-            android:id="@+id/wakeTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="32dp"
-            android:text="2h 34m"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/wakeProgressBar"
-            app:layout_constraintStart_toStartOf="@id/wakeProgressBar" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -303,12 +295,12 @@
         android:id="@+id/recordContainer"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/topMenuContainer"
-        android:visibility="gone"
-        tools:visibility="visible">
+        tools:visibility="gone">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -324,48 +316,11 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:visibility="gone"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/topMenuContainer"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:visibility="visible">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/qualityGraphLayout"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginHorizontal="16dp"
-            android:background="@drawable/bg_corner_gray_18"
-            android:layout_marginBottom="12dp"
-            android:layout_marginTop="42dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintHeight_percent="0.5">
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <TextView
-            android:text="@string/time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintStart_toStartOf="@id/timeGraphLayout"
-            app:layout_constraintBottom_toTopOf="@id/timeGraphLayout"
-            android:layout_marginStart="18dp"/>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/timeGraphLayout"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@drawable/bg_corner_gray_18"
-            app:layout_constraintStart_toStartOf="@id/qualityGraphLayout"
-            app:layout_constraintEnd_toEndOf="@id/qualityGraphLayout"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHeight_percent="0.3"
-            android:layout_marginBottom="32dp">
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topMenuContainer"
+        tools:visibility="gone"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
